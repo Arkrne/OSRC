@@ -1,33 +1,45 @@
 import { Resend } from 'resend'
 import { NextRequest, NextResponse } from 'next/server'
+import { Ratelimit } from '@upstash/ratelimit'
+import { Redis } from '@upstash/redis'
 
 const RECIPIENT = process.env.INQUIRY_EMAIL ?? 'jolavts@gmail.com'
 // Switch to noreply@orangesquarerealty.com.ph once domain is verified in Resend
 const FROM      = process.env.RESEND_FROM ?? 'OSRC Inquiries <onboarding@resend.dev>'
 
-// ─── Rate limiting (in-memory per instance) ──────────────────────────────────
-// For multi-instance production, replace with Upstash Redis.
+// ─── Rate limiting ────────────────────────────────────────────────────────────
+// Upstash Redis when env vars are present (production); in-memory fallback for local dev.
+const upstashRatelimit =
+  process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN
+    ? new Ratelimit({
+        redis: Redis.fromEnv(),
+        limiter: Ratelimit.slidingWindow(5, '60 s'),
+        prefix: 'osrc:inquiry',
+      })
+    : null
+
+// In-memory fallback (dev only — not shared across Vercel instances)
 const rateMap = new Map<string, { count: number; resetAt: number }>()
-const RATE_LIMIT  = 5             // requests
-const RATE_WINDOW = 60 * 1000     // per minute
-
-function checkRate(ip: string): boolean {
-  const now   = Date.now()
-  const entry = rateMap.get(ip)
-  if (!entry || now > entry.resetAt) {
-    rateMap.set(ip, { count: 1, resetAt: now + RATE_WINDOW })
-    return false // not limited
-  }
-  if (entry.count >= RATE_LIMIT) return true // limited
-  entry.count++
-  return false
-}
-
-// Prune stale entries to prevent unbounded growth
 setInterval(() => {
   const now = Date.now()
   for (const [k, v] of rateMap) if (now > v.resetAt) rateMap.delete(k)
 }, 5 * 60 * 1000)
+
+async function checkRate(ip: string): Promise<boolean> {
+  if (upstashRatelimit) {
+    const { success } = await upstashRatelimit.limit(ip)
+    return !success
+  }
+  const now   = Date.now()
+  const entry = rateMap.get(ip)
+  if (!entry || now > entry.resetAt) {
+    rateMap.set(ip, { count: 1, resetAt: now + 60_000 })
+    return false
+  }
+  if (entry.count >= 5) return true
+  entry.count++
+  return false
+}
 
 // ─── Validation helpers ───────────────────────────────────────────────────────
 function isEmail(s: string)  { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(s) && s.length <= 254 }
@@ -78,7 +90,7 @@ export async function POST(req: NextRequest) {
 
   // 1. Rate limit
   const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'unknown'
-  if (checkRate(ip)) {
+  if (await checkRate(ip)) {
     log('warn', 'rate_limited', { ip })
     return NextResponse.json(
       { error: 'Too many requests. Please wait a minute before trying again.' },
