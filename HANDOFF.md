@@ -1,8 +1,9 @@
 # HANDOFF — OSRC Website: Final Push & Deployment
 
 ## Repository
-- **GitHub:** https://github.com/Arkrne/OSRC.git
+- **GitHub:** https://github.com/Arkrne/OSRC.git (branch: `main`, latest commit: `81625b3`)
 - **Local project:** `C:\Users\TUF\Downloads\Orange\osrc-website`
+- **Vercel:** Connected to `Arkrne/OSRC` — root directory set to `osrc-website`
 
 ---
 
@@ -11,10 +12,10 @@
 ### Legal Pages
 | File | Status |
 |------|--------|
-| `src/app/privacy-policy/page.tsx` | ✅ RA 10173-compliant |
-| `src/app/terms/page.tsx` | ✅ Full Terms & Conditions |
-| `src/app/disclaimer/page.tsx` | ✅ Property/loan disclaimers |
-| `src/app/cookie-policy/page.tsx` | ✅ Minimal cookies, no banner needed |
+| `src/app/privacy-policy/page.tsx` | ✅ RA 10173-compliant + SEO metadata + canonical |
+| `src/app/terms/page.tsx` | ✅ Full Terms & Conditions + SEO metadata + canonical |
+| `src/app/disclaimer/page.tsx` | ✅ Property/loan disclaimers + SEO metadata + canonical |
+| `src/app/cookie-policy/page.tsx` | ✅ Minimal cookies, no banner needed + SEO metadata + canonical |
 | `src/components/Footer.tsx` | ✅ Legal links in bottom bar |
 
 ### Features
@@ -25,118 +26,123 @@
 | 30-photo admin with Canvas compression | ✅ Auto-compress, thumbnails, portrait crop |
 | Property detail modal (gallery + description) | ✅ |
 | 5000-char description | ✅ |
-| Resend email (API key set) | ✅ API key set in `.env.local` |
+| Resend email (API key set) | ✅ API key set in `.env.local` and Vercel env vars |
 | FROM address fallback | ✅ Uses `onboarding@resend.dev` until domain verified |
+| Inquiry email verified working | ✅ Tested locally — both admin notification and customer auto-reply send |
 
-### Security (done this session)
+### Security
 | Item | Status |
 |------|--------|
 | Rate limiting (5 req/min per IP) | ✅ `src/app/api/send-inquiry/route.ts` |
-| CORS headers on API | ✅ |
+| CORS headers on API | ✅ Allows only `orangesquarerealty.com.ph` + localhost in dev |
 | Input validation + sanitization | ✅ |
-| Security headers (HSTS, CSP, X-Frame-Options) | ✅ `src/middleware.ts` |
+| Security headers (HSTS, CSP, X-Frame-Options) | ✅ `src/proxy.ts` |
+| Vercel Analytics in CSP connect-src | ✅ |
 | Structured JSON logging | ✅ |
 | Generic admin login error (no Supabase leak) | ✅ |
 | Parameterized queries | ✅ Supabase client does this by default |
-| RLS on DB tables | ✅ Done in a previous session |
+| RLS on DB tables | ✅ |
+| Storage policies | ✅ |
+| API key redacted from repo | ✅ Removed from HANDOFF.md before GitHub push |
+
+### SEO
+| Item | Status |
+|------|--------|
+| `metadataBase` set | ✅ `https://orangesquarerealty.com.ph` |
+| Title template | ✅ `'%s \| Orange Square Realty'` — legal pages auto-inherit |
+| 20 targeted keywords | ✅ Pag-IBIG, house and lot per province, OFW loan, etc. |
+| `robots` directive | ✅ `googleBot: max-image-preview large, max-snippet -1` |
+| OpenGraph + Twitter card | ✅ All pages |
+| Dynamic OG image (1200×630) | ✅ `src/app/opengraph-image.tsx` — branded, builds at deploy time |
+| JSON-LD structured data | ✅ `src/components/JsonLd.tsx` — RealEstateAgent, FAQPage, WebSite schemas |
+| `sitemap.ts` | ✅ All 5 public routes with priority + changeFrequency |
+| `robots.txt` | ✅ `public/robots.txt` — crawlers allowed, `/admin/` blocked |
+| `lang="en-PH"` on `<html>` | ✅ |
+| Canonical URLs on all pages | ✅ |
+
+### Infrastructure
+| Item | Status |
+|------|--------|
+| `.env.example` | ✅ Created at project root |
+| `.env.local` | ✅ Has all 5 keys including `RESEND_FROM` |
+| Supabase SQL migrations | ✅ Run — 4 columns + 4 indexes added |
+| GitHub push | ✅ `https://github.com/Arkrne/OSRC` — branch `main` |
+| `middleware.ts` → `proxy.ts` | ✅ Renamed + export renamed `middleware` → `proxy` per Next.js 16 |
+| Resend lazy init | ✅ Moved inside POST handler — no longer crashes build |
+| Auto-reply contact email | ✅ Fixed — was `inquiries@orangesquarerealty.com.ph` (unregistered), now `jolavts@gmail.com` |
+| Vercel env vars | ✅ All 5 set in Vercel project settings |
+| Admin user in Supabase | ✅ |
+| RLS policies | ✅ |
 
 ---
 
 ## What Still Needs To Be Done
 
-### 1. Create `.env.example` (for Vercel/team reference)
+### 1. Complete Vercel Deployment (IN PROGRESS)
 
-Create this file at the project root (`osrc-website/.env.example`):
+The latest build on Vercel is failing on commit `e5f96fa` — that is an **old commit**.
+The fix is in commit `81625b3`. Make sure Vercel is building the latest commit:
 
-```
-NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
-RESEND_API_KEY=your-resend-api-key
-INQUIRY_EMAIL=your-email@example.com
-RESEND_FROM=OSRC Inquiries <noreply@orangesquarerealty.com.ph>
-```
+- Go to **Vercel → Deployments**
+- Find the deployment that says **Commit: `81625b3`** (it may have auto-triggered from the GitHub push)
+- If it hasn't appeared, go to **Deployments → New Deployment → Branch: main**
+- Do NOT click "Redeploy" on the old `e5f96fa` deployment
 
-### 2. Run Supabase SQL Migrations
+### 2. Test Inquiry Email on Live Site
 
-Go to **Supabase Dashboard → SQL Editor → New Query** and run:
+After a successful Vercel deploy:
+1. Go to the live site → submit the inquiry form
+2. Check `jolavts@gmail.com` for the admin notification
+3. Check the submitted email address for the customer auto-reply
+4. If emails don't arrive: Vercel → Project → Functions → check logs for `RESEND_API_KEY`
 
-```sql
--- Add columns needed for multi-photo + description support
-ALTER TABLE listings ADD COLUMN IF NOT EXISTS image_urls       text[]  DEFAULT '{}';
-ALTER TABLE listings ADD COLUMN IF NOT EXISTS thumbnail_urls   text[]  DEFAULT '{}';
-ALTER TABLE listings ADD COLUMN IF NOT EXISTS main_image_index integer DEFAULT 0;
-ALTER TABLE listings ADD COLUMN IF NOT EXISTS description      text    DEFAULT '';
+### 3. Add Real Property Listings
 
--- Database indexes for fields queried most
-CREATE INDEX IF NOT EXISTS idx_listings_created_at  ON listings (created_at DESC);
-CREATE INDEX IF NOT EXISTS idx_listings_title       ON listings USING gin(to_tsvector('english', title));
-CREATE INDEX IF NOT EXISTS idx_listings_location    ON listings USING gin(to_tsvector('english', location));
-CREATE INDEX IF NOT EXISTS idx_promos_created_at    ON promos   (created_at DESC);
-```
+Log in to `https://your-domain.com/admin/listings` and add real properties.
+The public Properties section shows "No listings available yet." until you do this.
 
-### 3. Push to GitHub
+---
 
-In PowerShell inside `C:\Users\TUF\Downloads\Orange\osrc-website`:
+## Remaining Manual / Business Tasks
 
-```powershell
-git init
-git add .
-git commit -m "Initial commit — OSRC website production ready"
-git branch -M main
-git remote add origin https://github.com/Arkrne/OSRC.git
-git push -u origin main
-```
+| Item | Status | Action |
+|------|--------|--------|
+| Real property photos | ❌ | Log in to `/admin/listings` and add listings with real photos |
+| Team section photos | ❌ | Replace placeholder Unsplash photos + fake names in `src/components/Team.tsx` with real team members — or remove the section |
+| Hero video | ⚠️ | Currently hotlinked from Pexels (`videos.pexels.com`) — Pexels can block this. Replace with a self-hosted video in `/public` or Supabase Storage |
+| `public/og-image.png` | ⚠️ | The dynamic OG image generates at build time. Optionally also add a static `public/og-image.png` (1200×630) as a fallback for pages that don't use the dynamic generator |
+| SEC Reg No. `OPC-2024-OSRC-00142` | ❓ | Confirm this is the real number — appears in Footer + Terms |
+| Domain `orangesquarerealty.com.ph` | ❌ | Register with a .PH registrar (requires business docs) |
+| Resend domain verification | ❌ | After domain is live: Resend dashboard → Domains → Add → add DNS records |
+| Update `RESEND_FROM` in Vercel | ❌ | After domain verified: change to `OSRC Inquiries <noreply@orangesquarerealty.com.ph>` in Vercel env vars + redeploy |
+| Update auto-reply contact email | ❌ | After domain verified: update `route.ts:163` from `jolavts@gmail.com` to `inquiries@orangesquarerealty.com.ph` |
+| NPC Registration | ❌ | Register at `privacy.gov.ph` as a Personal Information Controller (required under RA 10173) |
+| PRC License | ❓ | Confirm licensed real estate broker on staff has current PRC license |
+| Google Search Console | ❌ | After domain is live: submit `https://orangesquarerealty.com.ph/sitemap.xml` to GSC |
+| Google Business Profile | ❌ | Create a Google Business Profile — critical for local SEO ranking in PH |
 
-If `git init` says already initialized, skip it and start from `git add .`.
+---
 
-### 4. Set Vercel Environment Variables
-
-Go to **Vercel → Project → Settings → Environment Variables** and add:
+## Vercel Environment Variables (all 5 required)
 
 | Key | Value |
 |-----|-------|
 | `NEXT_PUBLIC_SUPABASE_URL` | `https://pfnfgbbccdexbyjorvam.supabase.co` |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | (from `.env.local`) |
-| `RESEND_API_KEY` | (copy from `.env.local`) |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | (from `.env.local` line 2) |
+| `RESEND_API_KEY` | (from `.env.local` line 3) |
 | `INQUIRY_EMAIL` | `jolavts@gmail.com` |
-| `RESEND_FROM` | Leave blank for now (uses onboarding@resend.dev fallback) |
-
-After adding, **redeploy** from Vercel dashboard.
-
-### 5. Deploy on Vercel
-
-- Go to vercel.com → New Project → Import from GitHub → select `Arkrne/OSRC`
-- Framework: **Next.js** (auto-detected)
-- Root directory: `osrc-website` ← **important**, the repo root is not the Next.js root
-- Build command: `npm run build` (default)
-- Click Deploy
-
-### 6. Test Inquiry Email End-to-End
-
-✅ Verified locally — both admin notification and customer auto-reply send successfully via Resend.
-
-After deploy, repeat on the live URL:
-1. Go to the live site → submit the inquiry form
-2. Check `jolavts@gmail.com` for the admin notification email
-3. Check the submitted email address for the customer auto-reply
-4. If emails don't arrive: check Vercel Function Logs → confirm `RESEND_API_KEY` is set
+| `RESEND_FROM` | `OSRC Inquiries <onboarding@resend.dev>` |
 
 ---
 
-## Pre-Launch Checklist (Manual — Danny / OSRC)
+## Git Commit History
 
-| Item | Status | Action |
-|------|--------|--------|
-| Admin user in Supabase | ✅ Done | — |
-| RLS policies | ✅ Done | — |
-| Storage policies | ✅ Done | — |
-| Real property photos | ❌ | Log in to `/admin/listings` and add listings with real photos |
-| SEC Reg No. `OPC-2024-OSRC-00142` | ❓ | Confirm this is the real number — it appears in Footer + Terms |
-| Domain `orangesquarerealty.com.ph` | ❌ | Register with a .PH registrar (requires business docs) |
-| Resend domain verification | ❌ | After domain is live: Resend dashboard → Domains → Add → add DNS records |
-| Update `RESEND_FROM` env var | ❌ | After domain verified: set `RESEND_FROM=OSRC Inquiries <noreply@orangesquarerealty.com.ph>` in Vercel |
-| NPC Registration | ❌ | Register at privacy.gov.ph as a Personal Information Controller (required under RA 10173) |
-| PRC License | ❓ | Confirm licensed real estate broker on staff has current PRC license |
+| Commit | Description |
+|--------|-------------|
+| `95bf23b` | Initial commit from Create Next App |
+| `51b2f49` | SEO: JSON-LD, OG image, full metadata, robots, sitemap + security fixes |
+| `e5f96fa` | Fix Vercel build: lazy Resend init, middleware → proxy |
+| `81625b3` | Fix opengraph-image: Satori-compliant JSX ← **latest, this must build on Vercel** |
 
 ---
 
@@ -144,16 +150,17 @@ After deploy, repeat on the live URL:
 
 - **Vercel:** Every deploy is saved. Go to Vercel → Deployments → click any previous deploy → "Promote to Production" to instantly roll back.
 - **GitHub:** All code is version-controlled. `git revert` or `git reset` to any previous commit if needed.
-- **Supabase:** The `ALTER TABLE ... ADD COLUMN IF NOT EXISTS` migrations are non-destructive (additive only). They can be reversed with `ALTER TABLE listings DROP COLUMN <name>` if needed, but this is unlikely to be necessary.
+- **Supabase:** The `ALTER TABLE ... ADD COLUMN IF NOT EXISTS` migrations are non-destructive. Reverse with `ALTER TABLE listings DROP COLUMN <name>` if needed.
 
 ---
 
 ## Tech Stack Reference
-- Next.js App Router (check `node_modules/next/dist/docs/` for breaking changes)
-- React 19
-- Tailwind v4
-- Framer Motion v12
-- `@supabase/ssr` + `@supabase/supabase-js`
-- Resend for email
-- Vercel Analytics (cookieless)
-- Supabase Storage (`property-images` bucket, public read)
+- **Next.js 16.2.7** App Router — `node_modules/next/dist/docs/` for API reference
+- **React 19.2.4**
+- **Tailwind v4**
+- **Framer Motion v12**
+- **`@supabase/ssr` + `@supabase/supabase-js`** — auth + DB + storage
+- **Resend v6** — transactional email
+- **Vercel Analytics** (cookieless, no GDPR banner needed)
+- **Supabase Storage** — `property-images` bucket, public read, `thumbnails/` subfolder
+- **Proxy file:** `src/proxy.ts` (was `middleware.ts` — renamed in Next.js 16)
