@@ -96,9 +96,29 @@ After a successful Vercel deploy:
 3. Check the submitted email address for the customer auto-reply
 4. If emails don't arrive: Vercel → Project → Functions → check logs for `RESEND_API_KEY`
 
-### 3. Add Real Property Listings
+### 3. Fix "Upload Failed" on Admin Listings ← NEXT TASK
 
-Log in to `https://your-domain.com/admin/listings` and add real properties.
+The error message now shows the real Supabase error (commit `50c5c5e`).
+Try adding a listing and read the exact error shown.
+
+**Most likely cause — missing storage policy.** Run this in Supabase SQL Editor:
+
+```sql
+CREATE POLICY "Admin upload" ON storage.objects
+FOR INSERT TO authenticated
+WITH CHECK (bucket_id = 'property-images');
+
+CREATE POLICY "Admin update" ON storage.objects
+FOR UPDATE TO authenticated
+USING (bucket_id = 'property-images');
+```
+
+**Second most likely — bucket doesn't exist.** Go to Supabase → Storage.
+If `property-images` is not listed, create it as a **public** bucket.
+
+### 4. Add Real Property Listings
+
+After upload is fixed, log in to `/admin/listings` and add real properties.
 The public Properties section shows "No listings available yet." until you do this.
 
 ---
@@ -142,7 +162,9 @@ The public Properties section shows "No listings available yet." until you do th
 | `95bf23b` | Initial commit from Create Next App |
 | `51b2f49` | SEO: JSON-LD, OG image, full metadata, robots, sitemap + security fixes |
 | `e5f96fa` | Fix Vercel build: lazy Resend init, middleware → proxy |
-| `81625b3` | Fix opengraph-image: Satori-compliant JSX ← **latest, this must build on Vercel** |
+| `81625b3` | Fix opengraph-image: Satori-compliant JSX |
+| `9b0a448` | Update HANDOFF.md |
+| `50c5c5e` | Show real Supabase error message on upload failure ← **latest** |
 
 ---
 
