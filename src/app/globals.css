@@ -1,26 +1,438 @@
 @import "tailwindcss";
 
+/* ─── Design System Tokens ─── */
+@theme {
+  /* Canvas — warm white editorial */
+  --color-canvas:        #FAFAF7;
+  --color-surface:       #F5EEE8;
+  --color-raised:        #EDE5DA;
+  --color-overlay:       #E5DDD0;
+
+  /* Text — dark espresso on light */
+  --color-text-1:        #1C1714;
+  --color-text-2:        #6E6055;
+  --color-text-3:        #A89070;
+
+  /* Brand — mature orange (not neon) */
+  --color-orange:        #E85D04;
+  --color-orange-light:  #F27024;
+  --color-orange-dark:   #B34803;
+  --color-orange-glow:   rgba(232, 93, 4, 0.12);
+
+  /* Accent */
+  --color-gold:          #C8943A;
+  --color-navy:          #1E2D5A;
+
+  /* Unified DARK-section palette — derived from the approved Hero (north star) */
+  --color-espresso:      #0B0906;   /* base bg for dark sections */
+  --color-espresso-2:    #14100B;   /* raised cards on dark */
+  --color-cream-1:       #FBF6EC;   /* headlines on dark */
+  --color-cream-body:    #E7DCC9;   /* body copy on dark */
+  --color-cream-2:       #C6B9A4;   /* labels / muted on dark */
+  --color-cream-3:       #8A7C68;   /* faint / tertiary on dark */
+
+  /* Semantic lines — dark hairlines on light bg */
+  --color-line:          rgba(28, 23, 20, 0.08);
+  --color-line-warm:     rgba(28, 23, 20, 0.13);
+  --color-line-orange:   rgba(232, 93, 4, 0.2);
+
+  /* Hairlines on DARK bg */
+  --color-line-dark:     rgba(255, 255, 255, 0.12);
+  --color-line-dark-soft: rgba(255, 255, 255, 0.07);
+
+  /* Typography */
+  --font-display: var(--font-dm-serif);
+  --font-sans:    var(--font-jakarta);
+}
+
+/* ─── Emil Kowalski Easing Curves ─── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --ease-out:    cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+  --ease-in:     cubic-bezier(0.55, 0, 1, 0.45);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ─── Keyframes ─── */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(0.85); }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ─── Reset & Base (mobile-first) ─── */
+*, *::before, *::after { box-sizing: border-box; }
+
+/* Prevent flex/grid children from forcing horizontal overflow */
+* { min-width: 0; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 96px;          /* clears the fixed glass navbar on anchor jumps */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #FAFAF7;
+  color: #1C1714;
+  font-family: var(--font-jakarta), system-ui, sans-serif;
+  line-height: 1.6;
+  min-height: 100svh;
+  overflow-x: hidden;
+}
+
+/* All media is responsive by default */
+img, picture, video, canvas, svg, iframe {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Never let long words / unbreakable strings cause overflow */
+p, h1, h2, h3, h4, h5, h6, li, td, th, figcaption {
+  overflow-wrap: break-word;
+}
+
+/* Inputs inherit type styles */
+input, button, textarea, select { font: inherit; }
+
+/* Kill 300ms tap delay + iOS blue tap flash on interactive elements */
+a, button, [role="button"], input[type="submit"], label {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Display headings: DM Serif, ultra-tight leading */
+.font-display, h1, h2, h3 {
+  font-family: var(--font-dm-serif), Georgia, serif;
+  line-height: 0.95;
+  letter-spacing: -0.025em;
+}
+
+/* ─── Custom Scrollbar ─── */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: #FAFAF7; }
+::-webkit-scrollbar-thumb { background: rgba(232, 93, 4, 0.3); border-radius: 2px; }
+
+/* ─── Selection ─── */
+::selection { background: rgba(232, 93, 4, 0.15); color: #1C1714; }
+
+/* ─── Grain overlay — always fixed, never on scroll containers ─── */
+.grain::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 99;
+  pointer-events: none;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 180px;
+}
+
+/* ─── Hairline divider ─── */
+.divider {
+  height: 1px;
+  background: rgba(28, 23, 20, 0.08);
+}
+
+/* ─── Eyebrow badge ─── */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: rgba(232, 93, 4, 0.09);
+  border: 1px solid rgba(232, 93, 4, 0.28);
+  color: #C94E03;
+  font-family: var(--font-jakarta), system-ui, sans-serif;
+}
+/* On-dark variant — reads cleanly over espresso sections */
+.eyebrow.on-dark {
+  background: rgba(232, 93, 4, 0.14);
+  border-color: rgba(242, 112, 36, 0.38);
+  color: #F8A56A;
+}
+
+/* ─── Unified section-header rhythm ─── */
+/* Pair with framer-motion whileInView + the shared EASE in components. */
+.section-title {
+  font-family: var(--font-dm-serif), Georgia, serif;
+  font-size: clamp(34px, 4vw, 58px);
+  line-height: 0.95;
+  letter-spacing: -0.025em;
+}
+
+/* ─── Double-Bezel card (used only for property/modal cards) ─── */
+.bezel-outer {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(28, 23, 20, 0.08);
+  border-radius: 1.75rem;
+  padding: 5px;
+  box-shadow: 0 2px 20px rgba(28, 23, 20, 0.05);
+}
+.bezel-inner {
+  background: #FFFFFF;
+  border-radius: calc(1.75rem - 5px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  overflow: hidden;
+  height: 100%;
+}
+/* Dark bezel — same anatomy, espresso surfaces (for dark sections) */
+.bezel-outer.on-dark {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.10);
+  box-shadow: 0 2px 30px rgba(0, 0, 0, 0.4);
+}
+.bezel-inner.on-dark {
+  background: #14100B;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* ─── Press feedback ─── */
+.press {
+  transition: transform 160ms var(--ease-out);
+}
+.press:active {
+  transform: scale(0.97);
+}
+
+/* ─── Hover lift — pointer-only so touch devices never get a stuck hover ─── */
+.lift {
+  transition: transform 260ms var(--ease-out), box-shadow 260ms var(--ease-out);
+  will-change: transform;
+}
+@media (hover: hover) and (pointer: fine) {
+  .lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 40px -12px rgba(28, 23, 20, 0.18);
+  }
+  .lift.on-dark:hover {
+    box-shadow: 0 22px 48px -14px rgba(0, 0, 0, 0.55);
+  }
+}
+
+/* ─── Nested "button-in-button" CTA icon circle ─── */
+/* The icon glyph nudges diagonally on hover (matches the Hero CTA). */
+.cta-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.2);
+  transition: transform 200ms var(--ease-out);
+}
+.group:hover .cta-icon {
+  transform: translate(2px, -2px);
+}
+.cta-icon.on-light {
+  background: rgba(232, 93, 4, 0.12);
+  color: #E85D04;
+}
+
+/* ─── Ambient orange glow — drop into a dark section as an absolute child ─── */
+/* <div className="ambient-glow" aria-hidden /> inside a relative parent */
+.ambient-glow {
+  position: absolute;
+  pointer-events: none;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(60% 50% at 15% 0%,  rgba(232, 93, 4, 0.16) 0%, transparent 60%),
+    radial-gradient(50% 45% at 100% 100%, rgba(242, 112, 36, 0.10) 0%, transparent 55%);
+}
+
+/* ─── Property image hover — pointer-only ─── */
+.property-image {
+  transition: transform 700ms var(--ease-out);
+  will-change: transform;
+}
+@media (hover: hover) and (pointer: fine) {
+  .property-card:hover .property-image {
+    transform: scale(1.05);
+  }
+}
+
+/* ─── Section number (editorial) ─── */
+.section-num {
+  font-family: var(--font-dm-serif), Georgia, serif;
+  font-size: clamp(48px, 6vw, 80px);
+  line-height: 1;
+  color: rgba(28, 23, 20, 0.07);
+  letter-spacing: -0.04em;
+  transition: color 400ms var(--ease-out);
+  user-select: none;
+}
+
+/* ════════════════════════════════════════════════════════════
+   WOW LAYER — depth, motion, and spectacle utilities
+   ════════════════════════════════════════════════════════════ */
+
+/* ─── Gradient mesh — warm, organic background depth on light ─── */
+.mesh-warm {
+  background-color: #FAFAF7;
+  background-image:
+    radial-gradient(40% 35% at 12% 8%,  rgba(232, 93, 4, 0.08) 0%, transparent 60%),
+    radial-gradient(38% 40% at 88% 18%, rgba(200, 148, 58, 0.09) 0%, transparent 62%),
+    radial-gradient(45% 45% at 70% 95%, rgba(232, 93, 4, 0.05) 0%, transparent 60%);
+}
+.mesh-dark {
+  background-color: #0B0906;
+  background-image:
+    radial-gradient(45% 40% at 10% 0%,   rgba(232, 93, 4, 0.20) 0%, transparent 60%),
+    radial-gradient(40% 45% at 95% 30%,  rgba(242, 112, 36, 0.12) 0%, transparent 60%),
+    radial-gradient(55% 50% at 60% 110%, rgba(200, 148, 58, 0.10) 0%, transparent 60%);
+}
+
+/* ─── Floating decorative blobs (drop into a relative parent) ─── */
+@keyframes float-slow {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50%      { transform: translate3d(0, -28px, 0) scale(1.06); }
+}
+@keyframes float-slower {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50%      { transform: translate3d(22px, 20px, 0) scale(1.08); }
+}
+.blob {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(60px);
+  pointer-events: none;
+  z-index: 0;
+  will-change: transform;
+}
+.blob-1 { background: rgba(232, 93, 4, 0.18); animation: float-slow 11s ease-in-out infinite; }
+.blob-2 { background: rgba(200, 148, 58, 0.16); animation: float-slower 14s ease-in-out infinite; }
+
+/* ─── Animated conic gradient border (premium card accent) ─── */
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+@keyframes spin-border { to { --angle: 360deg; } }
+.glow-border {
+  position: relative;
+  isolation: isolate;
+}
+.glow-border::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  z-index: -1;
+  border-radius: inherit;
+  padding: 1px;
+  background: conic-gradient(from var(--angle),
+    transparent 0%, rgba(232, 93, 4, 0.0) 60%,
+    rgba(232, 93, 4, 0.9) 78%, rgba(242, 112, 36, 0.6) 88%, transparent 100%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 400ms var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) {
+  .glow-border:hover::before { opacity: 1; animation: spin-border 4s linear infinite; }
+}
+
+/* ─── Shimmer sweep — a light streak crosses on hover ─── */
+.shimmer { position: relative; overflow: hidden; }
+.shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-120%) skewX(-18deg);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+  pointer-events: none;
+}
+@media (hover: hover) and (pointer: fine) {
+  .shimmer:hover::after { transition: transform 900ms var(--ease-out); transform: translateX(120%) skewX(-18deg); }
+}
+.shimmer.on-dark::after {
+  background: linear-gradient(90deg, transparent, rgba(248, 165, 106, 0.22), transparent);
+}
+
+/* ─── Animated gradient text (kinetic accent words) ─── */
+@keyframes text-shine {
+  to { background-position: 200% center; }
+}
+.text-shine {
+  background: linear-gradient(90deg, #E85D04, #F27024, #C8943A, #F27024, #E85D04);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: text-shine 5s linear infinite;
+}
+
+/* ─── Marquee strip styling ─── */
+.marquee-word {
+  font-family: var(--font-dm-serif), Georgia, serif;
+  font-size: clamp(34px, 7vw, 104px);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  padding: 0 0.3em;
+  display: inline-block;
+  white-space: nowrap;
+}
+.marquee-word.outline {
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(28, 23, 20, 0.22);
+}
+.marquee-word.outline.on-dark {
+  -webkit-text-stroke: 1px rgba(251, 246, 236, 0.28);
+}
+
+/* ─── Underline draw — animated link/heading underline ─── */
+.ul-draw {
+  background-image: linear-gradient(#E85D04, #E85D04);
+  background-size: 0% 1.5px;
+  background-position: 0% 100%;
+  background-repeat: no-repeat;
+  transition: background-size 360ms var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) {
+  .ul-draw:hover { background-size: 100% 1.5px; }
+}
+
+/* ─── Scroll-reveal mask for images (paired with framer clip) ─── */
+.img-zoom { overflow: hidden; }
+.img-zoom > img, .img-zoom > video {
+  transition: transform 800ms var(--ease-out);
+  will-change: transform;
+}
+@media (hover: hover) and (pointer: fine) {
+  .group:hover .img-zoom > img, .group:hover .img-zoom > video { transform: scale(1.06); }
+}
+
+/* ─── Focus ring ─── */
+:focus-visible {
+  outline: 2px solid #E85D04;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ─── Reduced motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
