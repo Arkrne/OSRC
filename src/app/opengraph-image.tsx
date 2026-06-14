@@ -1,4 +1,5 @@
 import { ImageResponse } from 'next/og'
+import { STATS } from '@/lib/site'
 
 export const alt = 'Orange Square Realty Corporation — Pag-IBIG Housing Loan Specialists Philippines'
 export const size = { width: 1200, height: 630 }
@@ -75,13 +76,13 @@ export default function Image() {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              fontSize: 15,
+              fontSize: 13,
               fontWeight: 800,
               color: 'white',
-              letterSpacing: '0.12em',
+              letterSpacing: '0.04em',
             }}
           >
-            OS
+            OSRC
           </div>
           <div
             style={{
@@ -161,10 +162,10 @@ export default function Image() {
           }}
         >
           {[
-            { val: '10+',   label: 'Developer Partners' },
-            { val: '3',     label: 'Regions Served'     },
-            { val: '₱890K', label: 'Starting Price'     },
-            { val: '24h',   label: 'Pre-Qualification'  },
+            { val: STATS.developerPartners, label: 'Developer Partners' },
+            { val: STATS.regions,           label: 'Regions Served'     },
+            { val: STATS.startingPrice,     label: 'Starting Price'     },
+            { val: STATS.preQualTime,       label: 'Pre-Qualification'  },
           ].map(s => (
             <div
               key={s.val}

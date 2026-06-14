@@ -29,7 +29,7 @@ export default function MobileCTABar() {
         >
           <div className="pointer-events-auto flex items-stretch gap-2 p-2 rounded-2xl bg-[rgba(11,9,6,0.88)] backdrop-blur-xl border border-[rgba(255,255,255,0.12)] shadow-[0_12px_40px_rgba(0,0,0,0.45)]">
             <a
-              href="tel:+639514342858"
+              href="tel:+639568843373"
               aria-label="Call Orange Square"
               className="flex items-center justify-center w-12 min-h-[48px] rounded-xl bg-[rgba(255,255,255,0.08)] border border-[rgba(255,255,255,0.1)] text-[#FBF6EC] active:scale-[0.95] transition-transform duration-150"
             >

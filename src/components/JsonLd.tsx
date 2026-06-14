@@ -15,20 +15,20 @@ const localBusiness = {
     height: 630,
   },
   image: `${SITE_URL}/og-image.png`,
-  telephone: '+63-951-434-2858',
+  telephone: '+63-956-884-3373',
   email: 'inquiries@orangesquarerealty.com.ph',
   address: {
     '@type': 'PostalAddress',
-    streetAddress: 'Unit 4B, Cityland Herrera Tower',
-    addressLocality: 'Makati City',
-    addressRegion: 'Metro Manila',
-    postalCode: '1227',
+    streetAddress: '#12 Madrona St., Phase 1, Greenwoods Executive Village',
+    addressLocality: 'Cainta',
+    addressRegion: 'Rizal',
+    postalCode: '1900',
     addressCountry: 'PH',
   },
   geo: {
     '@type': 'GeoCoordinates',
-    latitude: 14.5547,
-    longitude: 121.0244,
+    latitude: 14.5833,
+    longitude: 121.1167,
   },
   openingHoursSpecification: {
     '@type': 'OpeningHoursSpecification',
@@ -42,7 +42,10 @@ const localBusiness = {
     { '@type': 'State', name: 'Bulacan',     sameAs: 'https://en.wikipedia.org/wiki/Bulacan' },
     { '@type': 'City',  name: 'Metro Manila', sameAs: 'https://en.wikipedia.org/wiki/Metro_Manila' },
   ],
-  sameAs: ['https://www.facebook.com/profile.php?id=61565408232254'],
+  sameAs: [
+    'https://www.facebook.com/profile.php?id=61565408232254',
+    'https://www.tiktok.com/@orangesquarerealtycorp',
+  ],
   priceRange: '₱890,000+',
   currenciesAccepted: 'PHP',
   paymentAccepted: 'Pag-IBIG Housing Loan, Bank Transfer, Check',
@@ -160,14 +163,6 @@ const webSite = {
   url: SITE_URL,
   description:
     'Find Pag-IBIG eligible properties and get your housing loan processed end-to-end across Cavite, Laguna, Bulacan, and Metro Manila.',
-  potentialAction: {
-    '@type': 'SearchAction',
-    target: {
-      '@type': 'EntryPoint',
-      urlTemplate: `${SITE_URL}/properties?q={search_term_string}`,
-    },
-    'query-input': 'required name=search_term_string',
-  },
 }
 
 function Ld({ data }: { data: object }) {

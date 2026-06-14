@@ -54,7 +54,7 @@ export default function VideoShowcase() {
             <video
               ref={videoRef}
               className="w-full h-full object-cover"
-              src="https://www.pexels.com/download/video/29913691/"
+              src="https://videos.pexels.com/video-files/29913691/29913691-uhd_2560_1440_30fps.mp4"
               autoPlay
               loop
               muted

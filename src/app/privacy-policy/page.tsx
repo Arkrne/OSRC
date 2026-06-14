@@ -29,7 +29,7 @@ export default function PrivacyPolicy() {
         <div className="prose-legal">
 
           <Section title="1. Who We Are">
-            <p>Orange Square Realty Corporation (<strong>"OSRC," "we," "us," or "our"</strong>) is a duly incorporated One Person Corporation registered with the Securities and Exchange Commission of the Philippines (SEC Reg. No. OPC-2024-OSRC-00142), with principal office at Unit 4B, Cityland Herrera Tower, V.A. Rufino St., Salcedo Village, Makati City 1227.</p>
+            <p>Orange Square Realty Corporation (<strong>"OSRC," "we," "us," or "our"</strong>) is a duly incorporated One Person Corporation registered with the Securities and Exchange Commission of the Philippines (SEC Reg. No. OPC-2024-OSRC-00142), with principal office at #12 Madrona St., Phase 1, Greenwoods Executive Village, Cainta, Rizal 1900.</p>
             <p>We are a <strong>Personal Information Controller</strong> as defined under Republic Act No. 10173, otherwise known as the <em>Data Privacy Act of 2012</em>, and its Implementing Rules and Regulations.</p>
           </Section>
 
@@ -97,7 +97,7 @@ export default function PrivacyPolicy() {
               <li><strong>Object</strong> — withdraw your consent and object to processing</li>
               <li><strong>File a complaint</strong> — with the National Privacy Commission (NPC) at <em>www.privacy.gov.ph</em></li>
             </ul>
-            <p>To exercise any of these rights, contact our Data Privacy Officer at <strong>inquiries@orangesquarerealty.com.ph</strong> or call <strong>+63 951 434 2858</strong>.</p>
+            <p>To exercise any of these rights, contact our Data Privacy Officer at <strong>inquiries@orangesquarerealty.com.ph</strong> or call <strong>+63 956 884 3373</strong>.</p>
           </Section>
 
           <Section title="8. Cookies">
@@ -117,10 +117,10 @@ export default function PrivacyPolicy() {
             <address className="not-italic">
               <strong>Orange Square Realty Corporation</strong><br />
               Data Privacy Officer<br />
-              Unit 4B, Cityland Herrera Tower<br />
-              V.A. Rufino St., Salcedo Village, Makati City 1227<br />
+              #12 Madrona St., Phase 1<br />
+              Greenwoods Executive Village, Cainta, Rizal 1900<br />
               Email: <a href="mailto:inquiries@orangesquarerealty.com.ph" className="text-[#E85D04] hover:underline">inquiries@orangesquarerealty.com.ph</a><br />
-              Phone: +63 951 434 2858
+              Phone: +63 956 884 3373
             </address>
           </Section>
 

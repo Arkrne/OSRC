@@ -77,11 +77,11 @@ export default function ContactSection() {
             <span className="cta-icon w-8 h-8"><ArrowUpRight size={16} strokeWidth={2.25} /></span>
           </button>
           <a
-            href="tel:+639514342858"
+            href="tel:+639568843373"
             className="flex items-center justify-center gap-2.5 px-7 py-4 min-h-[52px] rounded-full border border-[rgba(255,255,255,0.14)] text-[#C6B9A4] hover:text-[#FBF6EC] hover:border-[rgba(255,255,255,0.3)] font-medium text-[15px] transition-[border-color,color,transform] duration-[160ms] ease-out active:scale-[0.97]"
           >
             <Phone size={15} strokeWidth={1.75} />
-            +63 951 434 2858
+            +63 956 884 3373
           </a>
         </motion.div>
 
@@ -95,8 +95,8 @@ export default function ContactSection() {
         >
           <div className="px-6 py-6 sm:px-7 sm:py-7 border-b sm:border-b-0 sm:border-r border-[rgba(255,255,255,0.1)]">
             <p className="text-[10px] text-[#8A7C68] uppercase tracking-[0.16em] font-medium mb-2">Phone</p>
-            <a href="tel:+639514342858" className="text-[#FBF6EC] text-[14px] font-medium hover:text-[#F27024] transition-colors duration-150">
-              +63 951 434 2858
+            <a href="tel:+639568843373" className="text-[#FBF6EC] text-[14px] font-medium hover:text-[#F27024] transition-colors duration-150">
+              +63 956 884 3373
             </a>
           </div>
           <div className="px-6 py-6 sm:px-7 sm:py-7 border-b sm:border-b-0 sm:border-r border-[rgba(255,255,255,0.1)]">

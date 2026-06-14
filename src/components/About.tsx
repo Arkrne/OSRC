@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { ArrowUpRight } from 'lucide-react'
+import { STATS } from '@/lib/site'
 
 const EASE = [0.23, 1, 0.32, 1] as const
 
@@ -84,12 +85,17 @@ export default function About() {
             transition={{ duration: 0.5, delay: 0.14, ease: EASE }}
             className="flex flex-col gap-5 text-[#6E6055] text-[16px] leading-relaxed mb-12 max-w-lg"
           >
+            <p className="text-[#1C1714] text-[18px] font-medium leading-relaxed">
+              Begin your unique home buying journey with our dedicated team. We offer
+              exceptional options and transparent service — managing sales, loan
+              documentation, and consultancy to make your search effortless and enjoyable.
+            </p>
             <p>
               Orange Square Realty Corporation opened in 2024 to do one thing:
               get ordinary Filipino families into homes they own.
             </p>
             <p>
-              From our office in Makati City, we process Pag-IBIG housing loans for
+              From our office in Cainta, Rizal, we process Pag-IBIG housing loans for
               buyers across Metro Manila, Cavite, Laguna, and Bulacan.
             </p>
             <p>
@@ -108,10 +114,10 @@ export default function About() {
             className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8 mb-10 sm:mb-12 pt-8 border-t border-[rgba(28,23,20,0.08)]"
           >
             {[
-              { v: '2024', l: 'Founded'       },
-              { v: '10+',  l: 'Dev. Partners' },
-              { v: '3',    l: 'Regions'       },
-              { v: '24h',  l: 'Pre-Qual'      },
+              { v: '2024',                   l: 'Founded'       },
+              { v: STATS.developerPartners,  l: 'Dev. Partners' },
+              { v: STATS.regions,            l: 'Regions'       },
+              { v: STATS.preQualTime,        l: 'Pre-Qual'      },
             ].map(s => (
               <div key={s.l}>
                 <div className="font-display text-[32px] text-[#E85D04]" style={{ lineHeight: 1, letterSpacing: '-0.03em' }}>{s.v}</div>

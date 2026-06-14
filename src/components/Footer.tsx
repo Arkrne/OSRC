@@ -1,5 +1,6 @@
 import { Mail, Phone, MapPin } from 'lucide-react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 const quickLinks = [
   { href: '/',           label: 'Home'       },
@@ -24,8 +25,8 @@ export default function Footer() {
           {/* Brand */}
           <div className="col-span-2 lg:col-span-1 flex flex-col gap-5">
             <div className="flex items-center gap-2.5">
-              <div className="w-7 h-7 rounded-lg bg-[#E85D04] flex items-center justify-center shadow-[0_0_14px_rgba(232,93,4,0.3)]">
-                <span className="text-white font-bold text-[9px] tracking-widest">OS</span>
+              <div className="relative w-8 h-8 rounded-lg overflow-hidden shadow-[0_0_14px_rgba(232,93,4,0.3)] shrink-0">
+                <Image src="/logo.jpg" alt="OSRC Logo" fill className="object-contain" sizes="32px" />
               </div>
               <div>
                 <div className="font-semibold text-[#FBF6EC] text-[13px] leading-tight tracking-tight">Orange Square</div>
@@ -35,17 +36,30 @@ export default function Footer() {
             <p className="text-[#C6B9A4] text-[13px] leading-relaxed max-w-[220px]">
               Honest Pag-IBIG guidance for Filipino families buying their first home.
             </p>
-            <a
-              href="https://www.facebook.com/profile.php?id=61565408232254"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-10 h-10 rounded-xl bg-[rgba(255,255,255,0.04)] hover:bg-[rgba(255,255,255,0.09)] border border-[rgba(255,255,255,0.08)] flex items-center justify-center transition-[background-color,transform] duration-[160ms] ease-out active:scale-[0.95] hover:-translate-y-0.5"
-              aria-label="Facebook"
-            >
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" className="text-[#C6B9A4]">
-                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
-              </svg>
-            </a>
+            <div className="flex items-center gap-2.5">
+              <a
+                href="https://www.facebook.com/profile.php?id=61565408232254"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-xl bg-[rgba(255,255,255,0.04)] hover:bg-[rgba(255,255,255,0.09)] border border-[rgba(255,255,255,0.08)] flex items-center justify-center transition-[background-color,transform] duration-[160ms] ease-out active:scale-[0.95] hover:-translate-y-0.5"
+                aria-label="Orange Square Realty on Facebook"
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" className="text-[#C6B9A4]">
+                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                </svg>
+              </a>
+              <a
+                href="https://www.tiktok.com/@orangesquarerealtycorp"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-xl bg-[rgba(255,255,255,0.04)] hover:bg-[rgba(255,255,255,0.09)] border border-[rgba(255,255,255,0.08)] flex items-center justify-center transition-[background-color,transform] duration-[160ms] ease-out active:scale-[0.95] hover:-translate-y-0.5"
+                aria-label="Orange Square Realty on TikTok"
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" className="text-[#C6B9A4]">
+                  <path d="M12.53 2h2.95c.16 1.2.66 2.32 1.43 3.22A5 5 0 0 0 20 6.7v2.97a7.9 7.9 0 0 1-4.2-1.25v5.93A5.59 5.59 0 1 1 10.2 8.78c.3 0 .6.02.88.07v3.02a2.6 2.6 0 1 0 1.45 2.34V2z"/>
+                </svg>
+              </a>
+            </div>
           </div>
 
           {/* Quick Links */}
@@ -86,9 +100,9 @@ export default function Footer() {
             </h4>
             <ul className="flex flex-col gap-3">
               <li>
-                <a href="tel:+639514342858" className="flex items-start gap-2.5 py-0.5 text-[13px] text-[#C6B9A4] hover:text-[#FBF6EC] transition-colors group">
+                <a href="tel:+639568843373" className="flex items-start gap-2.5 py-0.5 text-[13px] text-[#C6B9A4] hover:text-[#FBF6EC] transition-colors group">
                   <Phone size={14} strokeWidth={1.75} className="mt-0.5 shrink-0 group-hover:text-[#F27024] transition-colors" />
-                  +63 951 434 2858
+                  +63 956 884 3373
                 </a>
               </li>
               <li>
@@ -100,7 +114,7 @@ export default function Footer() {
               <li>
                 <div className="flex items-start gap-2.5 text-[13px] text-[#C6B9A4]">
                   <MapPin size={14} strokeWidth={1.75} className="mt-0.5 shrink-0" />
-                  Unit 4B, Cityland Herrera Tower,<br />Makati City 1227
+                  #12 Madrona St., Phase 1,<br />Greenwoods Exec. Village,<br />Cainta, Rizal 1900
                 </div>
               </li>
             </ul>

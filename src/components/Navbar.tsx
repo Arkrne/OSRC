@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { ArrowUpRight, Phone } from 'lucide-react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 const EASE_OUT    = [0.23, 1, 0.32, 1] as const
 const EASE_DRAWER = [0.32, 0.72, 0, 1] as const
@@ -92,8 +93,8 @@ export default function Navbar() {
         >
           {/* Logo wordmark + live pulse dot (the Dynamic Island tell) */}
           <Link href="/" className="flex items-center gap-2.5 shrink-0 group/logo">
-            <span className="relative w-7 h-7 rounded-[0.7rem] bg-[#E85D04] flex items-center justify-center shadow-[0_0_14px_rgba(232,93,4,0.4)] transition-transform duration-300 group-hover/logo:scale-105">
-              <span className="text-white font-bold text-[9px] tracking-widest">OS</span>
+            <span className="relative w-8 h-8 rounded-[0.7rem] overflow-hidden shadow-[0_0_14px_rgba(232,93,4,0.3)] transition-transform duration-300 group-hover/logo:scale-105">
+              <Image src="/logo.jpg" alt="OSRC Logo" fill className="object-contain" sizes="32px" />
               <span className="absolute -top-0.5 -right-0.5 flex h-2 w-2">
                 {!reduced && (
                   <span className="absolute inline-flex h-full w-full rounded-full bg-[#3CCB7F] opacity-75 animate-ping" />
@@ -230,7 +231,7 @@ export default function Navbar() {
               className="relative z-10 flex items-center justify-center gap-2 pb-8 text-[#C6B9A4] text-[13px]"
             >
               <Phone size={13} strokeWidth={1.75} className="text-[#F27024]" />
-              <a href="tel:+639000000000" className="tracking-wide">Talk to a specialist today</a>
+              <a href="tel:+639568843373" className="tracking-wide">Talk to a specialist · +63 956 884 3373</a>
             </motion.div>
           </motion.div>
         )}

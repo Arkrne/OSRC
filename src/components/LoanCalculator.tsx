@@ -64,9 +64,9 @@ export default function LoanCalculator() {
           className="bezel-outer"
         >
           <div className="bezel-inner p-6 sm:p-8 flex flex-col gap-7">
-            <Slider label="Property Price" value={peso(price)} min={890_000} max={8_000_000} step={50_000} v={price} onChange={setPrice} />
-            <Slider label="Down Payment" value={`${down}%`} min={5} max={30} step={1} v={down} onChange={setDown} />
-            <Slider label="Loan Term" value={`${years} years`} min={5} max={30} step={1} v={years} onChange={setYears} />
+            <Slider id="calc-price" label="Property Price" value={peso(price)} min={890_000} max={8_000_000} step={50_000} v={price} onChange={setPrice} />
+            <Slider id="calc-down" label="Down Payment" value={`${down}%`} min={5} max={30} step={1} v={down} onChange={setDown} />
+            <Slider id="calc-years" label="Loan Term" value={`${years} years`} min={5} max={30} step={1} v={years} onChange={setYears} />
 
             <div className="mt-2 pt-6 border-t border-[rgba(28,23,20,0.08)]">
               <p className="text-[10px] uppercase tracking-[0.16em] text-[#A89070] font-medium mb-2">Estimated Monthly</p>
@@ -91,20 +91,22 @@ export default function LoanCalculator() {
   )
 }
 
-function Slider({ label, value, min, max, step, v, onChange }: {
-  label: string; value: string; min: number; max: number; step: number; v: number; onChange: (n: number) => void
+function Slider({ id, label, value, min, max, step, v, onChange }: {
+  id: string; label: string; value: string; min: number; max: number; step: number; v: number; onChange: (n: number) => void
 }) {
   return (
     <div className="flex flex-col gap-2.5">
       <div className="flex items-center justify-between">
-        <label className="text-[12px] font-medium text-[#6E6055]">{label}</label>
-        <span className="text-[14px] font-semibold text-[#1C1714] tabular-nums">{value}</span>
+        <label htmlFor={id} className="text-[12px] font-medium text-[#6E6055]">{label}</label>
+        <span className="text-[14px] font-semibold text-[#1C1714] tabular-nums" aria-live="polite">{value}</span>
       </div>
       <input
+        id={id}
         type="range"
         min={min} max={max} step={step} value={v}
         onChange={e => onChange(Number(e.target.value))}
         className="osrc-range w-full"
+        aria-label={`${label}: ${value}`}
       />
       <style>{`
         .osrc-range { -webkit-appearance: none; appearance: none; height: 4px; border-radius: 999px; background: rgba(28,23,20,0.12); outline: none; }

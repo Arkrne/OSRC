@@ -3,14 +3,15 @@
 import { useRef, useState } from 'react'
 import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion'
 import { ArrowUpRight, Pause, Play } from 'lucide-react'
+import { STATS } from '@/lib/site'
 
 const EASE = [0.23, 1, 0.32, 1] as const
 
 const stats = [
-  { value: '10+',   label: 'Developer Partners'     },
-  { value: '3',     label: 'Regions Served'         },
-  { value: '₱890K', label: 'Starting Price'         },
-  { value: '24h',   label: 'Loan Pre-Qualification' },
+  { value: STATS.developerPartners, label: 'Developer Partners'     },
+  { value: STATS.regions,           label: 'Regions Served'         },
+  { value: STATS.startingPrice,     label: 'Starting Price'         },
+  { value: STATS.preQualTime,       label: 'Loan Pre-Qualification' },
 ]
 
 // Headline lines — each gets a masked slide-up reveal (kinetic typography)

@@ -7,7 +7,7 @@ import { VelocityMarquee } from './motion'
    drift in opposite directions for a parallax weave. */
 
 const ROW_A = ['Pag-IBIG Eligible', 'Zero Hidden Fees', 'SEC-Registered', 'Developer Pricing', 'Honest Advice']
-const ROW_B = ['Cavite', 'Laguna', 'Bulacan', 'Metro Manila', 'Makati', 'Your Next Home']
+const ROW_B = ['Cavite', 'Laguna', 'Bulacan', 'Metro Manila', 'Cainta', 'Your Next Home']
 
 function Dot() {
   return (

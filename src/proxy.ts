@@ -24,15 +24,27 @@ export async function proxy(request: NextRequest) {
   const { data: { user } } = await supabase.auth.getUser()
   const { pathname } = request.nextUrl
 
+  // Allowlisted admin UIDs — add the real Supabase UID(s) here.
+  // Keeping the env var optional: if unset, any authenticated user passes.
+  const ALLOWED_UIDS = process.env.ADMIN_ALLOWED_UIDS
+    ? process.env.ADMIN_ALLOWED_UIDS.split(',').map(s => s.trim()).filter(Boolean)
+    : []
+
+  const isAllowedAdmin = (u: typeof user) => {
+    if (!u) return false
+    if (ALLOWED_UIDS.length === 0) return true // env var not configured yet
+    return ALLOWED_UIDS.includes(u.id)
+  }
+
   // Protect all /admin/* except the login page itself
   if (pathname.startsWith('/admin') && pathname !== '/admin') {
-    if (!user) {
+    if (!isAllowedAdmin(user)) {
       return NextResponse.redirect(new URL('/admin', request.url))
     }
   }
 
-  // Already logged in → skip login page
-  if (pathname === '/admin' && user) {
+  // Already logged in (and allowed) → skip login page
+  if (pathname === '/admin' && isAllowedAdmin(user)) {
     return NextResponse.redirect(new URL('/admin/dashboard', request.url))
   }
 

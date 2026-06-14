@@ -1,8 +1,9 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import { X, Send, CheckCircle, Loader2 } from 'lucide-react'
+
 type Props = {
   propertyName?: string
   onClose: () => void
@@ -10,6 +11,15 @@ type Props = {
 type FormState = 'idle' | 'loading' | 'success' | 'error'
 
 const EASE_OUT = [0.23, 1, 0.32, 1] as const
+
+const FOCUSABLE = [
+  'a[href]',
+  'button:not([disabled])',
+  'textarea:not([disabled])',
+  'input:not([disabled])',
+  'select:not([disabled])',
+  '[tabindex]:not([tabindex="-1"])',
+].join(', ')
 
 export default function InquiryModal({ propertyName, onClose }: Props) {
   const [form, setForm] = useState({
@@ -21,6 +31,56 @@ export default function InquiryModal({ propertyName, onClose }: Props) {
   })
   const [formState, setFormState] = useState<FormState>('idle')
   const [error, setError]         = useState('')
+  const dialogRef  = useRef<HTMLDivElement>(null)
+  const triggerRef = useRef<HTMLElement | null>(null)
+
+  // Capture trigger element for focus restoration on close
+  useEffect(() => {
+    triggerRef.current = document.activeElement as HTMLElement
+  }, [])
+
+  // Body scroll lock
+  useEffect(() => {
+    const prev = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => { document.body.style.overflow = prev }
+  }, [])
+
+  // Escape key
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose() }
+    window.addEventListener('keydown', handler)
+    return () => window.removeEventListener('keydown', handler)
+  }, [onClose])
+
+  // Focus trap
+  const trapFocus = useCallback((e: KeyboardEvent) => {
+    if (e.key !== 'Tab' || !dialogRef.current) return
+    const nodes = dialogRef.current.querySelectorAll<HTMLElement>(FOCUSABLE)
+    const els = Array.from(nodes).filter(el => !el.closest('[hidden]'))
+    if (els.length === 0) return
+    const first = els[0]
+    const last  = els[els.length - 1]
+    if (e.shiftKey) {
+      if (document.activeElement === first) { e.preventDefault(); last.focus() }
+    } else {
+      if (document.activeElement === last) { e.preventDefault(); first.focus() }
+    }
+  }, [])
+
+  useEffect(() => {
+    window.addEventListener('keydown', trapFocus)
+    // Initial focus: first focusable element inside dialog
+    const first = dialogRef.current?.querySelector<HTMLElement>(FOCUSABLE)
+    first?.focus()
+    return () => window.removeEventListener('keydown', trapFocus)
+  }, [trapFocus])
+
+  // Focus restoration
+  const handleClose = useCallback(() => {
+    onClose()
+    triggerRef.current?.focus()
+  }, [onClose])
 
   const set = (k: keyof typeof form, v: string) => setForm(f => ({ ...f, [k]: v }))
 
@@ -53,14 +113,20 @@ export default function InquiryModal({ propertyName, onClose }: Props) {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.2 }}
       className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm"
-      onClick={e => { if (e.target === e.currentTarget) onClose() }}
+      aria-hidden="true"
+      onClick={e => { if (e.target === e.currentTarget) handleClose() }}
     >
       <motion.div
+        ref={dialogRef}
+        role="dialog"
+        aria-modal="true"
+        aria-label={propertyName ? `Send inquiry for ${propertyName}` : 'Send inquiry'}
         initial={{ opacity: 0, scale: 0.96, y: 16 }}
         animate={{ opacity: 1, scale: 1,    y: 0  }}
         exit={{ opacity: 0, scale: 0.97, y: 8 }}
         transition={{ duration: 0.3, ease: EASE_OUT }}
         className="bezel-outer w-full max-w-lg max-h-[90vh] overflow-y-auto"
+        aria-hidden="false"
       >
         <div className="bezel-inner px-6 py-6">
           <div className="flex items-start justify-between mb-6">
@@ -69,7 +135,8 @@ export default function InquiryModal({ propertyName, onClose }: Props) {
               {propertyName && <p className="text-[12px] text-[#6E6055] mt-1">{propertyName}</p>}
             </div>
             <button
-              onClick={onClose}
+              onClick={handleClose}
+              aria-label="Close dialog"
               className="w-8 h-8 rounded-full bg-[rgba(28,23,20,0.05)] hover:bg-[rgba(28,23,20,0.09)] flex items-center justify-center transition-[background-color,transform] duration-[160ms] ease-out active:scale-[0.97]"
             >
               <X size={13} strokeWidth={1.5} className="text-[#6E6055]" />
@@ -90,28 +157,29 @@ export default function InquiryModal({ propertyName, onClose }: Props) {
                 Thank you, {form.name.split(' ')[0]}! We&apos;ll get back to you within 24 hours.
               </p>
               <button
-                onClick={onClose}
+                onClick={handleClose}
                 className="mt-2 px-6 py-2.5 rounded-full bg-[#E85D04] text-white text-[13px] font-medium hover:bg-[#F27024] transition-[background-color,transform] duration-[160ms] ease-out active:scale-[0.97]"
               >
                 Close
               </button>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+            <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-4">
               {error && (
-                <p className="text-red-700 text-[12px] bg-red-50 border border-red-200 rounded-xl px-4 py-3">
+                <p role="alert" className="text-red-700 text-[12px] bg-red-50 border border-red-200 rounded-xl px-4 py-3">
                   {error}
                 </p>
               )}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <Field label="Full Name *"     value={form.name}  onChange={v => set('name',  v)} placeholder="Juan dela Cruz"  />
-                <Field label="Email *"         type="email" value={form.email} onChange={v => set('email', v)} placeholder="juan@email.com" />
+                <Field id="modal-name"  label="Full Name *"  value={form.name}  onChange={v => set('name',  v)} placeholder="Juan dela Cruz"  />
+                <Field id="modal-email" label="Email *" type="email" value={form.email} onChange={v => set('email', v)} placeholder="juan@email.com" />
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <Field label="Phone *"         type="tel"   value={form.phone} onChange={v => set('phone', v)} placeholder="09XX XXX XXXX" />
+                <Field id="modal-phone" label="Phone *" type="tel" value={form.phone} onChange={v => set('phone', v)} placeholder="09XX XXX XXXX" />
                 <div className="flex flex-col gap-1.5">
-                  <label className="text-[10px] font-medium text-[#A89070] uppercase tracking-wide">Property of Interest</label>
+                  <label htmlFor="modal-property" className="text-[10px] font-medium text-[#A89070] uppercase tracking-wide">Property of Interest</label>
                   <input
+                    id="modal-property"
                     value={form.property}
                     onChange={e => set('property', e.target.value)}
                     placeholder="Which property?"
@@ -120,13 +188,14 @@ export default function InquiryModal({ propertyName, onClose }: Props) {
                 </div>
               </div>
 
-              <div className="flex flex-col gap-1.5">
-                <label className="text-[10px] font-medium text-[#A89070] uppercase tracking-wide">Best Time to Contact</label>
+              <fieldset className="flex flex-col gap-1.5">
+                <legend className="text-[10px] font-medium text-[#A89070] uppercase tracking-wide mb-1.5">Best Time to Contact</legend>
                 <div className="flex gap-2">
                   {['Morning', 'Afternoon', 'Evening'].map(t => (
                     <button
                       key={t}
                       type="button"
+                      aria-pressed={form.time === t}
                       onClick={() => set('time', t)}
                       className={`flex-1 py-2.5 rounded-xl text-[12px] font-medium transition-[background-color,color,transform] duration-[150ms] ease-out active:scale-[0.97] border ${
                         form.time === t
@@ -138,15 +207,16 @@ export default function InquiryModal({ propertyName, onClose }: Props) {
                     </button>
                   ))}
                 </div>
-              </div>
+              </fieldset>
 
-              <div className="flex flex-col gap-1.5">
-                <label className="text-[10px] font-medium text-[#A89070] uppercase tracking-wide">Pag-IBIG Membership</label>
+              <fieldset className="flex flex-col gap-1.5">
+                <legend className="text-[10px] font-medium text-[#A89070] uppercase tracking-wide mb-1.5">Pag-IBIG Membership</legend>
                 <div className="flex gap-2">
                   {['Active Member', 'Not Yet a Member'].map(s => (
                     <button
                       key={s}
                       type="button"
+                      aria-pressed={form.pagibig === s}
                       onClick={() => set('pagibig', s)}
                       className={`flex-1 py-2.5 rounded-xl text-[12px] font-medium transition-[background-color,color,transform] duration-[150ms] ease-out active:scale-[0.97] border ${
                         form.pagibig === s
@@ -158,11 +228,12 @@ export default function InquiryModal({ propertyName, onClose }: Props) {
                     </button>
                   ))}
                 </div>
-              </div>
+              </fieldset>
 
               <div className="flex flex-col gap-1.5">
-                <label className="text-[10px] font-medium text-[#A89070] uppercase tracking-wide">Message (optional)</label>
+                <label htmlFor="modal-message" className="text-[10px] font-medium text-[#A89070] uppercase tracking-wide">Message (optional)</label>
                 <textarea
+                  id="modal-message"
                   value={form.message}
                   onChange={e => set('message', e.target.value)}
                   placeholder="Any specific questions or requirements…"
@@ -177,12 +248,12 @@ export default function InquiryModal({ propertyName, onClose }: Props) {
                 className="group flex items-center justify-center gap-2 w-full py-3.5 rounded-2xl bg-[#E85D04] hover:bg-[#F27024] disabled:opacity-60 text-white font-semibold text-[14px] transition-[background-color,transform] duration-[160ms] ease-out active:scale-[0.97] mt-1"
               >
                 {formState === 'loading' ? (
-                  <Loader2 size={15} className="animate-spin" />
+                  <Loader2 size={15} className="animate-spin" aria-label="Sending…" />
                 ) : (
                   <>
                     Send My Inquiry
                     <span className="w-6 h-6 rounded-full bg-black/15 flex items-center justify-center transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
-                      <Send size={10} />
+                      <Send size={10} aria-hidden="true" />
                     </span>
                   </>
                 )}
@@ -198,13 +269,14 @@ export default function InquiryModal({ propertyName, onClose }: Props) {
   )
 }
 
-function Field({ label, value, onChange, placeholder, type = 'text' }: {
-  label: string; value: string; onChange: (v: string) => void; placeholder?: string; type?: string
+function Field({ id, label, value, onChange, placeholder, type = 'text' }: {
+  id: string; label: string; value: string; onChange: (v: string) => void; placeholder?: string; type?: string
 }) {
   return (
     <div className="flex flex-col gap-1.5">
-      <label className="text-[10px] font-medium text-[#A89070] uppercase tracking-wide">{label}</label>
+      <label htmlFor={id} className="text-[10px] font-medium text-[#A89070] uppercase tracking-wide">{label}</label>
       <input
+        id={id}
         type={type}
         value={value}
         onChange={e => onChange(e.target.value)}

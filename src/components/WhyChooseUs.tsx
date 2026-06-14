@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { ShieldCheck, Clock, Handshake, Receipt } from 'lucide-react'
 import { RevealHeading, CountUp, Stagger, StaggerItem, TiltCard, SpotlightCard } from './motion'
+import { STATS } from '@/lib/site'
 
 const EASE = [0.23, 1, 0.32, 1] as const
 
@@ -30,10 +31,10 @@ const reasons = [
 ]
 
 const counters = [
-  { value: '10+',   label: 'Developer\nPartners'     },
-  { value: '3',     label: 'Regions\nServed'         },
-  { value: '₱0',    label: 'Hidden\nFees'            },
-  { value: '100%',  label: 'Pag-IBIG\nEligible'      },
+  { value: STATS.developerPartners, label: 'Developer\nPartners' },
+  { value: STATS.regions,           label: 'Regions\nServed'     },
+  { value: '₱0',                    label: 'Hidden\nFees'        },
+  { value: '100%',                  label: 'Pag-IBIG\nEligible'  },
 ]
 
 export default function WhyChooseUs() {

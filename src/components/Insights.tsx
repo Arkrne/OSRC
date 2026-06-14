@@ -1,14 +1,13 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { ArrowUpRight } from 'lucide-react'
 
 const EASE = [0.23, 1, 0.32, 1] as const
 
 const posts = [
   {
     tag: 'Guide',
-    title: 'Pag-IBIG Housing Loan Requirements in 2024',
+    title: 'Pag-IBIG Housing Loan Requirements in 2026',
     excerpt: 'Every document you need to qualify, and how OSRC prepares each one for you.',
     img: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&q=80',
     read: '6 min read',
@@ -53,7 +52,7 @@ export default function Insights() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {posts.map((p, i) => (
-            <motion.div
+            <motion.article
               key={p.title}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -63,7 +62,7 @@ export default function Insights() {
             >
               <div className="relative h-56 rounded-3xl overflow-hidden border border-[rgba(28,23,20,0.08)] mb-5">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={p.img} alt={p.title} loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
+                <img src={p.img} alt="" role="presentation" loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
                 <span className="absolute top-4 left-4 text-[10px] font-medium px-2.5 py-1 rounded-full bg-white/90 text-[#E85D04] border border-[rgba(232,93,4,0.2)]">{p.tag}</span>
               </div>
               <div className="flex items-center gap-2 text-[#A89070] text-[11px] mb-2">{p.read}</div>
@@ -71,7 +70,7 @@ export default function Insights() {
                 {p.title}
               </h3>
               <p className="text-[#6E6055] text-[14px] leading-relaxed">{p.excerpt}</p>
-            </motion.div>
+            </motion.article>
           ))}
         </div>
 
@@ -80,14 +79,14 @@ export default function Insights() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.45, delay: 0.25, ease: EASE }}
-          className="mt-10 flex justify-center"
+          className="mt-12 flex justify-center"
         >
           <a
             href="/contact"
             className="inline-flex items-center gap-2 pl-6 pr-5 py-3 rounded-full bg-[#1C1714] hover:bg-[#2E2420] text-[#FBF6EC] text-[13px] font-semibold tracking-tight transition-colors duration-150"
           >
             Have questions? Talk to a specialist
-            <ArrowUpRight size={14} strokeWidth={2.5} />
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg>
           </a>
         </motion.div>
       </div>

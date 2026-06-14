@@ -2,15 +2,15 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { motion, useInView, useMotionValue, animate } from 'framer-motion'
+import { STATS } from '@/lib/site'
 
 const EASE = [0.23, 1, 0.32, 1] as const
 
-// Adapted from 21st.dev "Count Animation" — framer-motion count-up, themed
 const stats = [
-  { value: 120, suffix: '+', label: 'Families Served' },
-  { value: 6,   suffix: '',  label: 'Developer Partners' },
-  { value: 4,   suffix: '',  label: 'Regions Covered' },
-  { value: 24,  suffix: 'h', label: 'Pre-Qualification' },
+  { value: STATS.familiesServed, suffix: '+', label: 'Families Served'     },
+  { value: 10,                   suffix: '+', label: 'Developer Partners'   },
+  { value: Number(STATS.regions),suffix: '',  label: 'Regions Covered'      },
+  { value: 24,                   suffix: 'h', label: 'Pre-Qualification'    },
 ]
 
 function Counter({ to, suffix }: { to: number; suffix: string }) {

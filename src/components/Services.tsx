@@ -20,7 +20,7 @@ const services = [
     num: '02',
     title: 'Real Estate Outsourcing',
     description:
-      'We work directly with Camella, Lancaster, Lumina, Crown Asia, and Futura, and curate Pag-IBIG-eligible homes across three regions at developer pricing.',
+      'We work directly with Camella, Lancaster, Lumina, Crown Asia, and Futura, and curate Pag-IBIG-eligible homes across four regions at developer pricing.',
     tag: 'Trusted developers',
   },
   {

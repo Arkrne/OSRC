@@ -175,7 +175,7 @@ export async function POST(req: NextRequest) {
             <div style="background:#f9f9f9;padding:32px;border-radius:0 0 12px 12px;">
               <p style="font-size:15px;color:#333;">We've received your inquiry${property ? ` about <strong>${esc(property)}</strong>` : ''} and one of our loan specialists will contact you within <strong>24 hours</strong>.</p>
               <p style="font-size:15px;color:#333;">For immediate assistance:</p>
-              <p style="font-size:15px;"><strong>📞 +63 951 434 2858</strong><br/><strong>📧 ${esc(RECIPIENT)}</strong></p>
+              <p style="font-size:15px;"><strong>📞 +63 956 884 3373</strong><br/><strong>📧 ${esc(RECIPIENT)}</strong></p>
               <p style="font-size:13px;color:#999;margin-top:24px;">Orange Square Realty Corporation · Mon–Sat 8AM–6PM</p>
             </div>
           </div>
@@ -189,7 +189,7 @@ export async function POST(req: NextRequest) {
   } catch (err) {
     log('error', 'email_failed', { ip, err: String(err) })
     return NextResponse.json(
-      { error: 'Unable to send your inquiry right now. Please call us directly at +63 951 434 2858.' },
+      { error: 'Unable to send your inquiry right now. Please call us directly at +63 956 884 3373.' },
       { status: 500, headers: cors }
     )
   }

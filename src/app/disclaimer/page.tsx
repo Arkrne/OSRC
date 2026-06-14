@@ -58,9 +58,9 @@ export default function Disclaimer() {
           <Section title="Contact">
             <address className="not-italic">
               <strong>Orange Square Realty Corporation</strong><br />
-              Unit 4B, Cityland Herrera Tower, V.A. Rufino St., Salcedo Village, Makati City 1227<br />
+              #12 Madrona St., Phase 1, Greenwoods Executive Village, Cainta, Rizal 1900<br />
               Email: <a href="mailto:inquiries@orangesquarerealty.com.ph" className="text-[#E85D04] hover:underline">inquiries@orangesquarerealty.com.ph</a><br />
-              Phone: +63 951 434 2858
+              Phone: +63 956 884 3373
             </address>
           </Section>
 
