@@ -36,6 +36,9 @@ function strip(s: unknown)   {
   if (typeof s !== 'string') return ''
   return s.trim().replace(/[\x00-\x1F\x7F]/g, '').slice(0, 1000)
 }
+function esc(s: string) {
+  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;')
+}
 
 // ─── CORS helpers ─────────────────────────────────────────────────────────────
 const ALLOWED_ORIGINS = new Set([
@@ -126,7 +129,7 @@ export async function POST(req: NextRequest) {
       resend.emails.send({
         from: FROM,
         to:   RECIPIENT,
-        subject: `New Inquiry — ${property || 'General'} — ${name}`,
+        subject: `New Inquiry — ${esc(property) || 'General'} — ${esc(name)}`,
         html: `
           <div style="font-family:sans-serif;max-width:600px;margin:auto;">
             <div style="background:#FF6B00;padding:20px 32px;border-radius:12px 12px 0 0;">
@@ -134,13 +137,13 @@ export async function POST(req: NextRequest) {
             </div>
             <div style="background:#f9f9f9;padding:32px;border-radius:0 0 12px 12px;">
               <table style="width:100%;border-collapse:collapse;">
-                <tr><td style="padding:8px 0;color:#666;width:160px;font-size:14px;">Name</td><td style="padding:8px 0;font-weight:600;font-size:14px;">${name}</td></tr>
-                <tr><td style="padding:8px 0;color:#666;font-size:14px;">Email</td><td style="padding:8px 0;font-size:14px;"><a href="mailto:${email}">${email}</a></td></tr>
-                <tr><td style="padding:8px 0;color:#666;font-size:14px;">Phone</td><td style="padding:8px 0;font-size:14px;"><a href="tel:${phone}">${phone}</a></td></tr>
-                <tr><td style="padding:8px 0;color:#666;font-size:14px;">Property</td><td style="padding:8px 0;font-size:14px;">${property || '—'}</td></tr>
-                <tr><td style="padding:8px 0;color:#666;font-size:14px;">Best time</td><td style="padding:8px 0;font-size:14px;">${time || '—'}</td></tr>
-                <tr><td style="padding:8px 0;color:#666;font-size:14px;">Pag-IBIG</td><td style="padding:8px 0;font-size:14px;font-weight:600;color:${pagibig === 'Active Member' ? '#16a34a' : '#d97706'};">${pagibig || '—'}</td></tr>
-                ${message ? `<tr><td style="padding:8px 0;color:#666;font-size:14px;vertical-align:top;">Message</td><td style="padding:8px 0;font-size:14px;">${message}</td></tr>` : ''}
+                <tr><td style="padding:8px 0;color:#666;width:160px;font-size:14px;">Name</td><td style="padding:8px 0;font-weight:600;font-size:14px;">${esc(name)}</td></tr>
+                <tr><td style="padding:8px 0;color:#666;font-size:14px;">Email</td><td style="padding:8px 0;font-size:14px;"><a href="mailto:${esc(email)}">${esc(email)}</a></td></tr>
+                <tr><td style="padding:8px 0;color:#666;font-size:14px;">Phone</td><td style="padding:8px 0;font-size:14px;"><a href="tel:${esc(phone)}">${esc(phone)}</a></td></tr>
+                <tr><td style="padding:8px 0;color:#666;font-size:14px;">Property</td><td style="padding:8px 0;font-size:14px;">${esc(property) || '—'}</td></tr>
+                <tr><td style="padding:8px 0;color:#666;font-size:14px;">Best time</td><td style="padding:8px 0;font-size:14px;">${esc(time) || '—'}</td></tr>
+                <tr><td style="padding:8px 0;color:#666;font-size:14px;">Pag-IBIG</td><td style="padding:8px 0;font-size:14px;font-weight:600;color:${pagibig === 'Active Member' ? '#16a34a' : '#d97706'};">${esc(pagibig) || '—'}</td></tr>
+                ${message ? `<tr><td style="padding:8px 0;color:#666;font-size:14px;vertical-align:top;">Message</td><td style="padding:8px 0;font-size:14px;white-space:pre-wrap;">${esc(message)}</td></tr>` : ''}
               </table>
             </div>
           </div>
@@ -155,12 +158,12 @@ export async function POST(req: NextRequest) {
         html: `
           <div style="font-family:sans-serif;max-width:600px;margin:auto;">
             <div style="background:#FF6B00;padding:20px 32px;border-radius:12px 12px 0 0;">
-              <h2 style="color:white;margin:0;font-size:20px;">Thank You, ${name.split(' ')[0]}!</h2>
+              <h2 style="color:white;margin:0;font-size:20px;">Thank You, ${esc(name.split(' ')[0])}!</h2>
             </div>
             <div style="background:#f9f9f9;padding:32px;border-radius:0 0 12px 12px;">
-              <p style="font-size:15px;color:#333;">We've received your inquiry${property ? ` about <strong>${property}</strong>` : ''} and one of our loan specialists will contact you within <strong>24 hours</strong>.</p>
+              <p style="font-size:15px;color:#333;">We've received your inquiry${property ? ` about <strong>${esc(property)}</strong>` : ''} and one of our loan specialists will contact you within <strong>24 hours</strong>.</p>
               <p style="font-size:15px;color:#333;">For immediate assistance:</p>
-              <p style="font-size:15px;"><strong>📞 +63 951 434 2858</strong><br/><strong>📧 jolavts@gmail.com</strong></p>
+              <p style="font-size:15px;"><strong>📞 +63 951 434 2858</strong><br/><strong>📧 ${esc(RECIPIENT)}</strong></p>
               <p style="font-size:13px;color:#999;margin-top:24px;">Orange Square Realty Corporation · Mon–Sat 8AM–6PM</p>
             </div>
           </div>
