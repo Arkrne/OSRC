@@ -223,7 +223,12 @@ export default function AdminListings() {
         supabase.storage.from('property-images').upload(fullName,  uploadFull,  { upsert: true, contentType: 'image/jpeg' }),
         supabase.storage.from('property-images').upload(thumbName, uploadThumb, { upsert: true, contentType: 'image/jpeg' }),
       ])
-      if (r1.error || r2.error) { setError('Upload failed. Please try again.'); setSaving(false); return }
+      if (r1.error || r2.error) {
+        const msg = r1.error?.message ?? r2.error?.message ?? 'unknown'
+        setError(`Upload failed: ${msg}`)
+        setSaving(false)
+        return
+      }
 
       fullUrls.push(supabase.storage.from('property-images').getPublicUrl(fullName).data.publicUrl)
       thumbUrls.push(supabase.storage.from('property-images').getPublicUrl(thumbName).data.publicUrl)
