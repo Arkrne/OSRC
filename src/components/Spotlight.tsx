@@ -88,7 +88,7 @@ export default function Spotlight() {
               </p>
             </div>
             <a
-              href="#contact"
+              href="/contact"
               className="group mt-8 inline-flex items-center justify-center gap-2 w-full min-h-[48px] py-4 rounded-full bg-[#E85D04] hover:bg-[#F27024] text-white font-semibold text-[14px] transition-[background-color,transform] duration-[160ms] ease-out active:scale-[0.97]"
             >
               Inquire About This Home

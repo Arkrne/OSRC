@@ -1,11 +1,11 @@
 import { Mail, Phone, MapPin } from 'lucide-react'
+import Link from 'next/link'
 
 const quickLinks = [
-  { href: '#home',       label: 'Home'       },
-  { href: '#properties', label: 'Properties' },
-  { href: '#services',   label: 'Services'   },
-  { href: '#about',      label: 'About'      },
-  { href: '#contact',    label: 'Contact'    },
+  { href: '/',           label: 'Home'       },
+  { href: '/properties', label: 'Properties' },
+  { href: '/services',   label: 'Services'   },
+  { href: '/about',      label: 'About'      },
 ]
 
 const services = [
@@ -56,12 +56,12 @@ export default function Footer() {
             <ul className="flex flex-col gap-1">
               {quickLinks.map(link => (
                 <li key={link.href}>
-                  <a
+                  <Link
                     href={link.href}
                     className="inline-flex py-1.5 text-[13px] text-[#C6B9A4] hover:text-[#FBF6EC] transition-colors duration-150"
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

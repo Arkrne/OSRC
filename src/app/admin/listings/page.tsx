@@ -50,6 +50,12 @@ function sanitizeFilename(n: string) {
 }
 function sanitizeText(s: string) { return s.trim().replace(/[\x00-\x1F\x7F]/g, '') }
 
+// URL slug for new listings — unique via short random suffix (titles can repeat).
+function makeSlug(title: string) {
+  const base = title.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 60)
+  return `${base || 'property'}-${Math.random().toString(36).slice(2, 8)}`
+}
+
 function getDisplayImage(l: Listing): string {
   if (l.thumbnail_urls?.length) return l.thumbnail_urls[l.main_image_index ?? 0] ?? l.thumbnail_urls[0]
   if (l.image_urls?.length)     return l.image_urls[l.main_image_index ?? 0] ?? l.image_urls[0]
@@ -192,6 +198,13 @@ export default function AdminListings() {
     if (!photos.length)                { setError('At least one photo is required.'); return }
     setSaving(true); setError('')
 
+    const { data: { user } } = await supabase.auth.getUser()
+    if (!user) {
+      setError('Session expired — please log in again.')
+      setSaving(false)
+      return
+    }
+
     const fullUrls:  string[] = []
     const thumbUrls: string[] = []
 
@@ -219,19 +232,23 @@ export default function AdminListings() {
       const fullName  = `${ts}-${i}-${safe}.jpg`
       const thumbName = `thumbnails/${ts}-${i}-${safe}-th.jpg`
 
-      const [r1, r2] = await Promise.all([
-        supabase.storage.from('property-images').upload(fullName,  uploadFull,  { upsert: true, contentType: 'image/jpeg' }),
-        supabase.storage.from('property-images').upload(thumbName, uploadThumb, { upsert: true, contentType: 'image/jpeg' }),
-      ])
-      if (r1.error || r2.error) {
-        const msg = r1.error?.message ?? r2.error?.message ?? 'unknown'
-        setError(`Upload failed: ${msg}`)
+      const fd = new FormData()
+      fd.append('full',      new Blob([uploadFull],  { type: 'image/jpeg' }))
+      fd.append('thumb',     new Blob([uploadThumb], { type: 'image/jpeg' }))
+      fd.append('fullName',  fullName)
+      fd.append('thumbName', thumbName)
+
+      const res = await fetch('/api/upload', { method: 'POST', body: fd })
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({ error: 'unknown' }))
+        setError(`Upload failed: ${err.error ?? 'unknown'}`)
         setSaving(false)
         return
       }
 
-      fullUrls.push(supabase.storage.from('property-images').getPublicUrl(fullName).data.publicUrl)
-      thumbUrls.push(supabase.storage.from('property-images').getPublicUrl(thumbName).data.publicUrl)
+      const { fullUrl, thumbUrl } = await res.json()
+      fullUrls.push(fullUrl)
+      thumbUrls.push(thumbUrl)
     }
 
     const safeMain = Math.min(mainIndex, fullUrls.length - 1)
@@ -245,7 +262,7 @@ export default function AdminListings() {
 
     const { error: dbErr } = editing
       ? await supabase.from('listings').update(payload).eq('id', editing.id)
-      : await supabase.from('listings').insert(payload)
+      : await supabase.from('listings').insert({ ...payload, slug: makeSlug(title) })
 
     if (dbErr) { setError('Save failed. Please try again.'); setSaving(false); return }
     setSaving(false); setShowForm(false); load()

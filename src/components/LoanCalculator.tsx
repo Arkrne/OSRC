@@ -78,7 +78,7 @@ export default function LoanCalculator() {
               </p>
             </div>
             <a
-              href="#contact"
+              href="/contact"
               className="group inline-flex items-center justify-center gap-2 w-full min-h-[48px] py-3.5 rounded-full bg-[#0B0906] hover:bg-black text-white font-semibold text-[14px] transition-[background-color,transform] duration-[160ms] ease-out active:scale-[0.97]"
             >
               Get Free Pre-Qualification

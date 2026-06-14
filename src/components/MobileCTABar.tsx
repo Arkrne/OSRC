@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { Phone, ArrowUpRight } from 'lucide-react'
+import Link from 'next/link'
 
 export default function MobileCTABar() {
   const [visible, setVisible] = useState(false)
@@ -34,13 +35,13 @@ export default function MobileCTABar() {
             >
               <Phone size={18} strokeWidth={1.75} />
             </a>
-            <a
-              href="#contact"
+            <Link
+              href="/contact"
               className="flex-1 flex items-center justify-center gap-1.5 min-h-[48px] rounded-xl bg-[#E85D04] text-white font-semibold text-[14px] tracking-tight shadow-[0_4px_20px_rgba(232,93,4,0.45)] active:scale-[0.97] transition-transform duration-150"
             >
               Get Pre-Qualified Free
               <ArrowUpRight size={15} strokeWidth={2.25} />
-            </a>
+            </Link>
           </div>
         </motion.div>
       )}

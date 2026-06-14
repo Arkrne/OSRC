@@ -53,31 +53,43 @@ export default function Insights() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {posts.map((p, i) => (
-            <motion.a
+            <motion.div
               key={p.title}
-              href="#contact"
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.08, ease: EASE }}
-              className="group flex flex-col"
+              className="flex flex-col"
             >
               <div className="relative h-56 rounded-3xl overflow-hidden border border-[rgba(28,23,20,0.08)] mb-5">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={p.img} alt={p.title} loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-[700ms] ease-out group-hover:scale-105" />
+                <img src={p.img} alt={p.title} loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
                 <span className="absolute top-4 left-4 text-[10px] font-medium px-2.5 py-1 rounded-full bg-white/90 text-[#E85D04] border border-[rgba(232,93,4,0.2)]">{p.tag}</span>
               </div>
               <div className="flex items-center gap-2 text-[#A89070] text-[11px] mb-2">{p.read}</div>
-              <h3 className="text-[#1C1714] font-semibold text-[17px] leading-snug tracking-tight mb-2 group-hover:text-[#E85D04] transition-colors duration-200">
+              <h3 className="text-[#1C1714] font-semibold text-[17px] leading-snug tracking-tight mb-2">
                 {p.title}
               </h3>
-              <p className="text-[#6E6055] text-[14px] leading-relaxed mb-3">{p.excerpt}</p>
-              <span className="mt-auto inline-flex items-center gap-1 text-[13px] font-medium text-[#6E6055] group-hover:text-[#E85D04] transition-colors duration-200">
-                Read article <ArrowUpRight size={14} className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </span>
-            </motion.a>
+              <p className="text-[#6E6055] text-[14px] leading-relaxed">{p.excerpt}</p>
+            </motion.div>
           ))}
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.45, delay: 0.25, ease: EASE }}
+          className="mt-10 flex justify-center"
+        >
+          <a
+            href="/contact"
+            className="inline-flex items-center gap-2 pl-6 pr-5 py-3 rounded-full bg-[#1C1714] hover:bg-[#2E2420] text-[#FBF6EC] text-[13px] font-semibold tracking-tight transition-colors duration-150"
+          >
+            Have questions? Talk to a specialist
+            <ArrowUpRight size={14} strokeWidth={2.5} />
+          </a>
+        </motion.div>
       </div>
     </section>
   )

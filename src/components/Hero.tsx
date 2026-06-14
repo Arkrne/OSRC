@@ -115,7 +115,7 @@ export default function Hero() {
             className="flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-3 sm:gap-4"
           >
             <a
-              href="#properties"
+              href="/properties"
               className="group flex items-center justify-center sm:justify-start gap-2 pl-6 pr-3 py-3.5 min-h-[48px] rounded-full bg-[#E85D04] hover:bg-[#F27024] text-white font-semibold text-[14px] tracking-tight shadow-[0_8px_32px_rgba(232,93,4,0.4)] transition-[background-color,transform] duration-[160ms] ease-out active:scale-[0.97]"
             >
               Browse Properties
@@ -124,7 +124,7 @@ export default function Hero() {
               </span>
             </a>
             <a
-              href="#contact"
+              href="/contact"
               className="flex items-center justify-center gap-2.5 px-6 py-3.5 min-h-[48px] rounded-full border border-[rgba(255,255,255,0.25)] text-[#E7DCC9] hover:text-white hover:border-[rgba(255,255,255,0.45)] text-[14px] font-medium backdrop-blur-sm transition-[border-color,color,transform] duration-[160ms] ease-out active:scale-[0.97]"
             >
               <span className="w-1.5 h-1.5 rounded-full bg-[#E85D04] animate-pulse" />

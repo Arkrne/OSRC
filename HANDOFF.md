@@ -1,125 +1,167 @@
-# HANDOFF — OSRC Website: Final Push & Deployment
+# HANDOFF — OSRC Website
 
-## Repository
-- **GitHub:** https://github.com/Arkrne/OSRC.git (branch: `main`, latest commit: `81625b3`)
-- **Local project:** `C:\Users\TUF\Downloads\Orange\osrc-website`
-- **Vercel:** Connected to `Arkrne/OSRC` — root directory set to `osrc-website`
+> Last updated: 2026-06-14. This document is the single source of truth for picking up
+> work on this project. Read the top 5 sections first.
 
 ---
 
-## What Is Done ✅
+## 1. The Goal We're Working Toward
 
-### Legal Pages
-| File | Status |
-|------|--------|
-| `src/app/privacy-policy/page.tsx` | ✅ RA 10173-compliant + SEO metadata + canonical |
-| `src/app/terms/page.tsx` | ✅ Full Terms & Conditions + SEO metadata + canonical |
-| `src/app/disclaimer/page.tsx` | ✅ Property/loan disclaimers + SEO metadata + canonical |
-| `src/app/cookie-policy/page.tsx` | ✅ Minimal cookies, no banner needed + SEO metadata + canonical |
-| `src/components/Footer.tsx` | ✅ Legal links in bottom bar |
+Ship the Orange Square Realty (OSRC) marketing + listings site to production on Vercel:
 
-### Features
-| Feature | Status |
-|---------|--------|
-| Pag-IBIG field in InquiryModal | ✅ |
-| Aira removed everywhere | ✅ Hero + MobileCTABar |
-| 30-photo admin with Canvas compression | ✅ Auto-compress, thumbnails, portrait crop |
-| Property detail modal (gallery + description) | ✅ |
-| 5000-char description | ✅ |
-| Resend email (API key set) | ✅ API key set in `.env.local` and Vercel env vars |
-| FROM address fallback | ✅ Uses `onboarding@resend.dev` until domain verified |
-| Inquiry email verified working | ✅ Tested locally — both admin notification and customer auto-reply send |
+- A fast, SEO-strong **multi-page** Next.js 16 site for a Philippine real-estate broker
+  specializing in Pag-IBIG housing loans.
+- An **admin CMS** (`/admin`) where staff log in and manage property listings (with 30-photo
+  upload + auto-compression) and promos, backed by Supabase (DB + Auth + Storage).
+- Public visitors browse Pag-IBIG-eligible properties, view per-property detail pages, and
+  submit inquiries (which email the team via Resend).
 
-### Security
-| Item | Status |
-|------|--------|
-| Rate limiting (5 req/min per IP) | ✅ `src/app/api/send-inquiry/route.ts` |
-| CORS headers on API | ✅ Allows only `orangesquarerealty.com.ph` + localhost in dev |
-| Input validation + sanitization | ✅ |
-| Security headers (HSTS, CSP, X-Frame-Options) | ✅ `src/proxy.ts` |
-| Vercel Analytics in CSP connect-src | ✅ |
-| Structured JSON logging | ✅ |
-| Generic admin login error (no Supabase leak) | ✅ |
-| Parameterized queries | ✅ Supabase client does this by default |
-| RLS on DB tables | ✅ |
-| Storage policies | ✅ |
-| API key redacted from repo | ✅ Removed from HANDOFF.md before GitHub push |
-
-### SEO
-| Item | Status |
-|------|--------|
-| `metadataBase` set | ✅ `https://orangesquarerealty.com.ph` |
-| Title template | ✅ `'%s \| Orange Square Realty'` — legal pages auto-inherit |
-| 20 targeted keywords | ✅ Pag-IBIG, house and lot per province, OFW loan, etc. |
-| `robots` directive | ✅ `googleBot: max-image-preview large, max-snippet -1` |
-| OpenGraph + Twitter card | ✅ All pages |
-| Dynamic OG image (1200×630) | ✅ `src/app/opengraph-image.tsx` — branded, builds at deploy time |
-| JSON-LD structured data | ✅ `src/components/JsonLd.tsx` — RealEstateAgent, FAQPage, WebSite schemas |
-| `sitemap.ts` | ✅ All 5 public routes with priority + changeFrequency |
-| `robots.txt` | ✅ `public/robots.txt` — crawlers allowed, `/admin/` blocked |
-| `lang="en-PH"` on `<html>` | ✅ |
-| Canonical URLs on all pages | ✅ |
-
-### Infrastructure
-| Item | Status |
-|------|--------|
-| `.env.example` | ✅ Created at project root |
-| `.env.local` | ✅ Has all 5 keys including `RESEND_FROM` |
-| Supabase SQL migrations | ✅ Run — 4 columns + 4 indexes added |
-| GitHub push | ✅ `https://github.com/Arkrne/OSRC` — branch `main` |
-| `middleware.ts` → `proxy.ts` | ✅ Renamed + export renamed `middleware` → `proxy` per Next.js 16 |
-| Resend lazy init | ✅ Moved inside POST handler — no longer crashes build |
-| Auto-reply contact email | ✅ Fixed — was `inquiries@orangesquarerealty.com.ph` (unregistered), now `jolavts@gmail.com` |
-| Vercel env vars | ✅ All 5 set in Vercel project settings |
-| Admin user in Supabase | ✅ |
-| RLS policies | ✅ |
+**Definition of done for the current milestone:** admin can add a listing with photos → it
+appears publicly on `/properties` and its own `/properties/[slug]` page → inquiries email
+through → deployed live on the real domain.
 
 ---
 
-## What Still Needs To Be Done
+## 2. Current State of the Code
 
-### 1. Complete Vercel Deployment (IN PROGRESS)
+**Working and verified locally (`npm run build` passes clean; dev on `http://localhost:3000`):**
 
-The latest build on Vercel is failing on commit `e5f96fa` — that is an **old commit**.
-The fix is in commit `81625b3`. Make sure Vercel is building the latest commit:
+- ✅ **Photo upload works** via `/api/upload` using the Supabase **service-role key** (bypasses
+  Storage RLS; route is gated by an admin auth check).
+- ✅ **Listings read** for everyone — public `anon` and logged-in `authenticated` admin (RLS
+  `Public read listings` policy added).
+- ✅ **Multi-page architecture** live. Routes (from `next build`):
+  - `/` (dynamic) — lean homepage
+  - `/properties` (dynamic) — searchable grid
+  - `/properties/[slug]` (dynamic) — per-property detail page w/ metadata + JSON-LD + `notFound()`
+  - `/services`, `/about`, `/contact` (static section pages)
+  - `/sitemap.xml` (dynamic, includes every property URL)
+  - `/admin/*`, legal pages, `/api/*` all intact
+- ✅ **Slug system** — `listings.slug` column added + backfilled + unique index. New listings
+  auto-generate a slug on save. Verified: `/properties/catanduanes-43d12a` and
+  `catanduanes-341a9a` both return 200 with correct `<title>` and JSON-LD.
+- ✅ All nav/footer/CTA links converted from `#anchor` hashes to real routes via `<Link>`.
 
-- Go to **Vercel → Deployments**
-- Find the deployment that says **Commit: `81625b3`** (it may have auto-triggered from the GitHub push)
-- If it hasn't appeared, go to **Deployments → New Deployment → Branch: main**
-- Do NOT click "Redeploy" on the old `e5f96fa` deployment
+**Architecture notes:**
+- Root layout `src/app/layout.tsx` = `<html><body>` + global metadata (unchanged).
+- New route group `src/app/(site)/layout.tsx` wraps all public pages with
+  `JsonLd + Navbar + Footer + MobileCTABar + ScrollProgress`. (Route groups don't affect URLs.)
+- `/admin` and legal pages live OUTSIDE `(site)` so they don't get the public chrome.
+- Listing data access is centralized in `src/lib/listings.ts` (server-side anon reads +
+  image/slug helpers). Listing-reading pages use `export const dynamic = 'force-dynamic'` so
+  new listings appear instantly without a rebuild (still full SSR HTML for crawlers).
 
-### 2. Test Inquiry Email on Live Site
+**Section → page distribution (easy to rearrange — each page file is just a list of sections):**
+| Page | Sections |
+|------|----------|
+| `/` | Hero · Partners · WhyChooseUs · VideoShowcase · PropertiesPreview · Promos · TrustStats · FinalCTA |
+| `/properties` | PropertiesGrid (search) |
+| `/services` | Services · HowItWorks · LoanCalculator · Spotlight |
+| `/about` | About · Regions · Gallery · Team · Awards · Testimonials · VideoReel · Insights · Marquee |
+| `/contact` | ContactForm · FAQ (+ FAQ JSON-LD) |
 
-After a successful Vercel deploy:
-1. Go to the live site → submit the inquiry form
-2. Check `jolavts@gmail.com` for the admin notification
-3. Check the submitted email address for the customer auto-reply
-4. If emails don't arrive: Vercel → Project → Functions → check logs for `RESEND_API_KEY`
+---
 
-### 3. Fix "Upload Failed" on Admin Listings ← NEXT TASK
+## 3. Files Actively Edited / Created (this session)
 
-The error message now shows the real Supabase error (commit `50c5c5e`).
-Try adding a listing and read the exact error shown.
+**Created:**
+- `src/lib/listings.ts` — server-side listing reads (`getListings`, `getListingBySlug`,
+  `getAllSlugs`) + helpers (`getCardImage`, `getFullImages`, `getThumbImages`, `getMainImage`, `makeSlug`).
+- `src/app/api/upload/route.ts` — server upload using service-role key (RLS bypass), auth-gated.
+- `src/app/(site)/layout.tsx` — shared public chrome.
+- `src/app/(site)/page.tsx` — lean homepage (replaces old `src/app/page.tsx`, which was deleted).
+- `src/app/(site)/properties/page.tsx` — listing index.
+- `src/app/(site)/properties/[slug]/page.tsx` — detail page (generateMetadata + Residence/Product JSON-LD).
+- `src/app/(site)/services/page.tsx`, `about/page.tsx`, `contact/page.tsx` — section pages.
+- `src/components/PropertyCard.tsx` — repurposed (was dead legacy code) into a `Listing`-based card linking to detail pages.
+- `src/components/PropertiesGrid.tsx` — client search grid for `/properties`.
+- `src/components/PropertiesPreview.tsx` — server component, 6-listing homepage preview.
+- `src/components/PropertyDetail.tsx` — client detail view (gallery + inquiry modal).
 
-**Most likely cause — missing storage policy.** Run this in Supabase SQL Editor:
+**Edited:**
+- `src/app/admin/listings/page.tsx` — uploads now POST to `/api/upload`; added `getUser()` session
+  guard; generates `slug` on insert.
+- `src/components/Navbar.tsx`, `Footer.tsx`, `MobileCTABar.tsx` — links → routes via `<Link>`.
+- `src/components/JsonLd.tsx` — split FAQ schema into `FaqJsonLd` (now rendered on `/contact`);
+  org+website stay site-wide; search action URL → `/properties`.
+- `src/components/{Hero,LoanCalculator,Spotlight,About,Insights,Regions,FAQ}.tsx` — stale
+  `#contact` / `#properties` anchors → `/contact` / `/properties`.
+- `src/app/sitemap.ts` — async, adds new routes + dynamic property URLs.
+- `.env.local` / `.env.example` — added `SUPABASE_SERVICE_ROLE_KEY`.
 
+**Deleted:** `src/app/page.tsx` (old monolithic homepage), `src/components/Properties.tsx`
+(old modal-based component, superseded).
+
+**Supabase migrations run (in SQL Editor):**
 ```sql
-CREATE POLICY "Admin upload" ON storage.objects
-FOR INSERT TO authenticated
-WITH CHECK (bucket_id = 'property-images');
-
-CREATE POLICY "Admin update" ON storage.objects
-FOR UPDATE TO authenticated
-USING (bucket_id = 'property-images');
+-- Storage upload/update policies
+CREATE POLICY "Admin upload" ON storage.objects FOR INSERT TO authenticated WITH CHECK (bucket_id = 'property-images');
+CREATE POLICY "Admin update" ON storage.objects FOR UPDATE TO authenticated USING (bucket_id = 'property-images');
+-- Public read (fixes admin/authenticated seeing 0 listings)
+CREATE POLICY "Public read listings" ON public.listings FOR SELECT TO public USING (true);
+CREATE POLICY "Public read promos"   ON public.promos   FOR SELECT TO public USING (true);
+-- Slug column + backfill + unique index
+ALTER TABLE listings ADD COLUMN IF NOT EXISTS slug text;
+UPDATE listings SET slug = trim(both '-' from lower(regexp_replace(title, '[^a-zA-Z0-9]+', '-', 'g'))) || '-' || substr(id::text, 1, 6) WHERE slug IS NULL OR slug = '';
+CREATE UNIQUE INDEX IF NOT EXISTS listings_slug_key ON listings(slug);
 ```
 
-**Second most likely — bucket doesn't exist.** Go to Supabase → Storage.
-If `property-images` is not listed, create it as a **public** bucket.
+---
 
-### 4. Add Real Property Listings
+## 4. Everything Tried That Failed (and why) — don't repeat these
 
-After upload is fixed, log in to `/admin/listings` and add real properties.
-The public Properties section shows "No listings available yet." until you do this.
+### Photo upload: `new row violates row-level security policy`
+1. ❌ **Client-side upload with the anon key** (original code). Storage RLS rejected it — the
+   request reached Supabase as `anon`, which has no INSERT policy.
+2. ❌ **Added storage INSERT/UPDATE policies for `authenticated`** — necessary but not
+   sufficient; uploads still failed.
+3. ❌ **Moved upload to a server route using the cookie/user-token client**
+   (`@supabase/ssr` `createServerClient`). Still failed: the access token wasn't reliably
+   applied to the Storage request, so it fell back to `anon`.
+4. ✅ **Server route with the service-role key** (`/api/upload`). Bypasses RLS entirely; safe
+   because the route checks `getUser()` first. **This is the fix — keep it.**
+
+### Listings saved but not visible
+5. ❌ Assumed the DB insert was failing. It wasn't — rows were inserting fine. Verified with the
+   service-role key that the rows existed.
+6. ❌ Assumed a page refresh / caching issue. Real cause: the `listings` SELECT policy allowed
+   only `anon`. The logged-in admin browses as `authenticated`, so they saw **0** rows (RLS on
+   SELECT silently returns empty — no error). ✅ Fixed with the `TO public` read policy.
+
+### Multi-page build gotchas (avoided)
+- `params` is a `Promise` in Next.js 16 — must `await params` in pages & `generateMetadata`.
+- Listing-reading pages set `force-dynamic` so the build doesn't try to prerender them with
+  build-time Supabase calls.
+
+---
+
+## 5. Next Steps (in order)
+
+1. **Click-through QA in the browser** at `http://localhost:3000`: every nav item, footer link,
+   a couple property cards → detail → inquiry submit. Check mobile widths (320–1024px+).
+2. **Add real property listings** via `/admin/listings` (replace the 2 "Catanduanes" test rows —
+   ask whether to delete them first).
+3. **Deploy to Vercel:**
+   - Add `SUPABASE_SERVICE_ROLE_KEY` to Vercel env vars (now **6** vars, not 5) — without it,
+     live uploads fall back to the RLS path and fail.
+   - Confirm Vercel builds the latest commit.
+   - (Supabase migrations above are already applied to the shared project — no prod DB step needed.)
+4. **Test inquiry email on the live site** (admin notification to `jolavts@gmail.com` + customer
+   auto-reply).
+5. **Content/business tasks** below (team photos, hero video self-hosting, domain, etc.).
+
+---
+
+## Vercel Environment Variables (6 required)
+
+| Key | Value |
+|-----|-------|
+| `NEXT_PUBLIC_SUPABASE_URL` | `https://pfnfgbbccdexbyjorvam.supabase.co` |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | (from `.env.local`) |
+| `SUPABASE_SERVICE_ROLE_KEY` | (from `.env.local` — **server-only secret, never `NEXT_PUBLIC`**) |
+| `RESEND_API_KEY` | (from `.env.local`) |
+| `INQUIRY_EMAIL` | `jolavts@gmail.com` |
+| `RESEND_FROM` | `OSRC Inquiries <onboarding@resend.dev>` |
 
 ---
 
@@ -127,62 +169,33 @@ The public Properties section shows "No listings available yet." until you do th
 
 | Item | Status | Action |
 |------|--------|--------|
-| Real property photos | ❌ | Log in to `/admin/listings` and add listings with real photos |
-| Team section photos | ❌ | Replace placeholder Unsplash photos + fake names in `src/components/Team.tsx` with real team members — or remove the section |
-| Hero video | ⚠️ | Currently hotlinked from Pexels (`videos.pexels.com`) — Pexels can block this. Replace with a self-hosted video in `/public` or Supabase Storage |
-| `public/og-image.png` | ⚠️ | The dynamic OG image generates at build time. Optionally also add a static `public/og-image.png` (1200×630) as a fallback for pages that don't use the dynamic generator |
-| SEC Reg No. `OPC-2024-OSRC-00142` | ❓ | Confirm this is the real number — appears in Footer + Terms |
-| Domain `orangesquarerealty.com.ph` | ❌ | Register with a .PH registrar (requires business docs) |
-| Resend domain verification | ❌ | After domain is live: Resend dashboard → Domains → Add → add DNS records |
-| Update `RESEND_FROM` in Vercel | ❌ | After domain verified: change to `OSRC Inquiries <noreply@orangesquarerealty.com.ph>` in Vercel env vars + redeploy |
-| Update auto-reply contact email | ❌ | After domain verified: update `route.ts:163` from `jolavts@gmail.com` to `inquiries@orangesquarerealty.com.ph` |
-| NPC Registration | ❌ | Register at `privacy.gov.ph` as a Personal Information Controller (required under RA 10173) |
-| PRC License | ❓ | Confirm licensed real estate broker on staff has current PRC license |
-| Google Search Console | ❌ | After domain is live: submit `https://orangesquarerealty.com.ph/sitemap.xml` to GSC |
-| Google Business Profile | ❌ | Create a Google Business Profile — critical for local SEO ranking in PH |
-
----
-
-## Vercel Environment Variables (all 5 required)
-
-| Key | Value |
-|-----|-------|
-| `NEXT_PUBLIC_SUPABASE_URL` | `https://pfnfgbbccdexbyjorvam.supabase.co` |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | (from `.env.local` line 2) |
-| `RESEND_API_KEY` | (from `.env.local` line 3) |
-| `INQUIRY_EMAIL` | `jolavts@gmail.com` |
-| `RESEND_FROM` | `OSRC Inquiries <onboarding@resend.dev>` |
-
----
-
-## Git Commit History
-
-| Commit | Description |
-|--------|-------------|
-| `95bf23b` | Initial commit from Create Next App |
-| `51b2f49` | SEO: JSON-LD, OG image, full metadata, robots, sitemap + security fixes |
-| `e5f96fa` | Fix Vercel build: lazy Resend init, middleware → proxy |
-| `81625b3` | Fix opengraph-image: Satori-compliant JSX |
-| `9b0a448` | Update HANDOFF.md |
-| `50c5c5e` | Show real Supabase error message on upload failure ← **latest** |
-
----
-
-## Rollback Strategy
-
-- **Vercel:** Every deploy is saved. Go to Vercel → Deployments → click any previous deploy → "Promote to Production" to instantly roll back.
-- **GitHub:** All code is version-controlled. `git revert` or `git reset` to any previous commit if needed.
-- **Supabase:** The `ALTER TABLE ... ADD COLUMN IF NOT EXISTS` migrations are non-destructive. Reverse with `ALTER TABLE listings DROP COLUMN <name>` if needed.
+| Real property photos | ❌ | Add real listings via `/admin/listings` |
+| Delete test listings | ❓ | 2 "Catanduanes" test rows still in DB |
+| Team section photos | ❌ | Replace placeholders/fake names in `src/components/Team.tsx` (now on `/about`) |
+| Hero video | ⚠️ | Hotlinked from Pexels — self-host in `/public` or Supabase Storage |
+| `public/og-image.png` | ⚠️ | Optional static fallback (1200×630); dynamic OG generates at build |
+| SEC Reg No. `OPC-2024-OSRC-00142` | ❓ | Confirm real number (Footer + Terms) |
+| Domain `orangesquarerealty.com.ph` | ❌ | Register with a .PH registrar |
+| Resend domain verification | ❌ | After domain live: add DNS records, then update `RESEND_FROM` + auto-reply email |
+| NPC Registration | ❌ | Register as Personal Information Controller (RA 10173) |
+| PRC License | ❓ | Confirm licensed broker on staff |
+| Google Search Console + Business Profile | ❌ | After domain live: submit sitemap, create GBP |
 
 ---
 
 ## Tech Stack Reference
-- **Next.js 16.2.7** App Router — `node_modules/next/dist/docs/` for API reference
-- **React 19.2.4**
-- **Tailwind v4**
-- **Framer Motion v12**
+- **Next.js 16.2.7** App Router (Turbopack) — `node_modules/next/dist/docs/` for API reference.
+  ⚠️ Breaking changes vs older Next: `params` is async, Middleware → **Proxy** (`src/proxy.ts`).
+- **React 19.2.4** · **Tailwind v4** · **Framer Motion v12** · **lucide-react**
 - **`@supabase/ssr` + `@supabase/supabase-js`** — auth + DB + storage
 - **Resend v6** — transactional email
-- **Vercel Analytics** (cookieless, no GDPR banner needed)
-- **Supabase Storage** — `property-images` bucket, public read, `thumbnails/` subfolder
-- **Proxy file:** `src/proxy.ts` (was `middleware.ts` — renamed in Next.js 16)
+- **Supabase Storage** — `property-images` bucket (public), `thumbnails/` subfolder
+- **Data layer:** `src/lib/listings.ts` (server reads) · `src/lib/supabase/{client,server}.ts`
+
+---
+
+## Rollback Strategy
+- **Vercel:** every deploy saved → Deployments → "Promote to Production" to roll back.
+- **Git:** `git revert` / `git reset` to any prior commit.
+- **Supabase:** migrations are additive/non-destructive. To reverse:
+  `DROP POLICY ...`, `DROP INDEX listings_slug_key`, `ALTER TABLE listings DROP COLUMN slug`.

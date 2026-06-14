@@ -37,7 +37,7 @@ export default function Regions() {
             <StaggerItem key={r.name} variant={ENTER[i]}>
               <TiltCard className="group h-full" max={10} glareColor="rgba(255,255,255,0.16)">
                 <a
-                  href="#properties"
+                  href="/properties"
                   className="glow-border relative block h-[340px] sm:h-[360px] rounded-3xl overflow-hidden border border-[rgba(28,23,20,0.08)] shadow-[0_10px_40px_-18px_rgba(28,23,20,0.35)]"
                 >
                   <ScrollImage className="absolute inset-0 h-full w-full" scaleFrom={1.22} drift={26}>

@@ -164,7 +164,7 @@ const webSite = {
     '@type': 'SearchAction',
     target: {
       '@type': 'EntryPoint',
-      urlTemplate: `${SITE_URL}/#properties?q={search_term_string}`,
+      urlTemplate: `${SITE_URL}/properties?q={search_term_string}`,
     },
     'query-input': 'required name=search_term_string',
   },
@@ -179,12 +179,17 @@ function Ld({ data }: { data: object }) {
   )
 }
 
+// Site-wide: organization + website. Safe on every public page.
 export default function JsonLd() {
   return (
     <>
       <Ld data={localBusiness} />
-      <Ld data={faqPage} />
       <Ld data={webSite} />
     </>
   )
+}
+
+// Render only on the page that actually shows the FAQ content (/contact).
+export function FaqJsonLd() {
+  return <Ld data={faqPage} />
 }

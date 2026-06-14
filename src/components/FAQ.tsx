@@ -39,7 +39,7 @@ export default function FAQ() {
           </motion.h2>
           <p className="text-[#6E6055] text-[15px] leading-relaxed">
             Can't find what you're looking for?{' '}
-            <a href="#contact" className="text-[#E85D04] font-medium hover:underline">Talk to our team</a>.
+            <a href="/contact" className="text-[#E85D04] font-medium hover:underline">Talk to our team</a>.
           </p>
         </div>
 

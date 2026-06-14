@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { ArrowUpRight, Phone } from 'lucide-react'
+import Link from 'next/link'
 
 const EASE_OUT    = [0.23, 1, 0.32, 1] as const
 const EASE_DRAWER = [0.32, 0.72, 0, 1] as const
@@ -10,23 +11,20 @@ const EASE_DRAWER = [0.32, 0.72, 0, 1] as const
 const SPRING = { type: 'spring', stiffness: 420, damping: 32, mass: 0.9 } as const
 
 const navLinks = [
-  { href: '#home',         label: 'Home'       },
-  { href: '#services',     label: 'Services'   },
-  { href: '#properties',   label: 'Properties' },
-  { href: '#about',        label: 'About'      },
-  { href: '#contact',      label: 'Contact'    },
+  { href: '/services',   label: 'Services'   },
+  { href: '/properties', label: 'Properties' },
+  { href: '/about',      label: 'About'      },
 ]
 
 const mobileLinks = [
-  { href: '#home',         label: 'Home'        },
-  { href: '#services',     label: 'Services'    },
-  { href: '#how-it-works', label: 'How It Works'},
-  { href: '#properties',   label: 'Properties'  },
-  { href: '#why-osrc',     label: 'Why Us'      },
-  { href: '#testimonials', label: 'Stories'     },
-  { href: '#faq',          label: 'FAQ'         },
-  { href: '#about',        label: 'About'       },
-  { href: '#contact',      label: 'Contact'     },
+  { href: '/',                      label: 'Home'        },
+  { href: '/services',              label: 'Services'    },
+  { href: '/services#how-it-works', label: 'How It Works'},
+  { href: '/properties',            label: 'Properties'  },
+  { href: '/#why-osrc',             label: 'Why Us'      },
+  { href: '/about#testimonials',    label: 'Stories'     },
+  { href: '/contact#faq',           label: 'FAQ'         },
+  { href: '/about',                 label: 'About'       },
 ]
 
 export default function Navbar() {
@@ -93,7 +91,7 @@ export default function Navbar() {
           }`}
         >
           {/* Logo wordmark + live pulse dot (the Dynamic Island tell) */}
-          <a href="#home" className="flex items-center gap-2.5 shrink-0 group/logo">
+          <Link href="/" className="flex items-center gap-2.5 shrink-0 group/logo">
             <span className="relative w-7 h-7 rounded-[0.7rem] bg-[#E85D04] flex items-center justify-center shadow-[0_0_14px_rgba(232,93,4,0.4)] transition-transform duration-300 group-hover/logo:scale-105">
               <span className="text-white font-bold text-[9px] tracking-widest">OS</span>
               <span className="absolute -top-0.5 -right-0.5 flex h-2 w-2">
@@ -106,44 +104,44 @@ export default function Navbar() {
             <span className="text-[13px] font-semibold text-[#1C1714] tracking-tight">
               Orange Square
             </span>
-          </a>
+          </Link>
 
           {/* Desktop links */}
           <div className="hidden md:flex items-center gap-7">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.href}
                 href={link.href}
                 className="ul-draw text-[13px] text-[#6E6055] hover:text-[#1C1714] transition-colors duration-150 font-medium pb-0.5"
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
           </div>
 
           {/* Right cluster */}
           <div className="flex items-center gap-2 shrink-0">
             {/* Desktop CTA */}
-            <a
-              href="#contact"
+            <Link
+              href="/contact"
               className="hidden md:flex items-center gap-2 pl-4 pr-3 py-2 rounded-full bg-[#E85D04] hover:bg-[#F27024] text-white text-[12px] font-semibold tracking-tight transition-[background-color,transform] duration-[160ms] ease-out active:scale-[0.97] group"
             >
               Get Free Consult
               <span className="cta-icon">
                 <ArrowUpRight size={11} strokeWidth={2.5} />
               </span>
-            </a>
+            </Link>
 
             {/* Mobile compact CTA — keeps the bar feeling intentional, not empty */}
-            <a
-              href="#contact"
+            <Link
+              href="/contact"
               className="flex md:hidden items-center gap-1.5 pl-3.5 pr-3 min-h-[40px] rounded-full bg-[#E85D04] text-white text-[12px] font-semibold tracking-tight press"
             >
               Consult
               <span className="w-4 h-4 rounded-full bg-black/15 flex items-center justify-center">
                 <ArrowUpRight size={10} strokeWidth={2.75} />
               </span>
-            </a>
+            </Link>
 
             {/* Hamburger — morphs to X */}
             <button
@@ -186,35 +184,41 @@ export default function Navbar() {
             <div className="ambient-glow" />
             <div className="relative z-10 flex flex-1 flex-col items-center justify-center gap-1 px-6 py-4 overflow-y-auto">
               {mobileLinks.map((link, i) => (
-                <motion.a
+                <motion.div
                   key={link.href}
-                  href={link.href}
-                  onClick={() => setIsOpen(false)}
                   initial={{ opacity: 0, y: 28 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 10 }}
                   transition={{ delay: 0.08 + i * 0.05, duration: 0.45, ease: EASE_OUT }}
-                  className="font-display text-[36px] sm:text-[48px] text-[#FBF6EC] hover:text-[#F27024] transition-colors duration-200"
-                  style={{ lineHeight: 1.1 }}
                 >
-                  {link.label}
-                </motion.a>
+                  <Link
+                    href={link.href}
+                    onClick={() => setIsOpen(false)}
+                    className="font-display text-[36px] sm:text-[48px] text-[#FBF6EC] hover:text-[#F27024] transition-colors duration-200"
+                    style={{ lineHeight: 1.1 }}
+                  >
+                    {link.label}
+                  </Link>
+                </motion.div>
               ))}
 
-              <motion.a
-                href="#contact"
-                onClick={() => setIsOpen(false)}
+              <motion.div
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }}
                 transition={{ delay: 0.08 + mobileLinks.length * 0.05, duration: 0.45, ease: EASE_OUT }}
-                className="group mt-8 flex items-center gap-2 pl-7 pr-5 py-4 rounded-full bg-[#E85D04] text-white font-semibold text-base active:scale-[0.97] transition-transform hover:bg-[#F27024]"
               >
-                Get Free Consult
-                <span className="cta-icon">
-                  <ArrowUpRight size={15} strokeWidth={2.5} />
-                </span>
-              </motion.a>
+                <Link
+                  href="/contact"
+                  onClick={() => setIsOpen(false)}
+                  className="group mt-8 flex items-center gap-2 pl-7 pr-5 py-4 rounded-full bg-[#E85D04] text-white font-semibold text-base active:scale-[0.97] transition-transform hover:bg-[#F27024]"
+                >
+                  Get Free Consult
+                  <span className="cta-icon">
+                    <ArrowUpRight size={15} strokeWidth={2.5} />
+                  </span>
+                </Link>
+              </motion.div>
             </div>
 
             {/* Contact footer inside the menu */}
