@@ -1,7 +1,6 @@
 import { Resend } from 'resend'
 import { NextRequest, NextResponse } from 'next/server'
 
-const resend    = new Resend(process.env.RESEND_API_KEY)
 const RECIPIENT = process.env.INQUIRY_EMAIL ?? 'jolavts@gmail.com'
 // Switch to noreply@orangesquarerealty.com.ph once domain is verified in Resend
 const FROM      = process.env.RESEND_FROM ?? 'OSRC Inquiries <onboarding@resend.dev>'
@@ -121,6 +120,7 @@ export async function POST(req: NextRequest) {
 
   // 6. Send emails
   try {
+    const resend = new Resend(process.env.RESEND_API_KEY)
     await Promise.all([
       // Admin notification
       resend.emails.send({
