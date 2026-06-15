@@ -10,6 +10,10 @@ export async function POST(request: NextRequest) {
   if (!user) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
+  const allowedUids = process.env.ADMIN_ALLOWED_UIDS?.split(',').map(s => s.trim()).filter(Boolean) ?? []
+  if (allowedUids.length > 0 && !allowedUids.includes(user.id)) {
+    return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
+  }
 
   // ── Storage client ────────────────────────────────────────────────────────
   // Prefer the service-role key: it runs as a trusted server identity and

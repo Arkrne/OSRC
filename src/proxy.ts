@@ -32,7 +32,7 @@ export async function proxy(request: NextRequest) {
 
   const isAllowedAdmin = (u: typeof user) => {
     if (!u) return false
-    if (ALLOWED_UIDS.length === 0) return true // env var not configured yet
+    if (ALLOWED_UIDS.length === 0) return false // deny all if env var not configured
     return ALLOWED_UIDS.includes(u.id)
   }
 
