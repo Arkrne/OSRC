@@ -21,7 +21,7 @@ export default function PropertyCard({ listing, index = 0 }: { listing: Listing;
         aria-label={`View ${listing.title} in ${listing.location}`}
       >
         <div className="bezel-inner h-full flex flex-col">
-          <div className="relative w-full h-[220px] overflow-hidden">
+          <div className="relative w-full aspect-video overflow-hidden">
             {mainImage
               ? <Image src={mainImage} alt={listing.title} fill className="object-cover property-image" sizes="(max-width:768px) 100vw, 28vw" />
               : <div className="w-full h-full bg-[#EDE5DA]" />}

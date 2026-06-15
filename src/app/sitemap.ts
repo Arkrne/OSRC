@@ -1,8 +1,9 @@
 import type { MetadataRoute } from 'next'
 import { getAllSlugs } from '@/lib/listings'
 
-// Re-read listings on each request so new properties appear without a rebuild.
-export const dynamic = 'force-dynamic'
+// Rebuild at most once per hour; new listings appear within 60 minutes.
+// TODO: split into sitemap index when listing count approaches 1,000
+export const revalidate = 3600
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = 'https://orangesquarerealty.com.ph'

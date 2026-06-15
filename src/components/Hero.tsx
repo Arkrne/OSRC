@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion'
 import { ArrowUpRight, Pause, Play } from 'lucide-react'
 import { STATS } from '@/lib/site'
@@ -26,8 +26,17 @@ const headlineLines = [
 export default function Hero() {
   const videoRef = useRef<HTMLVideoElement>(null)
   const sectionRef = useRef<HTMLElement>(null)
-  const [playing, setPlaying] = useState(true)
   const reduced = useReducedMotion()
+  const [saveData, setSaveData] = useState(false)
+  useEffect(() => {
+    const conn = (navigator as unknown as { connection?: { saveData?: boolean } }).connection
+    setSaveData(conn?.saveData === true)
+  }, [])
+  const shouldAutoplay = !reduced && !saveData
+  const [playing, setPlaying] = useState(true)
+  useEffect(() => {
+    if (!shouldAutoplay) { videoRef.current?.pause(); setPlaying(false) }
+  }, [shouldAutoplay])
 
   // Subtle depth parallax — video drifts slower than the page on scroll-out
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start start', 'end start'] })
@@ -51,7 +60,8 @@ export default function Hero() {
           style={{ height: '115%' }}
           src="https://videos.pexels.com/video-files/7578552/7578552-uhd_2560_1440_30fps.mp4"
           poster="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1600&q=80"
-          autoPlay
+          autoPlay={shouldAutoplay}
+          preload={shouldAutoplay ? 'auto' : 'none'}
           loop
           muted
           playsInline

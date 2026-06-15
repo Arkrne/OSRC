@@ -1,10 +1,10 @@
 import Link from 'next/link'
 import { ArrowUpRight } from 'lucide-react'
-import { getListings } from '@/lib/listings'
+import { getListings, CARD_COLUMNS } from '@/lib/listings'
 import PropertyCard from './PropertyCard'
 
 export default async function PropertiesPreview() {
-  const listings = await getListings(6)
+  const listings = await getListings({ limit: 6, select: CARD_COLUMNS })
 
   return (
     <section id="properties" className="py-12 sm:py-18 md:py-24 px-5 sm:px-8 lg:px-20 bg-[#F5EEE8]">

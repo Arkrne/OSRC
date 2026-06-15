@@ -1,8 +1,10 @@
 import type { Metadata } from 'next'
-import { getListings } from '@/lib/listings'
+import { getListings, getListingsCount, CARD_COLUMNS, type ListingFilters } from '@/lib/listings'
 import PropertiesGrid from '@/components/PropertiesGrid'
 
 export const dynamic = 'force-dynamic'
+
+const PAGE_SIZE = 9
 
 export const metadata: Metadata = {
   title: 'Properties for Sale — Pag-IBIG Eligible Homes',
@@ -16,8 +18,39 @@ export const metadata: Metadata = {
   },
 }
 
-export default async function PropertiesPage() {
-  const listings = await getListings()
+type Props = {
+  searchParams: Promise<{
+    page?: string; q?: string
+    type?: string; region?: string; status?: string
+    bedrooms?: string; minPrice?: string; maxPrice?: string
+  }>
+}
+
+export default async function PropertiesPage({ searchParams }: Props) {
+  const {
+    page: pageStr = '1', q = '',
+    type = '', region = '', status = '',
+    bedrooms = '', minPrice = '', maxPrice = '',
+  } = await searchParams
+
+  const page   = Math.max(1, parseInt(pageStr, 10) || 1)
+  const offset = (page - 1) * PAGE_SIZE
+
+  const filters: ListingFilters = {
+    search:   q.trim() || undefined,
+    type:     type     || undefined,
+    region:   region   || undefined,
+    status:   status   || undefined,
+    // parseInt('5+', 10) === 5, so '5+' naturally maps to the ≥5 branch in applyFilters
+    bedrooms: bedrooms ? parseInt(bedrooms, 10) : undefined,
+    minPrice: minPrice ? parseInt(minPrice, 10) : undefined,
+    maxPrice: maxPrice ? parseInt(maxPrice, 10) : undefined,
+  }
+
+  const [listings, total] = await Promise.all([
+    getListings({ ...filters, limit: PAGE_SIZE, offset, select: CARD_COLUMNS }),
+    getListingsCount(filters),
+  ])
 
   return (
     <div className="min-h-screen bg-[#F5EEE8] pt-24 sm:pt-28 pb-16 sm:pb-24 px-5 sm:px-8 lg:px-20">
@@ -35,7 +68,11 @@ export default async function PropertiesPage() {
           </p>
         </div>
 
-        <PropertiesGrid listings={listings} />
+        <PropertiesGrid
+          listings={listings} total={total} page={page} q={q}
+          filterType={type} filterRegion={region} filterStatus={status}
+          filterBedrooms={bedrooms} filterMinPrice={minPrice} filterMaxPrice={maxPrice}
+        />
       </div>
     </div>
   )

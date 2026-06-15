@@ -2,18 +2,22 @@
 
 import { motion } from 'framer-motion'
 import { Quote } from 'lucide-react'
+import { useVideoAutoplay } from '@/lib/useVideoAutoplay'
 
 const EASE = [0.23, 1, 0.32, 1] as const
 
 // Second video block — a "client story reel" full-bleed band
 export default function VideoReel() {
+  const shouldAutoplay = useVideoAutoplay()
   return (
     <section className="relative min-h-[78svh] sm:min-h-[70vh] flex items-center overflow-hidden bg-[#0B0906]">
       {/* Background video */}
       <video
         className="absolute inset-0 w-full h-full object-cover"
         src="https://videos.pexels.com/video-files/8293760/8293760-uhd_2560_1440_25fps.mp4"
-        autoPlay loop muted playsInline
+        autoPlay={shouldAutoplay}
+        preload={shouldAutoplay ? 'auto' : 'none'}
+        loop muted playsInline
         poster="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1400&q=80"
       />
       <div className="absolute inset-0 bg-[#0B0906]/75" />

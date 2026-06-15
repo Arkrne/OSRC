@@ -1,15 +1,20 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Play, Pause } from 'lucide-react'
+import { useVideoAutoplay } from '@/lib/useVideoAutoplay'
 
 const EASE = [0.23, 1, 0.32, 1] as const
 
 // Adapted from 21st.dev "Hero With Video" pattern — themed to warm editorial light
 export default function VideoShowcase() {
   const videoRef = useRef<HTMLVideoElement>(null)
+  const shouldAutoplay = useVideoAutoplay()
   const [playing, setPlaying] = useState(true)
+  useEffect(() => {
+    if (!shouldAutoplay) { videoRef.current?.pause(); setPlaying(false) }
+  }, [shouldAutoplay])
 
   const toggle = () => {
     const v = videoRef.current
@@ -55,7 +60,8 @@ export default function VideoShowcase() {
               ref={videoRef}
               className="w-full h-full object-cover"
               src="https://videos.pexels.com/video-files/29913691/29913691-uhd_2560_1440_30fps.mp4"
-              autoPlay
+              autoPlay={shouldAutoplay}
+              preload={shouldAutoplay ? 'auto' : 'none'}
               loop
               muted
               playsInline

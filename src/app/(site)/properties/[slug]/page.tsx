@@ -1,11 +1,17 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { getListingBySlug, getMainImage } from '@/lib/listings'
+import { getListingBySlug, getMainImage, getAllSlugs } from '@/lib/listings'
 import PropertyDetail from '@/components/PropertyDetail'
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 300
+export const dynamicParams = true
 
 type Props = { params: Promise<{ slug: string }> }
+
+export async function generateStaticParams() {
+  const slugs = await getAllSlugs()
+  return slugs.filter(s => !!s.slug).map(({ slug }) => ({ slug }))
+}
 
 function buildDescription(title: string, location: string, description: string): string {
   const clean = (description || '').replace(/\s+/g, ' ').trim()
@@ -34,7 +40,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description,
       url: `/properties/${listing.slug}`,
       type: 'website',
-      ...(image ? { images: [{ url: image, width: 1200, height: 900, alt: listing.title }] } : {}),
+      ...(image ? { images: [{ url: image, width: 1200, height: 675, alt: listing.title }] } : {}),
     },
     twitter: {
       card: 'summary_large_image',

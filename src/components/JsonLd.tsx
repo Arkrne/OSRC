@@ -10,11 +10,9 @@ const localBusiness = {
   url: SITE_URL,
   logo: {
     '@type': 'ImageObject',
-    url: `${SITE_URL}/og-image.png`,
-    width: 1200,
-    height: 630,
+    url: `${SITE_URL}/logo.jpg`,
   },
-  image: `${SITE_URL}/og-image.png`,
+  image: `${SITE_URL}/opengraph-image`,
   telephone: '+63-956-884-3373',
   email: 'inquiries@orangesquarerealty.com.ph',
   address: {

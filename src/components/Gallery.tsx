@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { SpotlightCard } from './motion'
+import { useVideoAutoplay } from '@/lib/useVideoAutoplay'
 
 const EASE = [0.23, 1, 0.32, 1] as const
 
@@ -18,6 +19,7 @@ const media: Media[] = [
 ]
 
 export default function Gallery() {
+  const shouldAutoplay = useVideoAutoplay()
   return (
     <section className="relative py-12 sm:py-18 md:py-24 px-5 sm:px-8 lg:px-20 overflow-hidden">
       <div className="blob blob-2 right-[-5rem] top-1/3 h-72 w-72" aria-hidden />
@@ -75,7 +77,10 @@ export default function Gallery() {
                   <video
                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-[800ms] ease-out group-hover:scale-[1.06]"
                     src={item.url}
-                    autoPlay loop muted playsInline
+                    poster="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=900&q=80"
+                    autoPlay={shouldAutoplay}
+                    preload={shouldAutoplay ? 'auto' : 'none'}
+                    loop muted playsInline
                   />
                 ) : (
                   // plain img to avoid next/image domain config; lazy-loaded
