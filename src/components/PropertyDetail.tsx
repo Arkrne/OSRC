@@ -67,7 +67,7 @@ export default function PropertyDetail({ listing }: { listing: Listing }) {
       <div className="max-w-[1240px] mx-auto">
 
         {/* Breadcrumb */}
-        <div className="flex items-center gap-2 text-[12px] text-[#A89070] mb-6">
+        <div className="flex items-center gap-2 text-[12px] text-[#6E6055] mb-6">
           <Link href="/" className="hover:text-[#E85D04] transition-colors">Home</Link>
           <span>/</span>
           <Link href="/properties" className="hover:text-[#E85D04] transition-colors">Properties</Link>

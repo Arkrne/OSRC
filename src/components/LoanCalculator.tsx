@@ -47,7 +47,7 @@ export default function LoanCalculator() {
             style={{ lineHeight: 0.95, letterSpacing: '-0.025em' }}
           >
             Estimate Your
-            <br /><em className="italic text-[#E85D04]">Monthly Amortization</em>
+            <br /><em className="not-italic text-[#E85D04]">Monthly Amortization</em>
           </motion.h2>
           <p className="text-[#6E6055] text-[16px] leading-relaxed max-w-md">
             Adjust the price, down payment, and term to see a sample Pag-IBIG monthly

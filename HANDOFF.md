@@ -1,6 +1,6 @@
 # HANDOFF — OSRC Website
 
-> Last updated: 2026-06-15. This document is the single source of truth for picking up
+> Last updated: 2026-06-15 (Session 6 — design audit implementation). This document is the single source of truth for picking up
 > work on this project. Read the top 5 sections first.
 
 ---
@@ -35,9 +35,9 @@ changes). Run this at the end of every session so the graph stays current.
 ### Graph stats (as of 2026-06-15):
 | Stat | Value |
 |------|-------|
-| Nodes | 440 |
-| Edges | 621 |
-| Communities | 28 |
+| Nodes | 532 |
+| Edges | 721 |
+| Communities | 38 |
 | Graph file | `graphify-out/graph.json` |
 | Interpreter | `graphify-out/.graphify_python` |
 | Report | `graphify-out/GRAPH_REPORT.md` |
@@ -135,7 +135,7 @@ through → deployed live on the real domain.
 **Section → page distribution:**
 | Page | Sections |
 |------|----------|
-| `/` | Hero · Partners · WhyChooseUs · VideoShowcase · PropertiesPreview · Promos · TrustStats · FinalCTA |
+| `/` | Hero · **TrustBar** · Partners · WhyChooseUs · VideoShowcase · PropertiesPreview · Promos · TrustStats · FinalCTA |
 | `/properties` | PropertiesGrid (search + 6-dimension filter bar + pagination) |
 | `/services` | Services · HowItWorks · LoanCalculator · Spotlight |
 | `/about` | About · Regions · Gallery · Team · Awards · Testimonials · VideoReel · Insights · Marquee |
@@ -230,6 +230,45 @@ WHERE price IS NOT NULL
   AND REGEXP_REPLACE(price, '[^0-9]', '', 'g') != '';
 CREATE INDEX IF NOT EXISTS idx_listings_price_value ON listings (price_value);
 ```
+
+### Session 6 — design audit implementation (2026-06-15)
+
+**Created:**
+- `src/components/TrustBar.tsx` — new dark stats band (4 stats) placed between Hero and Partners;
+  extracted from Hero's bottom stats strip. Uses framer-motion whileInView entrance.
+
+**Edited:**
+- `src/components/Hero.tsx` — removed stats strip div + `const stats` array + `STATS` import.
+  Hero is now a clean full-bleed video section with no bottom stats.
+- `src/app/(site)/page.tsx` — added `TrustBar` import + inserted between Hero and Partners.
+- `src/components/WhyChooseUs.tsx` — removed `motion` import and `const EASE` (unused after eyebrow
+  removal); removed "Our Edge" eyebrow motion.div block; differentiated 2 of 4 counter cards:
+  ₱0 Hidden Fees → orange-tint `bg-[rgba(232,93,4,0.06)]`, 100% Pag-IBIG → dark `bg-[#0B0906]`.
+- `src/components/TrustStats.tsx` — fixed Counter zero-start bug: `useState(0)` → `useState<number|null>(null)`;
+  renders blank string until inView fires. Stat labels: `text-[11px] sm:text-[12px] tracking-[0.14em]`
+  → `text-xs sm:text-[13px] tracking-wider`.
+- `src/components/Partners.tsx` — developer tiles now show monogram mark (2-letter orange badge)
+  alongside name instead of text-only. `partners` changed from `string[]` to `{name,mark}[]`.
+- `src/components/Navbar.tsx` — desktop nav links gap: `gap-7` → `gap-8`.
+- `src/app/(site)/properties/page.tsx` — H1: "Find the Right Home for You" → "Browse Our Listings".
+- `src/components/PropertiesGrid.tsx` — improved empty state (icon + heading + body + CTA button);
+  search bar border contrast: `border-[rgba(28,23,20,0.09)]` → `border-[rgba(28,23,20,0.15)]`.
+- `src/components/PropertyDetail.tsx` — breadcrumb contrast: `text-[#A89070]` → `text-[#6E6055]`.
+- `src/components/Footer.tsx` — column headers: `text-[10px] text-[#8A7C68]` → `text-[11px] text-[#C6B9A4]`;
+  social icon SVGs: `width/height 14` → `16`.
+- **P1 italic fixes (9 files)** — removed `italic` from all `<em>` headline accents to eliminate
+  typeface-mixing appearance (DM Serif italic looks like a different typeface at display sizes).
+  Added `not-italic` to: Hero.tsx, VideoShowcase.tsx, FinalCTA.tsx, About.tsx, ContactForm.tsx,
+  LoanCalculator.tsx, Services.tsx (also upgraded "Support" color → orange `#E85D04`),
+  HowItWorks.tsx, WhyChooseUs.tsx.
+
+**Known issues (not fixed this session):**
+- Test listings in Supabase ("catanduanes-43d12a", "djuarlong portak nab" features) — delete via
+  `/admin/listings`. These are database content issues, not code issues.
+- Spotlight "Featured This Month" may show blank if no featured listing is set in DB.
+- Videos still hotlinked from external CDNs (Hero + VideoShowcase priority).
+
+---
 
 ### Session 5 — gallery preload + shimmer
 

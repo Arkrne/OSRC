@@ -73,7 +73,7 @@ export default function About() {
           >
             Built to Make
             <br />
-            <em className="italic text-[#6E6055]">Homeownership</em>
+            <em className="not-italic text-[#6E6055]">Homeownership</em>
             <br />
             Real.
           </motion.h2>

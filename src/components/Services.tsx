@@ -57,7 +57,7 @@ export default function Services() {
             <RevealHeading
               className="font-display text-[clamp(32px,4.5vw,64px)] text-[#1C1714]"
               style={{ lineHeight: 0.95, letterSpacing: '-0.025em' }}
-              lines={['Complete', <span key="hs">Homeownership <em className="italic text-[#6E6055]">Support</em></span>]}
+              lines={['Complete', <span key="hs">Homeownership <em className="not-italic text-[#E85D04]">Support</em></span>]}
             />
           </motion.div>
 

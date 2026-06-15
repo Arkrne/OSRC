@@ -17,7 +17,7 @@ function Counter({ to, suffix }: { to: number; suffix: string }) {
   const ref = useRef<HTMLSpanElement>(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
   const mv = useMotionValue(0)
-  const [display, setDisplay] = useState(0)
+  const [display, setDisplay] = useState<number | null>(null)
 
   useEffect(() => {
     if (!inView) return
@@ -26,7 +26,7 @@ function Counter({ to, suffix }: { to: number; suffix: string }) {
     return () => { controls.stop(); unsub() }
   }, [inView, to, mv])
 
-  return <span ref={ref}>{display}{suffix}</span>
+  return <span ref={ref}>{display === null ? '' : `${display}${suffix}`}</span>
 }
 
 export default function TrustStats() {
@@ -46,7 +46,7 @@ export default function TrustStats() {
               <div className="font-display text-[clamp(38px,6vw,72px)] text-[#F27024] leading-none tabular-nums">
                 <Counter to={s.value} suffix={s.suffix} />
               </div>
-              <div className="text-[11px] sm:text-[12px] text-[#C6B9A4] mt-2.5 sm:mt-3 uppercase tracking-[0.14em] font-medium">{s.label}</div>
+              <div className="text-xs sm:text-[13px] text-[#C6B9A4] mt-2.5 sm:mt-3 uppercase tracking-wider font-medium">{s.label}</div>
             </div>
           ))}
         </motion.div>

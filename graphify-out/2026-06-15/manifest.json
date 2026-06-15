@@ -1,0 +1,412 @@
+{
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\next.config.ts": {
+    "mtime": 1781425032.9299023,
+    "ast_hash": "80a7dab2250eb067d11aab9c77e30721",
+    "semantic_hash": "80a7dab2250eb067d11aab9c77e30721"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\package.json": {
+    "mtime": 1781425324.4536285,
+    "ast_hash": "9f7edd0018d9d1c9af2672da0ec0e161",
+    "semantic_hash": "9f7edd0018d9d1c9af2672da0ec0e161"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\postcss.config.mjs": {
+    "mtime": 1780997636.9294412,
+    "ast_hash": "239f3ebf717465dc636818a1a619398d",
+    "semantic_hash": "239f3ebf717465dc636818a1a619398d"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\src\\app\\(site)\\about\\page.tsx": {
+    "mtime": 1781422103.5038486,
+    "ast_hash": "abe383c2da684ee28d1bcf91c0f3590d",
+    "semantic_hash": "abe383c2da684ee28d1bcf91c0f3590d"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\src\\app\\(site)\\contact\\page.tsx": {
+    "mtime": 1781422111.1873162,
+    "ast_hash": "fd22f995bb6c5d254ddb0e242fdcbf06",
+    "semantic_hash": "fd22f995bb6c5d254ddb0e242fdcbf06"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\src\\app\\(site)\\layout.tsx": {
+    "mtime": 1781421980.2352471,
+    "ast_hash": "12a661217ecdc8c8e0ad628153d2c16c",
+    "semantic_hash": "12a661217ecdc8c8e0ad628153d2c16c"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\src\\app\\(site)\\page.tsx": {
+    "mtime": 1781422000.954652,
+    "ast_hash": "cc06f704b439829a99455eddb0e557b0",
+    "semantic_hash": "cc06f704b439829a99455eddb0e557b0"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\src\\app\\(site)\\properties\\[slug]\\page.tsx": {
+    "mtime": 1781474480.1497684,
+    "ast_hash": "148d6cd5da9efd1fbb7d69d72cf7ef0c",
+    "semantic_hash": "148d6cd5da9efd1fbb7d69d72cf7ef0c"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\src\\app\\(site)\\properties\\page.tsx": {
+    "mtime": 1781475033.8108718,
+    "ast_hash": "861cb2d45937b054f63769a27ab7cef5",
+    "semantic_hash": "861cb2d45937b054f63769a27ab7cef5"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\src\\app\\(site)\\services\\page.tsx": {
+    "mtime": 1781422094.979841,
+    "ast_hash": "e4645008b11360ba47843c7136641c65",
+    "semantic_hash": "e4645008b11360ba47843c7136641c65"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\src\\app\\admin\\LogoutButton.tsx": {
+    "mtime": 1781490028.0846481,
+    "ast_hash": "36f03fd29338d99a9d32adca21daf29e",
+    "semantic_hash": "36f03fd29338d99a9d32adca21daf29e"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\src\\app\\admin\\dashboard\\page.tsx": {
+    "mtime": 1781490044.9933953,
+    "ast_hash": "b70a55e4cc5f5bbe2b5be6427f8b4b2f",
+    "semantic_hash": "b70a55e4cc5f5bbe2b5be6427f8b4b2f"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\src\\app\\admin\\layout.tsx": {
+    "mtime": 1781371230.3263562,
+    "ast_hash": "aa2a02c025acad2ed3f704725250d81b",
+    "semantic_hash": "aa2a02c025acad2ed3f704725250d81b"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\src\\app\\admin\\listings\\page.tsx": {
+    "mtime": 1781490166.1421235,
+    "ast_hash": "1682111f577a03e75048f6a721353ed6",
+    "semantic_hash": "1682111f577a03e75048f6a721353ed6"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\src\\app\\admin\\page.tsx": {
+    "mtime": 1781412783.6138387,
+    "ast_hash": "e2e5c6aa39223bebf5cfc949dcb4d182",
+    "semantic_hash": "e2e5c6aa39223bebf5cfc949dcb4d182"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\src\\app\\admin\\promos\\page.tsx": {
+    "mtime": 1781490106.6464856,
+    "ast_hash": "f345412dcd4495f7431e899a4d322efd",
+    "semantic_hash": "f345412dcd4495f7431e899a4d322efd"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\src\\app\\api\\delete-listing\\route.ts": {
+    "mtime": 1781490022.2151978,
+    "ast_hash": "4278f3290d33a10423873a32cbd0488d",
+    "semantic_hash": "4278f3290d33a10423873a32cbd0488d"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\src\\app\\api\\send-inquiry\\route.ts": {
+    "mtime": 1781444525.266554,
+    "ast_hash": "1caa1a42b52bfd5866c00a12af4d7443",
+    "semantic_hash": "1caa1a42b52bfd5866c00a12af4d7443"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\src\\app\\api\\upload\\route.ts": {
+    "mtime": 1781419797.3017037,
+    "ast_hash": "3fefdd717888e4b58c8e03018feaa005",
+    "semantic_hash": "3fefdd717888e4b58c8e03018feaa005"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\src\\app\\cookie-policy\\page.tsx": {
+    "mtime": 1781444608.4074976,
+    "ast_hash": "7ab9505c19b04723f8a11d0e2b9da4d9",
+    "semantic_hash": "7ab9505c19b04723f8a11d0e2b9da4d9"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\src\\app\\disclaimer\\page.tsx": {
+    "mtime": 1781444576.4252687,
+    "ast_hash": "ad457205f9fb10d62ff2cb6b9608e171",
+    "semantic_hash": "ad457205f9fb10d62ff2cb6b9608e171"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\src\\app\\layout.tsx": {
+    "mtime": 1781414437.6194916,
+    "ast_hash": "cc8f3b49dc8252e4244a3ce26d1df2ed",
+    "semantic_hash": "cc8f3b49dc8252e4244a3ce26d1df2ed"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\src\\app\\opengraph-image.tsx": {
+    "mtime": 1781445425.3379185,
+    "ast_hash": "92622161bfa1b55c1c2cabf3f1b98760",
+    "semantic_hash": "92622161bfa1b55c1c2cabf3f1b98760"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\src\\app\\privacy-policy\\page.tsx": {
+    "mtime": 1781444569.1933458,
+    "ast_hash": "4e77280979b1f77b794179b86f8b390e",
+    "semantic_hash": "4e77280979b1f77b794179b86f8b390e"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\src\\app\\sitemap.ts": {
+    "mtime": 1781490004.1495798,
+    "ast_hash": "c8a9e8d4006dcc74904116a0d9a4e268",
+    "semantic_hash": "c8a9e8d4006dcc74904116a0d9a4e268"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\src\\app\\terms\\page.tsx": {
+    "mtime": 1781444603.2833054,
+    "ast_hash": "1601269bc6d73c0185af4d583b9aba60",
+    "semantic_hash": "1601269bc6d73c0185af4d583b9aba60"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\src\\components\\About.tsx": {
+    "mtime": 1781445406.0042598,
+    "ast_hash": "42b7e7b892e897b2c4556154fe320808",
+    "semantic_hash": "42b7e7b892e897b2c4556154fe320808"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\src\\components\\Awards.tsx": {
+    "mtime": 1781094910.023731,
+    "ast_hash": "82da366b98375c56b71e1f090fb54f3b",
+    "semantic_hash": "82da366b98375c56b71e1f090fb54f3b"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\src\\components\\ContactForm.tsx": {
+    "mtime": 1781444516.4724092,
+    "ast_hash": "a24cdcbb0e8481744b9dbeee2038718f",
+    "semantic_hash": "a24cdcbb0e8481744b9dbeee2038718f"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\src\\components\\FAQ.tsx": {
+    "mtime": 1781422343.5009408,
+    "ast_hash": "d1d0471a8206a20b4d6f556cb04da276",
+    "semantic_hash": "d1d0471a8206a20b4d6f556cb04da276"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\src\\components\\FinalCTA.tsx": {
+    "mtime": 1781445237.1541727,
+    "ast_hash": "433a071ef7eaf27bcb3ae74c9e45fe93",
+    "semantic_hash": "433a071ef7eaf27bcb3ae74c9e45fe93"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\src\\components\\Footer.tsx": {
+    "mtime": 1781445203.3940935,
+    "ast_hash": "1a2ee70b407115ac3480af377b80d3ac",
+    "semantic_hash": "1a2ee70b407115ac3480af377b80d3ac"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\src\\components\\Gallery.tsx": {
+    "mtime": 1781470150.546118,
+    "ast_hash": "e837f12ea30aae45943e6ddde0c6aa01",
+    "semantic_hash": "e837f12ea30aae45943e6ddde0c6aa01"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\src\\components\\Hero.tsx": {
+    "mtime": 1781470098.807822,
+    "ast_hash": "28d0a10e42c3a6537ecd2e8a0d0ed51d",
+    "semantic_hash": "28d0a10e42c3a6537ecd2e8a0d0ed51d"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\src\\components\\HowItWorks.tsx": {
+    "mtime": 1781095216.939142,
+    "ast_hash": "2ae35fec1bb1f6687ac77a81c03a20d7",
+    "semantic_hash": "2ae35fec1bb1f6687ac77a81c03a20d7"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\src\\components\\InquiryModal.tsx": {
+    "mtime": 1781445363.9819872,
+    "ast_hash": "2ff6bf0907409481393ac2396384c725",
+    "semantic_hash": "2ff6bf0907409481393ac2396384c725"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\src\\components\\Insights.tsx": {
+    "mtime": 1781445311.8949444,
+    "ast_hash": "7bb47b769ed2a22889f4ac466298165d",
+    "semantic_hash": "7bb47b769ed2a22889f4ac466298165d"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\src\\components\\JsonLd.tsx": {
+    "mtime": 1781469851.1761432,
+    "ast_hash": "61d5d0680dd57f9c937773e66abab795",
+    "semantic_hash": "61d5d0680dd57f9c937773e66abab795"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\src\\components\\LoanCalculator.tsx": {
+    "mtime": 1781445219.5509243,
+    "ast_hash": "f24e8733801e337a98894a4d0a856dfb",
+    "semantic_hash": "f24e8733801e337a98894a4d0a856dfb"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\src\\components\\Marquee.tsx": {
+    "mtime": 1781444527.1328452,
+    "ast_hash": "412b68be58deb184ad304181f08f02e0",
+    "semantic_hash": "412b68be58deb184ad304181f08f02e0"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\src\\components\\MobileCTABar.tsx": {
+    "mtime": 1781444514.0965035,
+    "ast_hash": "51fe3d4bbb1f6a6e93c6370ed903691d",
+    "semantic_hash": "51fe3d4bbb1f6a6e93c6370ed903691d"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\src\\components\\Navbar.tsx": {
+    "mtime": 1781445192.1452208,
+    "ast_hash": "4f2c2eb76ca9317dab6d5d4a91a45aa8",
+    "semantic_hash": "4f2c2eb76ca9317dab6d5d4a91a45aa8"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\src\\components\\Partners.tsx": {
+    "mtime": 1781051599.7423606,
+    "ast_hash": "91fc771968cfc7989380eeff6797ac49",
+    "semantic_hash": "91fc771968cfc7989380eeff6797ac49"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\src\\components\\Promos.tsx": {
+    "mtime": 1781445290.0722852,
+    "ast_hash": "820334a2ad9988617fc6ecdd0b0b1c83",
+    "semantic_hash": "820334a2ad9988617fc6ecdd0b0b1c83"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\src\\components\\PromosClient.tsx": {
+    "mtime": 1781445286.0255885,
+    "ast_hash": "695ce0391a2e01ea6c6aeafd14394948",
+    "semantic_hash": "695ce0391a2e01ea6c6aeafd14394948"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\src\\components\\PropertiesGrid.tsx": {
+    "mtime": 1781475088.5581534,
+    "ast_hash": "1654b8624b347bf661e34448b53dc3c2",
+    "semantic_hash": "1654b8624b347bf661e34448b53dc3c2"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\src\\components\\PropertiesPreview.tsx": {
+    "mtime": 1781475097.9592168,
+    "ast_hash": "e29d067d4ce3dee1056fe7cd7569bec2",
+    "semantic_hash": "e29d067d4ce3dee1056fe7cd7569bec2"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\src\\components\\PropertyCard.tsx": {
+    "mtime": 1781474083.9867704,
+    "ast_hash": "c383c8bbb52812f5904054b7c988aef1",
+    "semantic_hash": "c383c8bbb52812f5904054b7c988aef1"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\src\\components\\PropertyDetail.tsx": {
+    "mtime": 1781491942.4722784,
+    "ast_hash": "3f0b143f0b9a2e9ff237e1c41c08b3c7",
+    "semantic_hash": "3f0b143f0b9a2e9ff237e1c41c08b3c7"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\src\\components\\Regions.tsx": {
+    "mtime": 1781422343.5584147,
+    "ast_hash": "d55163e4b0b094a646049fa27e27c3c4",
+    "semantic_hash": "d55163e4b0b094a646049fa27e27c3c4"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\src\\components\\ScrollProgress.tsx": {
+    "mtime": 1781050559.6451714,
+    "ast_hash": "e09e63d93183386a174b0474002b49d9",
+    "semantic_hash": "e09e63d93183386a174b0474002b49d9"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\src\\components\\Services.tsx": {
+    "mtime": 1781445072.6552806,
+    "ast_hash": "74167308d25b2b4d72bd474683f36e69",
+    "semantic_hash": "74167308d25b2b4d72bd474683f36e69"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\src\\components\\Spotlight.tsx": {
+    "mtime": 1781470912.7376685,
+    "ast_hash": "326698393c3468498b2282f254b50cb9",
+    "semantic_hash": "326698393c3468498b2282f254b50cb9"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\src\\components\\SpotlightCard.tsx": {
+    "mtime": 1781445467.399404,
+    "ast_hash": "f2d0f8403dc7fe3d1896a116dd834cc5",
+    "semantic_hash": "f2d0f8403dc7fe3d1896a116dd834cc5"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\src\\components\\Team.tsx": {
+    "mtime": 1781094598.3059406,
+    "ast_hash": "f9b9651ac62c04b8742091e3a74ad5bf",
+    "semantic_hash": "f9b9651ac62c04b8742091e3a74ad5bf"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\src\\components\\Testimonials.tsx": {
+    "mtime": 1781095228.185435,
+    "ast_hash": "baca477b2aaaca7f4d5b4ad8bc2f81d3",
+    "semantic_hash": "baca477b2aaaca7f4d5b4ad8bc2f81d3"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\src\\components\\TrustStats.tsx": {
+    "mtime": 1781445415.036051,
+    "ast_hash": "807582b285a1303b604e56bb57ede1dd",
+    "semantic_hash": "807582b285a1303b604e56bb57ede1dd"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\src\\components\\VideoReel.tsx": {
+    "mtime": 1781470138.3541443,
+    "ast_hash": "36d72e999c26c7f8b7117d88be1f2ef9",
+    "semantic_hash": "36d72e999c26c7f8b7117d88be1f2ef9"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\src\\components\\VideoShowcase.tsx": {
+    "mtime": 1781470126.279274,
+    "ast_hash": "76e2f7d5b2be585df5e9c1d74ebeaf63",
+    "semantic_hash": "76e2f7d5b2be585df5e9c1d74ebeaf63"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\src\\components\\WhyChooseUs.tsx": {
+    "mtime": 1781445397.0369325,
+    "ast_hash": "bd489698a742b25f9849fb73ef79167a",
+    "semantic_hash": "bd489698a742b25f9849fb73ef79167a"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\src\\components\\motion.tsx": {
+    "mtime": 1781092108.6500049,
+    "ast_hash": "7a4872ad80b25ec281d26adfbfa5d386",
+    "semantic_hash": "7a4872ad80b25ec281d26adfbfa5d386"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\src\\data\\properties.ts": {
+    "mtime": 1780998355.6846333,
+    "ast_hash": "c380b0e5e44182946f8972800d0f03a1",
+    "semantic_hash": "c380b0e5e44182946f8972800d0f03a1"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\src\\lib\\listings.ts": {
+    "mtime": 1781490009.591004,
+    "ast_hash": "bddd9cef1d76d2c195a02d0261dc9cc8",
+    "semantic_hash": "bddd9cef1d76d2c195a02d0261dc9cc8"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\src\\lib\\site.ts": {
+    "mtime": 1781445374.0645926,
+    "ast_hash": "5beae6ea12f72afa5f05e52ab45a5e18",
+    "semantic_hash": "5beae6ea12f72afa5f05e52ab45a5e18"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\src\\lib\\supabase\\client.ts": {
+    "mtime": 1781371200.7732642,
+    "ast_hash": "4cb5739c1e33353d8f9d66c1737df2d1",
+    "semantic_hash": "4cb5739c1e33353d8f9d66c1737df2d1"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\src\\lib\\supabase\\server.ts": {
+    "mtime": 1781371202.408127,
+    "ast_hash": "0ba0c879bd01319a60c4470d63c4708a",
+    "semantic_hash": "0ba0c879bd01319a60c4470d63c4708a"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\src\\lib\\useVideoAutoplay.ts": {
+    "mtime": 1781470081.9408183,
+    "ast_hash": "638abc3f3a5bd9f44a978e816c8e1416",
+    "semantic_hash": "638abc3f3a5bd9f44a978e816c8e1416"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\src\\proxy.ts": {
+    "mtime": 1781445477.377237,
+    "ast_hash": "c6954d11cedfff4e23aa02adb1750f71",
+    "semantic_hash": "c6954d11cedfff4e23aa02adb1750f71"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\supabase\\migrations\\add_listing_enrichment_columns.sql": {
+    "mtime": 1781470343.5747638,
+    "ast_hash": "26836707184df2d4a64154a95035ce42",
+    "semantic_hash": "26836707184df2d4a64154a95035ce42"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\tsconfig.json": {
+    "mtime": 1780997637.2521741,
+    "ast_hash": "ee17fd1c97c735e9f3564e3f5251f125",
+    "semantic_hash": "ee17fd1c97c735e9f3564e3f5251f125"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\AGENTS.md": {
+    "mtime": 1780997663.8922746,
+    "ast_hash": "9e09241799026ac05be315a2f0b50055",
+    "semantic_hash": "9e09241799026ac05be315a2f0b50055"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\CLAUDE.md": {
+    "mtime": 1780997663.8932834,
+    "ast_hash": "5c27369b226fcf2be8a6cfe52224e767",
+    "semantic_hash": "5c27369b226fcf2be8a6cfe52224e767"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\HANDOFF.md": {
+    "mtime": 1781492114.6326919,
+    "ast_hash": "bbc19e2217565fc356d6128a933e2bda",
+    "semantic_hash": "bbc19e2217565fc356d6128a933e2bda"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\README.md": {
+    "mtime": 1780997636.8830135,
+    "ast_hash": "f15aaa42d5d299d091b1171097ea56ad",
+    "semantic_hash": "f15aaa42d5d299d091b1171097ea56ad"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\public\\robots.txt": {
+    "mtime": 1781413444.0124722,
+    "ast_hash": "8e1b525e3f675750a0afd7e77146d8d0",
+    "semantic_hash": "8e1b525e3f675750a0afd7e77146d8d0"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\requirements.md": {
+    "mtime": 1781426020.011784,
+    "ast_hash": "148be95fb099619677206434fb0808ff",
+    "semantic_hash": "148be95fb099619677206434fb0808ff"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\public\\file.svg": {
+    "mtime": 1780997636.9375262,
+    "ast_hash": "d09f95206c3fa0bb9bd9fefabfd0ea71",
+    "semantic_hash": "d09f95206c3fa0bb9bd9fefabfd0ea71"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\public\\globe.svg": {
+    "mtime": 1780997636.95178,
+    "ast_hash": "2aaafa6a49b6563925fe440891e32717",
+    "semantic_hash": "2aaafa6a49b6563925fe440891e32717"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\public\\logo.jpg": {
+    "mtime": 1780994089.293484,
+    "ast_hash": "c0e9d868bfdfedf6ff13f2ef1ca3d5f4",
+    "semantic_hash": "c0e9d868bfdfedf6ff13f2ef1ca3d5f4"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\public\\next.svg": {
+    "mtime": 1780997636.9609897,
+    "ast_hash": "8e061864f388b47f33a1c3780831193e",
+    "semantic_hash": "8e061864f388b47f33a1c3780831193e"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\public\\vercel.svg": {
+    "mtime": 1780997636.972979,
+    "ast_hash": "c0af2f507b369b085b35ef4bbe3bcf1e",
+    "semantic_hash": "c0af2f507b369b085b35ef4bbe3bcf1e"
+  },
+  "C:\\Users\\TUF\\Downloads\\Orange\\osrc-website\\public\\window.svg": {
+    "mtime": 1780997636.9847767,
+    "ast_hash": "a2760511c65806022ad20adf74370ff3",
+    "semantic_hash": "a2760511c65806022ad20adf74370ff3"
+  }
+}

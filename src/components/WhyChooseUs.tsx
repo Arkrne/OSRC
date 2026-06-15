@@ -1,11 +1,8 @@
 'use client'
 
-import { motion } from 'framer-motion'
 import { ShieldCheck, Clock, Handshake, Receipt } from 'lucide-react'
 import { RevealHeading, CountUp, Stagger, StaggerItem, TiltCard, SpotlightCard } from './motion'
 import { STATS } from '@/lib/site'
-
-const EASE = [0.23, 1, 0.32, 1] as const
 
 const reasons = [
   {
@@ -46,18 +43,10 @@ export default function WhyChooseUs() {
 
         {/* Section header */}
         <div className="flex flex-col gap-2 sm:gap-3 mb-8 sm:mb-12">
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.45, ease: EASE }}
-          >
-            <span className="eyebrow">Our Edge</span>
-          </motion.div>
           <RevealHeading
             className="font-display text-[clamp(36px,4vw,60px)] text-[#1C1714] max-w-xl"
             style={{ lineHeight: 0.95, letterSpacing: '-0.025em' }}
-            lines={['Why Filipino Families', <span key="w">Choose <em className="italic text-shine">Orange Square</em></span>]}
+            lines={['Why Filipino Families', <span key="w">Choose <em className="not-italic text-shine">Orange Square</em></span>]}
           />
         </div>
 
@@ -66,13 +55,17 @@ export default function WhyChooseUs() {
           {counters.map((c) => (
             <StaggerItem key={c.label} variant="scale">
               <TiltCard className="group h-full" max={8}>
-                <SpotlightCard className="glow-border h-full rounded-2xl bg-[#F5EEE8] border border-[rgba(28,23,20,0.09)] px-6 py-9 sm:px-8 sm:py-10 lift">
+                <SpotlightCard className={`glow-border h-full rounded-2xl border px-6 py-9 sm:px-8 sm:py-10 lift ${
+                  c.value === '100%' ? 'bg-[#0B0906] border-[rgba(255,255,255,0.08)]' :
+                  c.value === '₱0'   ? 'bg-[rgba(232,93,4,0.06)] border-[rgba(232,93,4,0.2)]' :
+                  'bg-[#F5EEE8] border-[rgba(28,23,20,0.09)]'
+                }`}>
                   <CountUp
                     value={c.value}
                     className="block font-display text-[clamp(36px,4vw,56px)] text-[#E85D04] tabular-nums"
                     style={{ lineHeight: 1, letterSpacing: '-0.03em' }}
                   />
-                  <div className="text-[11px] text-[#A89070] mt-3 uppercase tracking-[0.14em] font-medium whitespace-pre-line">
+                  <div className={`text-[11px] mt-3 uppercase tracking-[0.14em] font-medium whitespace-pre-line ${c.value === '100%' ? 'text-[#8A7C68]' : 'text-[#A89070]'}`}>
                     {c.label}
                   </div>
                 </SpotlightCard>

@@ -4,10 +4,15 @@ import { motion } from 'framer-motion'
 
 const EASE = [0.23, 1, 0.32, 1] as const
 
-// Developer partners — wordmarks (real PH developers OSRC works with)
 const partners = [
-  'Camella', 'Lancaster New City', 'Lumina Homes', 'Crown Asia',
-  'Futura Homes', 'Bria Homes', 'Vista Land', 'Suntrust Properties',
+  { name: 'Camella',             mark: 'CM' },
+  { name: 'Lancaster New City',  mark: 'LN' },
+  { name: 'Lumina Homes',        mark: 'LH' },
+  { name: 'Crown Asia',          mark: 'CA' },
+  { name: 'Futura Homes',        mark: 'FH' },
+  { name: 'Bria Homes',          mark: 'BH' },
+  { name: 'Vista Land',          mark: 'VL' },
+  { name: 'Suntrust',            mark: 'SP' },
 ]
 
 export default function Partners() {
@@ -35,13 +40,16 @@ export default function Partners() {
         style={{ maskImage: 'linear-gradient(to right, transparent, black 8%, black 92%, transparent)', WebkitMaskImage: 'linear-gradient(to right, transparent, black 8%, black 92%, transparent)' }}
       >
         <div className="flex w-max items-center gap-5 marquee-track group-hover:[animation-play-state:paused]">
-          {[...partners, ...partners].map((name, i) => (
+          {[...partners, ...partners].map((p, i) => (
             <div
               key={i}
-              className="shrink-0 flex items-center justify-center h-16 px-8 rounded-2xl bg-[#F5EEE8] border border-[rgba(28,23,20,0.07)]"
+              className="shrink-0 flex items-center gap-3 h-16 px-5 rounded-2xl bg-[#F5EEE8] border border-[rgba(28,23,20,0.07)]"
             >
-              <span className="font-display text-[22px] text-[#1C1714] whitespace-nowrap" style={{ letterSpacing: '-0.02em' }}>
-                {name}
+              <div className="w-8 h-8 rounded-lg bg-[rgba(232,93,4,0.1)] border border-[rgba(232,93,4,0.2)] flex items-center justify-center shrink-0">
+                <span className="text-[10px] font-bold text-[#E85D04] tracking-wider">{p.mark}</span>
+              </div>
+              <span className="font-display text-[19px] text-[#1C1714] whitespace-nowrap" style={{ letterSpacing: '-0.02em' }}>
+                {p.name}
               </span>
             </div>
           ))}

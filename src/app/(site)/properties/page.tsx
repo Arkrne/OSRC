@@ -61,7 +61,7 @@ export default async function PropertiesPage({ searchParams }: Props) {
             className="font-display text-[clamp(36px,4.5vw,60px)] text-[#1C1714]"
             style={{ lineHeight: 0.95, letterSpacing: '-0.025em' }}
           >
-            Find the Right Home for You
+            Browse Our Listings
           </h1>
           <p className="text-[#6E6055] text-[14px] max-w-xl leading-relaxed">
             Every listing is Pag-IBIG eligible. Browse, then get a free 24-hour pre-qualification — no obligation.

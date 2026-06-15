@@ -1,12 +1,18 @@
-# Graph Report - .  (2026-06-10)
+# Graph Report - osrc-website  (2026-06-15)
 
 ## Corpus Check
-- Corpus is ~17,585 words - fits in a single context window. You may not need a graph.
+- 76 files · ~42,998 words
+- Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 228 nodes · 268 edges · 22 communities (17 shown, 5 thin omitted)
-- Extraction: 96% EXTRACTED · 4% INFERRED · 0% AMBIGUOUS · INFERRED: 11 edges (avg confidence: 0.93)
+- 532 nodes · 721 edges · 38 communities (26 shown, 12 thin omitted)
+- Extraction: 97% EXTRACTED · 3% INFERRED · 0% AMBIGUOUS · INFERRED: 21 edges (avg confidence: 0.91)
 - Token cost: 0 input · 0 output
+
+## Graph Freshness
+- Built from commit: `0ed5cfb0`
+- Run `git rev-parse HEAD` and compare to check if the graph is stale.
+- Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
 - [[_COMMUNITY_Awards & Gallery|Awards & Gallery]]
@@ -31,121 +37,177 @@
 - [[_COMMUNITY_Email Inquiry API|Email Inquiry API]]
 - [[_COMMUNITY_Next.js Config|Next.js Config]]
 - [[_COMMUNITY_PostCSS Config|PostCSS Config]]
+- [[_COMMUNITY_Community 22|Community 22]]
+- [[_COMMUNITY_Community 23|Community 23]]
+- [[_COMMUNITY_Community 24|Community 24]]
+- [[_COMMUNITY_Community 25|Community 25]]
+- [[_COMMUNITY_Community 26|Community 26]]
+- [[_COMMUNITY_Community 27|Community 27]]
+- [[_COMMUNITY_Community 28|Community 28]]
+- [[_COMMUNITY_Community 29|Community 29]]
+- [[_COMMUNITY_Community 30|Community 30]]
+- [[_COMMUNITY_Community 31|Community 31]]
+- [[_COMMUNITY_Community 32|Community 32]]
+- [[_COMMUNITY_Community 33|Community 33]]
+- [[_COMMUNITY_Community 34|Community 34]]
+- [[_COMMUNITY_Community 35|Community 35]]
+- [[_COMMUNITY_Community 36|Community 36]]
 
 ## God Nodes (most connected - your core abstractions)
-1. `compilerOptions` - 16 edges
-2. `RevealHeading()` - 6 edges
-3. `Stagger()` - 6 edges
-4. `StaggerItem()` - 6 edges
-5. `TiltCard()` - 6 edges
-6. `Next.js Project (osrc-website)` - 6 edges
-7. `Next.js Framework` - 5 edges
-8. `scripts` - 4 edges
-9. `SpotlightCard()` - 4 edges
-10. `Property` - 4 edges
+1. `OSRC Website Handoff Document` - 18 edges
+2. `compilerOptions` - 16 edges
+3. `1. CONTENT & COPY` - 16 edges
+4. `HANDOFF — OSRC Website` - 11 edges
+5. `OSRC Website — Complete Requirements Checklist` - 10 edges
+6. `OSRC Website Requirements Checklist (222 items)` - 10 edges
+7. `getListings()` - 9 edges
+8. `3. TECHNICAL / CODE` - 9 edges
+9. `POST()` - 8 edges
+10. `POST()` - 8 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `Next.js Agent Rules` --conceptually_related_to--> `Next.js Framework`  [INFERRED]
-  osrc-website/AGENTS.md → osrc-website/README.md
-- `Next.js Breaking Changes Warning` --rationale_for--> `Next.js Framework`  [INFERRED]
-  osrc-website/AGENTS.md → osrc-website/README.md
-- `CLAUDE.md Agents Reference` --references--> `Next.js Agent Rules`  [EXTRACTED]
-  osrc-website/CLAUDE.md → osrc-website/AGENTS.md
+- `Vercel Triangle Logo SVG — Hosting Platform Brand` --conceptually_related_to--> `Vercel Deployment Target`  [INFERRED]
+  public/vercel.svg → HANDOFF.md
+- `Vercel Platform Deployment` --semantically_similar_to--> `Vercel Deployment Target`  [INFERRED] [semantically similar]
+  README.md → HANDOFF.md
+- `Next.js SVG Logo` --conceptually_related_to--> `Next.js 16.2.7 App Router (Turbopack)`  [INFERRED]
+  osrc-website/public/next.svg → HANDOFF.md
+- `Brand Colors — #E85D04 Orange, #1C1714 Dark, #FAFAF7 Light` --conceptually_related_to--> `OSRC Logo — Orange Background with Navy OSRC Wordmark`  [INFERRED]
+  requirements.md → public/logo.jpg
+- `OSRC Logo — Orange Background with Navy OSRC Wordmark` --references--> `Orange Square Realty (OSRC) — Philippine Real Estate Broker`  [EXTRACTED]
+  public/logo.jpg → HANDOFF.md
 
 ## Import Cycles
 - None detected.
 
 ## Hyperedges (group relationships)
-- **Next.js Project Bootstrap and Deployment Flow** — readme_nextjs_project, readme_create_next_app, readme_vercel_deployment [INFERRED 0.85]
-- **Agent Rules, Breaking Changes Warning, and Docs Reference for Next.js** — agents_nextjs_agent_rules, agents_nextjs_breaking_changes_warning, agents_nextjs_docs_node_modules [EXTRACTED 1.00]
+- **Core Technology Stack** — handoff_nextjs16, handoff_react19, handoff_tailwind_v4, handoff_framer_motion_v12, handoff_supabase, handoff_resend, handoff_upstash_redis [EXTRACTED 1.00]
+- **Admin Security Layer** — handoff_proxy_ts, handoff_admin_uid, handoff_supabase_rls, handoff_api_upload, handoff_api_delete_listing [INFERRED 0.90]
+- **Property Listing System** — handoff_lib_listings_ts, handoff_slug_system, handoff_price_value_column, handoff_apply_filters, handoff_propertiesgrid, handoff_propertydetail [EXTRACTED 1.00]
+- **OSRC Brand Identity Assets** — public_logo, requirements_brand_colors, handoff_orange_square_realty [INFERRED 0.85]
+- **Deployment Requirements** — handoff_vercel_deploy, handoff_vercel_env_vars, requirements_infrastructure, public_robots [INFERRED 0.85]
 
-## Communities (22 total, 5 thin omitted)
+## Communities (38 total, 12 thin omitted)
 
 ### Community 0 - "Awards & Gallery"
-Cohesion: 0.07
-Nodes (29): badges, EASE, Media, EASE, steps, ROW_A, ROW_B, CountUp() (+21 more)
+Cohesion: 0.08
+Nodes (24): badges, EASE, steps, CountUp(), EASE, Parallax(), RevealHeading(), RevealVariant (+16 more)
 
 ### Community 1 - "Main Pages & About"
-Cohesion: 0.06
-Nodes (13): EASE, EASE, faqs, EASE, quickLinks, services, EASE, posts (+5 more)
+Cohesion: 0.08
+Nodes (37): sitemap(), BEDROOMS, EASE, PROPERTY_TYPES, Props, REGIONS, STATUSES, PropertiesPreview() (+29 more)
 
 ### Community 2 - "Contact & Inquiry Forms"
-Cohesion: 0.12
-Nodes (13): EASE, EASE_OUT, FormState, Props, EASE, EASE, Props, priceRanges (+5 more)
+Cohesion: 0.07
+Nodes (42): Admin CMS (/admin) — Listings and Promos Management, Admin UID Allowlist — 183105ed-f54a-44e9-9f12-1d6715f58266, src/app/api/delete-listing/route.ts — DB Delete + Storage Cleanup, src/app/api/send-inquiry/route.ts — Rate-limited Inquiry Email via Resend, src/app/api/upload/route.ts — Storage Upload with Service-Role Key, applyFilters Helper — Supabase TypeScript Type Workaround using any, Framer Motion v12, Gallery Preload + Shimmer — useEffect Preloader with unoptimized Images (+34 more)
 
 ### Community 3 - "Dependencies & Packages"
 Cohesion: 0.09
-Nodes (22): dependencies, @anthropic-ai/sdk, framer-motion, lucide-react, next, react, react-dom, resend (+14 more)
+Nodes (15): ALLOWED, drawBlob(), EMPTY_FORM, Form, Listing, loadImg(), OptionGroup, OptionItem (+7 more)
 
 ### Community 4 - "TypeScript Configuration"
+Cohesion: 0.36
+Nodes (13): ALLOWED_ORIGINS, checkRate(), corsHeaders(), esc(), isEmail(), isPhone(), log(), OPTIONS() (+5 more)
+
+### Community 5 - "Dev Docs & Agent Rules"
+Cohesion: 0.07
+Nodes (16): EASE, faqs, quickLinks, services, FaqJsonLd(), faqPage, JsonLd(), localBusiness (+8 more)
+
+### Community 6 - "App Layout & Fonts"
+Cohesion: 0.07
+Nodes (26): dependencies, @anthropic-ai/sdk, framer-motion, lucide-react, next, react, react-dom, resend (+18 more)
+
+### Community 7 - "AI Chatbot"
+Cohesion: 0.12
+Nodes (11): LogoutButton(), Dashboard(), publicClient(), AdminListings(), AdminPromos(), EMPTY, Form, Promo (+3 more)
+
+### Community 8 - "Navigation Bar"
+Cohesion: 0.06
+Nodes (21): size, EASE, EASE, EASE, headlineLines, stats, EASE, partners (+13 more)
+
+### Community 9 - "Hero Section"
+Cohesion: 0.13
+Nodes (12): EASE, EASE_OUT, FOCUSABLE, FormState, InquiryModal(), Props, priceRanges, properties (+4 more)
+
+### Community 10 - "Loan Calculator"
 Cohesion: 0.10
 Nodes (19): compilerOptions, allowJs, esModuleInterop, incremental, isolatedModules, jsx, lib, module (+11 more)
 
-### Community 5 - "Dev Docs & Agent Rules"
-Cohesion: 0.21
-Nodes (12): Next.js Agent Rules, Next.js Breaking Changes Warning, Next.js Dist Docs in node_modules, CLAUDE.md Agents Reference, app/page.tsx Entry Point, create-next-app Bootstrap Tool, Development Server (npm run dev), Geist Font Family (+4 more)
+### Community 11 - "Testimonials"
+Cohesion: 0.14
+Nodes (18): Next.js 16 Breaking Changes Warning, Next.js Agent Rules, Next.js Dist Docs in node_modules, CLAUDE.md Agents Reference, ISR Strategy for /properties/[slug] — revalidate=300 + dynamicParams=true, Next.js 16.2.7 App Router (Turbopack), Next.js Brand Identity, Next.js Framework (+10 more)
 
-### Community 6 - "App Layout & Fonts"
-Cohesion: 0.33
-Nodes (4): dmSerif, jakarta, metadata, viewport
-
-### Community 7 - "AI Chatbot"
-Cohesion: 0.33
-Nodes (4): EASE_DRAWER, EASE_OUT, INITIAL_MESSAGE, Message
-
-### Community 8 - "Navigation Bar"
-Cohesion: 0.33
-Nodes (4): EASE_DRAWER, EASE_OUT, navLinks, SPRING
-
-### Community 9 - "Hero Section"
-Cohesion: 0.40
-Nodes (3): EASE, headlineLines, stats
-
-### Community 10 - "Loan Calculator"
+### Community 12 - "Trust Statistics"
 Cohesion: 0.50
 Nodes (3): EASE, LoanCalculator(), peso()
 
-### Community 11 - "Testimonials"
-Cohesion: 0.40
-Nodes (3): data, EASE, Testimonial
-
 ### Community 13 - "Next.js Brand Assets"
-Cohesion: 0.67
-Nodes (4): Next.js Brand Identity, Next.js Framework, Next.js SVG Logo, Next.js Wordmark Typography
-
-### Community 14 - "Window UI Icon"
-Cohesion: 0.67
-Nodes (4): Browser Window UI Element, Flat Monochrome Icon Style, Window SVG Icon, Traffic Light Dots (Window Controls)
-
-### Community 16 - "File Icon Asset"
-Cohesion: 1.00
-Nodes (3): Document/File Icon (generic file representation), File SVG Icon, Flat Monochrome Icon Style (#666 fill, no stroke)
+Cohesion: 0.39
+Nodes (5): dmSerif, jakarta, metadata, RootLayout(), viewport
 
 ### Community 17 - "Globe Icon Asset"
 Cohesion: 0.67
+Nodes (4): Browser Window UI Element, Flat Monochrome Icon Style, Window SVG Icon, Traffic Light Dots (Window Controls)
+
+### Community 19 - "Email Inquiry API"
+Cohesion: 1.00
+Nodes (3): Document/File Icon (generic file representation), File SVG Icon, Flat Monochrome Icon Style (#666 fill, no stroke)
+
+### Community 20 - "Next.js Config"
+Cohesion: 0.67
 Nodes (3): World / Global Concept, Globe SVG Icon, Flat Monochrome Icon Style
 
-### Community 18 - "Vercel Brand Asset"
+### Community 21 - "PostCSS Config"
 Cohesion: 1.00
 Nodes (3): Vercel Brand Identity, Vercel Logo SVG, Vercel Triangle Icon
 
+### Community 28 - "Community 28"
+Cohesion: 0.05
+Nodes (42): 2.1 Branding Assets, 2.2 Favicon & App Icons, 2.3 Open Graph / Social Share Image, 2.4 Cookie Consent Banner, 2.5 Custom 404 Page, 2.6 Custom Error Page, 2. DESIGN & UI ASSETS, 3.1 Video (+34 more)
+
+### Community 29 - "Community 29"
+Cohesion: 0.07
+Nodes (29): 0. How to Work on This Project (READ THIS FIRST), 1. The Goal We're Working Toward, 2. Current State of the Code, 3. Files Edited / Created (all sessions to date), 4. Everything Tried That Failed (don't repeat these), 5. Next Steps (in order), 6. Vercel Environment Variables (7 required), 7. Known Remaining Issues (+21 more)
+
+### Community 30 - "Community 30"
+Cohesion: 0.12
+Nodes (16): 1.10 Loan Calculator (`src/components/LoanCalculator.tsx`), 1.11 Promos (`src/components/Promos.tsx`), 1.12 Property Listings, 1.13 Insights / Blog (`src/components/Insights.tsx`), 1.14 Contact Information, 1.15 Footer, 1.1 Team Section (`src/components/Team.tsx`), 1.2 Partners Section (`src/components/Partners.tsx`) (+8 more)
+
+### Community 31 - "Community 31"
+Cohesion: 0.23
+Nodes (9): EASE, Gallery(), Media, SpotlightCard(), EASE, VideoReel(), EASE, VideoShowcase() (+1 more)
+
+### Community 32 - "Community 32"
+Cohesion: 0.25
+Nodes (5): metadata, Marquee(), ROW_A, ROW_B, VelocityMarquee()
+
+### Community 33 - "Community 33"
+Cohesion: 0.40
+Nodes (3): data, EASE, Testimonial
+
+### Community 35 - "Community 35"
+Cohesion: 0.50
+Nodes (3): Deploy on Vercel, Getting Started, Learn More
+
 ## Knowledge Gaps
-- **110 isolated node(s):** `nextConfig`, `name`, `version`, `private`, `dev` (+105 more)
+- **251 isolated node(s):** `nextConfig`, `name`, `version`, `private`, `dev` (+246 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **5 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **12 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
+- **Why does `createClient()` connect `Navigation Bar` to `TypeScript Configuration`?**
+  _High betweenness centrality (0.021) - this node is a cross-community bridge._
+- **Why does `createClient()` connect `AI Chatbot` to `Dependencies & Packages`?**
+  _High betweenness centrality (0.019) - this node is a cross-community bridge._
 - **What connects `nextConfig`, `name`, `version` to the rest of the system?**
-  _110 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _254 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Awards & Gallery` be split into smaller, more focused modules?**
-  _Cohesion score 0.06648936170212766 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.08205128205128205 - nodes in this community are weakly interconnected._
 - **Should `Main Pages & About` be split into smaller, more focused modules?**
-  _Cohesion score 0.05555555555555555 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.07692307692307693 - nodes in this community are weakly interconnected._
 - **Should `Contact & Inquiry Forms` be split into smaller, more focused modules?**
-  _Cohesion score 0.11956521739130435 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.06736353077816493 - nodes in this community are weakly interconnected._
 - **Should `Dependencies & Packages` be split into smaller, more focused modules?**
-  _Cohesion score 0.08695652173913043 - nodes in this community are weakly interconnected._
-- **Should `TypeScript Configuration` be split into smaller, more focused modules?**
-  _Cohesion score 0.1 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.09 - nodes in this community are weakly interconnected._

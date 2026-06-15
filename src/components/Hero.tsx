@@ -3,16 +3,7 @@
 import { useRef, useState, useEffect } from 'react'
 import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion'
 import { ArrowUpRight, Pause, Play } from 'lucide-react'
-import { STATS } from '@/lib/site'
-
 const EASE = [0.23, 1, 0.32, 1] as const
-
-const stats = [
-  { value: STATS.developerPartners, label: 'Developer Partners'     },
-  { value: STATS.regions,           label: 'Regions Served'         },
-  { value: STATS.startingPrice,     label: 'Starting Price'         },
-  { value: STATS.preQualTime,       label: 'Loan Pre-Qualification' },
-]
 
 // Headline lines — each gets a masked slide-up reveal (kinetic typography)
 const headlineLines = [
@@ -97,7 +88,7 @@ export default function Hero() {
             {headlineLines.map((line, i) => (
               <span key={line.text} className="block overflow-hidden pb-[0.06em] -mb-[0.06em]">
                 <motion.span
-                  className={`block ${line.accent ? 'italic text-[#F27024]' : ''}`}
+                  className={`block ${line.accent ? 'not-italic text-[#F27024]' : ''}`}
                   initial={reduced ? { opacity: 0 } : { y: '105%' }}
                   animate={reduced ? { opacity: 1 } : { y: '0%' }}
                   transition={{ duration: 0.85, delay: 0.1 + i * 0.09, ease: EASE }}
@@ -144,28 +135,6 @@ export default function Hero() {
           </motion.div>
         </div>
       </motion.div>
-
-      {/* ── Bottom stats strip — staggered entrance ── */}
-      <div className="relative z-20 px-5 sm:px-8 md:px-12 lg:px-16 xl:px-20 pb-10">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-y-6 border-t border-[rgba(255,255,255,0.15)] pt-6 sm:pt-7 max-w-4xl">
-          {stats.map((s, i) => (
-            <motion.div
-              key={s.label}
-              initial={{ opacity: 0, y: reduced ? 0 : 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.75 + i * 0.07, duration: 0.5, ease: EASE }}
-              className={`pr-6 ${i > 0 ? 'lg:pl-8 lg:border-l border-[rgba(255,255,255,0.15)]' : ''}`}
-            >
-              <div className="font-display text-[clamp(24px,3vw,32px)] text-[#FBF6EC] tabular-nums" style={{ lineHeight: 1, letterSpacing: '-0.03em' }}>
-                {s.value}
-              </div>
-              <div className="text-[10px] md:text-[11px] text-[#C6B9A4] mt-1.5 uppercase tracking-[0.14em] font-medium">
-                {s.label}
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </div>
 
       {/* ── Scroll cue — animated hairline (hidden on short/landscape phones) ── */}
       <motion.div

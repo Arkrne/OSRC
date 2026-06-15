@@ -59,7 +59,7 @@ export default function HowItWorks() {
           <RevealHeading
             className="font-display text-[clamp(40px,5vw,72px)] text-[#1C1714]"
             style={{ lineHeight: 0.93, letterSpacing: '-0.03em' }}
-            lines={['From Inquiry', <span key="2">to <em className="italic text-shine">Keys</em> — in Four Steps</span>]}
+            lines={['From Inquiry', <span key="2">to <em className="not-italic text-shine">Keys</em> — in Four Steps</span>]}
           />
           <motion.p
             initial={{ opacity: 0, y: 14 }}

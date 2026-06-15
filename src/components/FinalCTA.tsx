@@ -26,7 +26,7 @@ export default function FinalCTA() {
               Ready to Find Your Home?
             </span>
             <h2 className="font-display text-[clamp(30px,5vw,68px)] text-[#FBF6EC] mb-5" style={{ lineHeight: 0.95, letterSpacing: '-0.03em' }}>
-              Browse Pag-IBIG Homes,<br /><em className="italic text-[#F27024]">Find the Right Fit</em>
+              Browse Pag-IBIG Homes,<br /><em className="not-italic text-[#F27024]">Find the Right Fit</em>
             </h2>
             <p className="text-[#C6B9A4] text-[15px] sm:text-[16px] leading-relaxed mb-8 sm:mb-10 max-w-lg">
               Explore available properties across Cavite, Laguna, Bulacan, and Metro Manila — all Pag-IBIG eligible, all with transparent developer pricing.

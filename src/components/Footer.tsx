@@ -44,7 +44,7 @@ export default function Footer() {
                 className="w-10 h-10 rounded-xl bg-[rgba(255,255,255,0.04)] hover:bg-[rgba(255,255,255,0.09)] border border-[rgba(255,255,255,0.08)] flex items-center justify-center transition-[background-color,transform] duration-[160ms] ease-out active:scale-[0.95] hover:-translate-y-0.5"
                 aria-label="Orange Square Realty on Facebook"
               >
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" className="text-[#C6B9A4]">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" className="text-[#C6B9A4]">
                   <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
                 </svg>
               </a>
@@ -55,7 +55,7 @@ export default function Footer() {
                 className="w-10 h-10 rounded-xl bg-[rgba(255,255,255,0.04)] hover:bg-[rgba(255,255,255,0.09)] border border-[rgba(255,255,255,0.08)] flex items-center justify-center transition-[background-color,transform] duration-[160ms] ease-out active:scale-[0.95] hover:-translate-y-0.5"
                 aria-label="Orange Square Realty on TikTok"
               >
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" className="text-[#C6B9A4]">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" className="text-[#C6B9A4]">
                   <path d="M12.53 2h2.95c.16 1.2.66 2.32 1.43 3.22A5 5 0 0 0 20 6.7v2.97a7.9 7.9 0 0 1-4.2-1.25v5.93A5.59 5.59 0 1 1 10.2 8.78c.3 0 .6.02.88.07v3.02a2.6 2.6 0 1 0 1.45 2.34V2z"/>
                 </svg>
               </a>
@@ -64,7 +64,7 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-[10px] font-semibold text-[#8A7C68] uppercase tracking-[0.15em] mb-4 sm:mb-5">
+            <h4 className="text-[11px] font-semibold text-[#C6B9A4] uppercase tracking-[0.15em] mb-4 sm:mb-5">
               Quick Links
             </h4>
             <ul className="flex flex-col gap-1">
@@ -83,7 +83,7 @@ export default function Footer() {
 
           {/* Services */}
           <div>
-            <h4 className="text-[10px] font-semibold text-[#8A7C68] uppercase tracking-[0.15em] mb-4 sm:mb-5">
+            <h4 className="text-[11px] font-semibold text-[#C6B9A4] uppercase tracking-[0.15em] mb-4 sm:mb-5">
               Services
             </h4>
             <ul className="flex flex-col gap-2.5">
@@ -95,7 +95,7 @@ export default function Footer() {
 
           {/* Contact */}
           <div className="col-span-2 lg:col-span-1">
-            <h4 className="text-[10px] font-semibold text-[#8A7C68] uppercase tracking-[0.15em] mb-4 sm:mb-5">
+            <h4 className="text-[11px] font-semibold text-[#C6B9A4] uppercase tracking-[0.15em] mb-4 sm:mb-5">
               Contact
             </h4>
             <ul className="flex flex-col gap-3">

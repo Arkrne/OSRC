@@ -43,7 +43,7 @@ export default function VideoShowcase() {
             className="font-display text-[clamp(36px,4.5vw,64px)] text-[#1C1714] max-w-3xl"
             style={{ lineHeight: 0.95, letterSpacing: '-0.025em' }}
           >
-            Your Future Home, <em className="italic text-[#E85D04]">Today</em>
+            Your Future Home, <em className="not-italic text-[#E85D04]">Today</em>
           </motion.h2>
         </div>
 

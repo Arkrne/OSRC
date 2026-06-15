@@ -154,7 +154,7 @@ export default function PropertiesGrid({
         className="mb-6"
       >
         {/* Search row */}
-        <div className="flex items-center gap-3 py-4 border-y border-[rgba(28,23,20,0.09)]">
+        <div className="flex items-center gap-3 py-4 border-y border-[rgba(28,23,20,0.15)]">
           <Search size={14} strokeWidth={1.5} className="text-[#A89070] shrink-0" />
           <input
             value={search}
@@ -287,13 +287,24 @@ export default function PropertiesGrid({
 
       {/* ── Grid ── */}
       {listings.length === 0 ? (
-        <div className="flex flex-col items-center gap-5 py-32 text-[#A89070]">
-          <p className="font-display text-2xl text-[#6E6055]">
-            {hasAnyFilter ? 'No properties match your filters.' : 'No listings available yet.'}
+        <div className="flex flex-col items-center gap-4 py-28 text-center">
+          <div className="w-16 h-16 rounded-2xl bg-[rgba(28,23,20,0.04)] border border-[rgba(28,23,20,0.08)] flex items-center justify-center mb-2">
+            <Search size={24} strokeWidth={1.25} className="text-[#C4B8A8]" />
+          </div>
+          <p className="font-display text-[26px] text-[#1C1714]" style={{ letterSpacing: '-0.02em' }}>
+            {hasAnyFilter ? 'No matches found' : 'No listings yet'}
+          </p>
+          <p className="text-[#8A7C68] text-[14px] max-w-xs leading-relaxed">
+            {hasAnyFilter
+              ? 'Try adjusting your filters or clearing them to see all available properties.'
+              : 'Check back soon — new properties are added regularly.'}
           </p>
           {hasAnyFilter && (
-            <button onClick={clearAll} className="text-[#E85D04] text-[13px] underline hover:opacity-70">
-              Clear filters
+            <button
+              onClick={clearAll}
+              className="mt-2 px-5 py-2.5 rounded-full bg-[#E85D04] text-white text-[13px] font-medium hover:bg-[#F27024] transition-colors"
+            >
+              Clear all filters
             </button>
           )}
         </div>

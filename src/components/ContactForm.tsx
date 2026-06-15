@@ -47,7 +47,7 @@ export default function ContactSection() {
           style={{ lineHeight: 0.93, letterSpacing: '-0.03em' }}
         >
           Ready to Own<br />
-          <em className="italic text-[#F27024]">Your First Home?</em>
+          <em className="not-italic text-[#F27024]">Your First Home?</em>
         </motion.h2>
 
         <motion.p
