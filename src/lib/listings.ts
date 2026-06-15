@@ -130,6 +130,15 @@ export function getMainImage(l: Listing): string {
   return full[l.main_image_index ?? 0] ?? full[0] ?? l.image_url ?? ''
 }
 
+export function displayPrice(price: string | null | undefined): string {
+  const s = (price ?? '').trim()
+  if (!s) return ''
+  if (/^\d+$/.test(s)) {
+    return '₱' + parseInt(s, 10).toLocaleString('en-PH')
+  }
+  return s
+}
+
 // Slug generator for new listings (admin). Unique via short random suffix.
 export function makeSlug(title: string): string {
   const base = title.toLowerCase().trim()

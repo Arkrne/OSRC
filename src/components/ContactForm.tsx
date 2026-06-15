@@ -73,7 +73,7 @@ export default function ContactSection() {
             onClick={() => setShowModal(true)}
             className="group flex items-center justify-center gap-2 pl-7 pr-3 py-4 min-h-[52px] rounded-full bg-[#E85D04] hover:bg-[#F27024] text-white font-semibold text-[15px] shadow-[0_0_40px_rgba(232,93,4,0.3)] transition-[background-color,transform] duration-[160ms] ease-out active:scale-[0.97]"
           >
-            Send Inquiry Form
+            Send Inquiry
             <span className="cta-icon w-8 h-8"><ArrowUpRight size={16} strokeWidth={2.25} /></span>
           </button>
           <a

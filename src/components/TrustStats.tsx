@@ -22,7 +22,7 @@ function Counter({ to, suffix }: { to: number; suffix: string }) {
   useEffect(() => {
     if (!inView) return
     const controls = animate(mv, to, { duration: 1.6, ease: EASE })
-    const unsub = mv.on('change', v => setDisplay(Math.round(v)))
+    const unsub = mv.on('change', v => { const n = Math.round(v); if (n > 0) setDisplay(n) })
     return () => { controls.stop(); unsub() }
   }, [inView, to, mv])
 

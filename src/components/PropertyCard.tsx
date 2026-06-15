@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import { MapPin, ArrowUpRight } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { type Listing, getCardImage, getFullImages } from '@/lib/listings'
+import { type Listing, getCardImage, getFullImages, displayPrice } from '@/lib/listings'
 
 export default function PropertyCard({ listing, index = 0 }: { listing: Listing; index?: number }) {
   const mainImage  = getCardImage(listing)
@@ -35,7 +35,7 @@ export default function PropertyCard({ listing, index = 0 }: { listing: Listing;
             )}
           </div>
           <div className="flex flex-col gap-3 p-5 flex-1">
-            <div className="text-[22px] font-bold text-[#1C1714] tracking-tight leading-none">{listing.price}</div>
+            <div className="text-[22px] font-bold text-[#1C1714] tracking-tight leading-none">{displayPrice(listing.price)}</div>
             <div className="border-t border-[rgba(28,23,20,0.07)] pt-3">
               <h3 className="text-[#1C1714] font-semibold text-[14px] leading-snug">{listing.title}</h3>
             </div>

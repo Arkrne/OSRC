@@ -177,12 +177,14 @@ export default function InquiryModal({ propertyName, onClose }: Props) {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <Field id="modal-phone" label="Phone *" type="tel" value={form.phone} onChange={v => set('phone', v)} placeholder="09XX XXX XXXX" />
                 <div className="flex flex-col gap-1.5">
-                  <label htmlFor="modal-property" className="text-[10px] font-medium text-[#A89070] uppercase tracking-wide">Property of Interest</label>
+                  <label htmlFor="modal-property" className="text-[10px] font-medium text-[#A89070] uppercase tracking-wide">
+                    Property of Interest{!propertyName && <span className="normal-case tracking-normal font-normal text-[#C4B8A8] ml-1">(optional)</span>}
+                  </label>
                   <input
                     id="modal-property"
                     value={form.property}
                     onChange={e => set('property', e.target.value)}
-                    placeholder="Which property?"
+                    placeholder={propertyName ? '' : 'e.g. Catanduanes in Virac, or leave blank'}
                     className="h-11 px-4 rounded-xl bg-[rgba(28,23,20,0.03)] border border-[rgba(28,23,20,0.1)] text-[#1C1714] text-[13px] placeholder:text-[#C4B8A8] focus:outline-none focus:border-[rgba(232,93,4,0.45)] transition-[border-color] duration-200"
                   />
                 </div>

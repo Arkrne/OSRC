@@ -5,7 +5,7 @@ import { AnimatePresence } from 'framer-motion'
 import { MapPin, ArrowUpRight, ArrowLeft, Check, Images } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { type Listing, getFullImages, getThumbImages } from '@/lib/listings'
+import { type Listing, getFullImages, getThumbImages, displayPrice } from '@/lib/listings'
 import InquiryModal from './InquiryModal'
 
 const RATE = 0.0625
@@ -147,7 +147,7 @@ export default function PropertyDetail({ listing }: { listing: Listing }) {
           <div className="flex flex-col">
             <div className="lg:sticky lg:top-28">
               <span className="eyebrow mb-4 block">Property Details</span>
-              <div className="text-[clamp(30px,4vw,42px)] font-bold text-[#1C1714] tracking-tight leading-none">{listing.price}</div>
+              <div className="text-[clamp(30px,4vw,42px)] font-bold text-[#1C1714] tracking-tight leading-none">{displayPrice(listing.price)}</div>
               <h1 className="font-display text-[22px] sm:text-[26px] text-[#1C1714] leading-tight mt-3" style={{ letterSpacing: '-0.02em' }}>
                 {listing.title}
               </h1>

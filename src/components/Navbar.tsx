@@ -138,7 +138,7 @@ export default function Navbar() {
               href="/contact"
               className="flex md:hidden items-center gap-1.5 pl-3.5 pr-3 min-h-[40px] rounded-full bg-[#E85D04] text-white text-[12px] font-semibold tracking-tight press"
             >
-              Consult
+              Free Consult
               <span className="w-4 h-4 rounded-full bg-black/15 flex items-center justify-center">
                 <ArrowUpRight size={10} strokeWidth={2.75} />
               </span>
