@@ -23,10 +23,11 @@ export type Listing = {
   status:               string | null
   monthly_amortization: string | null
   pagibig_eligible:     boolean
+  featured?:            boolean
 }
 
 // Columns for card/grid views — omits heavy fields (features, lot_area, etc.)
-export const CARD_COLUMNS = 'id,slug,title,location,price,price_value,thumbnail_urls,image_urls,main_image_index,image_url,status,property_type,bedrooms,bathrooms,floor_area,description'
+export const CARD_COLUMNS = 'id,slug,title,location,price,price_value,thumbnail_urls,image_urls,main_image_index,image_url,status,property_type,bedrooms,bathrooms,floor_area,description,featured'
 
 // Server-side public reader. Uses the anon key (no cookies) so it works in
 // Server Components, generateMetadata, and sitemap generation. Listings are
@@ -47,6 +48,7 @@ export type ListingFilters = {
   bedrooms?: number   // ≥5 → gte query; <5 → eq query
   minPrice?: number
   maxPrice?: number
+  featured?: boolean
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -59,6 +61,7 @@ function applyFilters(q: any, f: ListingFilters): any {
   if (f.bedrooms) q = f.bedrooms >= 5 ? q.gte('bedrooms', f.bedrooms) : q.eq('bedrooms', f.bedrooms)
   if (f.minPrice != null) q = q.gte('price_value', f.minPrice)
   if (f.maxPrice != null) q = q.lte('price_value', f.maxPrice)
+  if (f.featured != null) q = q.eq('featured', f.featured)
   return q
 }
 

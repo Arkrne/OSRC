@@ -111,6 +111,7 @@ type Listing = {
   floor_area: number | null; lot_area: number | null
   monthly_amortization: string | null; features: string[]
   pagibig_eligible: boolean
+  featured: boolean
 }
 
 type Form = {
@@ -119,6 +120,7 @@ type Form = {
   bedrooms: string; bathrooms: string; floor_area: string; lot_area: string
   monthly_amortization: string; features: string
   pagibig_eligible: boolean
+  featured: boolean
 }
 
 const EMPTY_FORM: Form = {
@@ -127,6 +129,7 @@ const EMPTY_FORM: Form = {
   bedrooms: '', bathrooms: '', floor_area: '', lot_area: '',
   monthly_amortization: '', features: '',
   pagibig_eligible: true,
+  featured: false,
 }
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
@@ -299,6 +302,7 @@ export default function AdminListings() {
       monthly_amortization: l.monthly_amortization ?? '',
       features:             (l.features ?? []).join('\n'),
       pagibig_eligible:     l.pagibig_eligible ?? true,
+      featured:             l.featured ?? false,
     })
     const fullUrls  = l.image_urls?.length ? l.image_urls : (l.image_url ? [l.image_url] : [])
     const thumbUrls = l.thumbnail_urls ?? []
@@ -400,6 +404,7 @@ export default function AdminListings() {
       monthly_amortization: sanitizeText(form.monthly_amortization) || null,
       features:             form.features.split('\n').map(s => s.trim()).filter(Boolean),
       pagibig_eligible:     form.pagibig_eligible,
+      featured:             form.featured,
       image_urls:           fullUrls as string[],
       thumbnail_urls:       thumbUrls as string[],
       main_image_index:     safeMain,
@@ -740,12 +745,20 @@ export default function AdminListings() {
                     { value: 'Foreclosed',          label: 'Foreclosed'          },
                   ]} />
                 </div>
-                <div className="mb-8">
+                <div className="mb-4">
                   <ToggleField
                     label="Pag-IBIG Eligible"
                     hint="Disable only for cash-only or non-HDMF listings"
                     checked={form.pagibig_eligible}
                     onChange={v => setForm(f => ({ ...f, pagibig_eligible: v }))}
+                  />
+                </div>
+                <div className="mb-8">
+                  <ToggleField
+                    label="Featured Listing"
+                    hint="Pins this listing to the Spotlight section on the Services page"
+                    checked={form.featured}
+                    onChange={v => setForm(f => ({ ...f, featured: v }))}
                   />
                 </div>
 
