@@ -10,21 +10,18 @@ const posts = [
     title: 'Pag-IBIG Housing Loan Requirements in 2026',
     excerpt: 'Every document you need to qualify, and how OSRC prepares each one for you.',
     img: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&q=80',
-    read: '6 min read',
   },
   {
     tag: 'Tips',
     title: 'How Much Can You Borrow? Computing Your Loanable Amount',
     excerpt: 'Understand how Pag-IBIG calculates your maximum loan based on income and contributions.',
     img: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&q=80',
-    read: '5 min read',
   },
   {
     tag: 'For OFWs',
     title: 'Buying a Home While Working Abroad',
     excerpt: 'How to process your Pag-IBIG loan from abroad, step by step, without flying home.',
     img: 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&q=80',
-    read: '7 min read',
   },
 ]
 
@@ -58,18 +55,24 @@ export default function Insights() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.08, ease: EASE }}
-              className="flex flex-col"
+              className="flex flex-col h-full"
             >
               <div className="relative h-56 rounded-3xl overflow-hidden border border-[rgba(28,23,20,0.08)] mb-5">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={p.img} alt="" role="presentation" loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
                 <span className="absolute top-4 left-4 text-[10px] font-medium px-2.5 py-1 rounded-full bg-white/90 text-[#E85D04] border border-[rgba(232,93,4,0.2)]">{p.tag}</span>
               </div>
-              <div className="flex items-center gap-2 text-[#A89070] text-[11px] mb-2">{p.read}</div>
               <h3 className="text-[#1C1714] font-semibold text-[17px] leading-snug tracking-tight mb-2">
                 {p.title}
               </h3>
-              <p className="text-[#6E6055] text-[14px] leading-relaxed">{p.excerpt}</p>
+              <p className="text-[#6E6055] text-[14px] leading-relaxed mb-4">{p.excerpt}</p>
+              <a
+                href="/contact"
+                className="inline-flex items-center gap-1.5 text-[12px] font-semibold text-[#E85D04] hover:text-[#F27024] transition-colors duration-150 mt-auto"
+              >
+                Ask us about this
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg>
+              </a>
             </motion.article>
           ))}
         </div>
