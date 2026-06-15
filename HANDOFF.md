@@ -5,6 +5,46 @@
 
 ---
 
+## 0. How to Work on This Project (READ THIS FIRST)
+
+**Always use graphify before touching any file.** The codebase has a live knowledge graph
+at `graphify-out/graph.json` (440 nodes, 621 edges, 28 communities — updated 2026-06-15).
+
+### Before fixing or changing anything:
+```bash
+cd osrc-website
+graphify query "<describe what you're about to fix>"
+```
+This tells you exactly which files are involved and how they connect — no blind reading.
+
+### Example queries:
+```bash
+graphify query "how does the gallery image loading work"
+graphify query "what calls applyFilters"
+graphify query "admin auth flow"
+graphify query "price filter properties grid"
+```
+
+### After making changes:
+```bash
+graphify --update .
+```
+This re-extracts only the files you changed (incremental — fast, no LLM cost for code-only
+changes). Run this at the end of every session so the graph stays current.
+
+### Graph stats (as of 2026-06-15):
+| Stat | Value |
+|------|-------|
+| Nodes | 440 |
+| Edges | 621 |
+| Communities | 28 |
+| Graph file | `graphify-out/graph.json` |
+| Interpreter | `graphify-out/.graphify_python` |
+| Report | `graphify-out/GRAPH_REPORT.md` |
+| Viz | `graphify-out/graph.html` (open in browser) |
+
+---
+
 ## 1. The Goal We're Working Toward
 
 Ship the Orange Square Realty (OSRC) marketing + listings site to production on Vercel:
@@ -379,6 +419,8 @@ git push origin main
 - **Upstash Redis** — cross-instance rate limiting for `/api/send-inquiry` (falls back to
   in-memory Map in dev if `UPSTASH_REDIS_REST_URL` is unset)
 - **Supabase Storage** — `property-images` bucket (public), `thumbnails/` subfolder
+- **graphify** (`graphify-out/`) — live knowledge graph of the codebase. Always query before
+  editing. Run `graphify --update .` after each session to keep in sync.
 
 **Key file map:**
 | File | Purpose |
