@@ -80,9 +80,9 @@
     "semantic_hash": "f345412dcd4495f7431e899a4d322efd"
   },
   "src/app/api/delete-listing/route.ts": {
-    "mtime": 1781490022.2151978,
-    "ast_hash": "4278f3290d33a10423873a32cbd0488d",
-    "semantic_hash": "4278f3290d33a10423873a32cbd0488d"
+    "mtime": 1781526961.426444,
+    "ast_hash": "8779e3c6e7e6a3ebe0bac7ce738533cc",
+    "semantic_hash": ""
   },
   "src/app/api/send-inquiry/route.ts": {
     "mtime": 1781444525.266554,
@@ -90,9 +90,9 @@
     "semantic_hash": "1caa1a42b52bfd5866c00a12af4d7443"
   },
   "src/app/api/upload/route.ts": {
-    "mtime": 1781419797.3017037,
-    "ast_hash": "3fefdd717888e4b58c8e03018feaa005",
-    "semantic_hash": "3fefdd717888e4b58c8e03018feaa005"
+    "mtime": 1781526957.760757,
+    "ast_hash": "8ee51b2c921fb5d091793c69043e3539",
+    "semantic_hash": ""
   },
   "src/app/cookie-policy/page.tsx": {
     "mtime": 1781444608.4074976,
@@ -180,9 +180,9 @@
     "semantic_hash": "2ff6bf0907409481393ac2396384c725"
   },
   "src/components/Insights.tsx": {
-    "mtime": 1781445311.8949444,
-    "ast_hash": "7bb47b769ed2a22889f4ac466298165d",
-    "semantic_hash": "7bb47b769ed2a22889f4ac466298165d"
+    "mtime": 1781527377.990978,
+    "ast_hash": "4ff6baeb57d1fbaf1fa79359cba1a363",
+    "semantic_hash": ""
   },
   "src/components/JsonLd.tsx": {
     "mtime": 1781469851.1761432,
@@ -245,9 +245,9 @@
     "semantic_hash": ""
   },
   "src/components/Regions.tsx": {
-    "mtime": 1781422343.5584147,
-    "ast_hash": "d55163e4b0b094a646049fa27e27c3c4",
-    "semantic_hash": "d55163e4b0b094a646049fa27e27c3c4"
+    "mtime": 1781527820.3724527,
+    "ast_hash": "c61185b573c08b69d0689b61dc5a8968",
+    "semantic_hash": ""
   },
   "src/components/ScrollProgress.tsx": {
     "mtime": 1781050559.6451714,
@@ -335,9 +335,9 @@
     "semantic_hash": "638abc3f3a5bd9f44a978e816c8e1416"
   },
   "src/proxy.ts": {
-    "mtime": 1781445477.377237,
-    "ast_hash": "c6954d11cedfff4e23aa02adb1750f71",
-    "semantic_hash": "c6954d11cedfff4e23aa02adb1750f71"
+    "mtime": 1781526949.2103853,
+    "ast_hash": "ef606713e8af4ade86990c824fd9f5cf",
+    "semantic_hash": ""
   },
   "supabase/migrations/add_listing_enrichment_columns.sql": {
     "mtime": 1781470343.5747638,
@@ -360,8 +360,8 @@
     "semantic_hash": "5c27369b226fcf2be8a6cfe52224e767"
   },
   "HANDOFF.md": {
-    "mtime": 1781495644.2320664,
-    "ast_hash": "e9c803bd43866b3e13b7e65a35334503",
+    "mtime": 1781499489.9622586,
+    "ast_hash": "e58bfff98bfb2148c1965eecd7c8cf9d",
     "semantic_hash": ""
   },
   "README.md": {

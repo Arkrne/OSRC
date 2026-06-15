@@ -1,16 +1,16 @@
 # Graph Report - osrc-website  (2026-06-15)
 
 ## Corpus Check
-- 76 files · ~42,998 words
+- 76 files · ~43,406 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 532 nodes · 721 edges · 38 communities (26 shown, 12 thin omitted)
+- 533 nodes · 722 edges · 47 communities (33 shown, 14 thin omitted)
 - Extraction: 97% EXTRACTED · 3% INFERRED · 0% AMBIGUOUS · INFERRED: 21 edges (avg confidence: 0.91)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `0ed5cfb0`
+- Built from commit: `cfc15759`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -52,6 +52,15 @@
 - [[_COMMUNITY_Community 34|Community 34]]
 - [[_COMMUNITY_Community 35|Community 35]]
 - [[_COMMUNITY_Community 36|Community 36]]
+- [[_COMMUNITY_Community 38|Community 38]]
+- [[_COMMUNITY_Community 39|Community 39]]
+- [[_COMMUNITY_Community 40|Community 40]]
+- [[_COMMUNITY_Community 41|Community 41]]
+- [[_COMMUNITY_Community 42|Community 42]]
+- [[_COMMUNITY_Community 43|Community 43]]
+- [[_COMMUNITY_Community 44|Community 44]]
+- [[_COMMUNITY_Community 45|Community 45]]
+- [[_COMMUNITY_Community 46|Community 46]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `OSRC Website Handoff Document` - 18 edges
@@ -74,8 +83,8 @@
   osrc-website/public/next.svg → HANDOFF.md
 - `Brand Colors — #E85D04 Orange, #1C1714 Dark, #FAFAF7 Light` --conceptually_related_to--> `OSRC Logo — Orange Background with Navy OSRC Wordmark`  [INFERRED]
   requirements.md → public/logo.jpg
-- `OSRC Logo — Orange Background with Navy OSRC Wordmark` --references--> `Orange Square Realty (OSRC) — Philippine Real Estate Broker`  [EXTRACTED]
-  public/logo.jpg → HANDOFF.md
+- `Next.js Project (osrc-website)` --references--> `Next.js 16.2.7 App Router (Turbopack)`  [INFERRED]
+  osrc-website/README.md → HANDOFF.md
 
 ## Import Cycles
 - None detected.
@@ -87,19 +96,19 @@
 - **OSRC Brand Identity Assets** — public_logo, requirements_brand_colors, handoff_orange_square_realty [INFERRED 0.85]
 - **Deployment Requirements** — handoff_vercel_deploy, handoff_vercel_env_vars, requirements_infrastructure, public_robots [INFERRED 0.85]
 
-## Communities (38 total, 12 thin omitted)
+## Communities (47 total, 14 thin omitted)
 
 ### Community 0 - "Awards & Gallery"
-Cohesion: 0.08
-Nodes (24): badges, EASE, steps, CountUp(), EASE, Parallax(), RevealHeading(), RevealVariant (+16 more)
+Cohesion: 0.15
+Nodes (12): badges, EASE, steps, ScrollImage(), Stagger(), StaggerItem(), TiltCard(), EASE (+4 more)
 
 ### Community 1 - "Main Pages & About"
-Cohesion: 0.08
-Nodes (37): sitemap(), BEDROOMS, EASE, PROPERTY_TYPES, Props, REGIONS, STATUSES, PropertiesPreview() (+29 more)
+Cohesion: 0.05
+Nodes (49): sitemap(), EASE, EASE_OUT, FOCUSABLE, FormState, InquiryModal(), Props, BEDROOMS (+41 more)
 
 ### Community 2 - "Contact & Inquiry Forms"
-Cohesion: 0.07
-Nodes (42): Admin CMS (/admin) — Listings and Promos Management, Admin UID Allowlist — 183105ed-f54a-44e9-9f12-1d6715f58266, src/app/api/delete-listing/route.ts — DB Delete + Storage Cleanup, src/app/api/send-inquiry/route.ts — Rate-limited Inquiry Email via Resend, src/app/api/upload/route.ts — Storage Upload with Service-Role Key, applyFilters Helper — Supabase TypeScript Type Workaround using any, Framer Motion v12, Gallery Preload + Shimmer — useEffect Preloader with unoptimized Images (+34 more)
+Cohesion: 0.18
+Nodes (13): Orange Square Realty (OSRC) — Philippine Real Estate Broker, Pag-IBIG Housing Loan Specialization, Orange Square Realty Marketing + Listings Site Goal, OSRC Logo — Orange Background with Navy OSRC Wordmark, Brand Colors — #E85D04 Orange, #1C1714 Dark, #FAFAF7 Light, OSRC Website Requirements Checklist (222 items), Content & Copy Requirements — Team, Partners, Awards, Gallery, Testimonials, Design & UI Assets Requirements — Branding, Favicon, OG Image, Cookie Consent, 404 (+5 more)
 
 ### Community 3 - "Dependencies & Packages"
 Cohesion: 0.09
@@ -110,8 +119,8 @@ Cohesion: 0.36
 Nodes (13): ALLOWED_ORIGINS, checkRate(), corsHeaders(), esc(), isEmail(), isPhone(), log(), OPTIONS() (+5 more)
 
 ### Community 5 - "Dev Docs & Agent Rules"
-Cohesion: 0.07
-Nodes (16): EASE, faqs, quickLinks, services, FaqJsonLd(), faqPage, JsonLd(), localBusiness (+8 more)
+Cohesion: 0.20
+Nodes (4): quickLinks, services, JsonLd(), ScrollProgress()
 
 ### Community 6 - "App Layout & Fonts"
 Cohesion: 0.07
@@ -126,16 +135,16 @@ Cohesion: 0.06
 Nodes (21): size, EASE, EASE, EASE, headlineLines, stats, EASE, partners (+13 more)
 
 ### Community 9 - "Hero Section"
-Cohesion: 0.13
-Nodes (12): EASE, EASE_OUT, FOCUSABLE, FormState, InquiryModal(), Props, priceRanges, properties (+4 more)
+Cohesion: 0.20
+Nodes (7): EASE, Parallax(), RevealHeading(), RevealVariant, VARIANTS, EASE, services
 
 ### Community 10 - "Loan Calculator"
 Cohesion: 0.10
 Nodes (19): compilerOptions, allowJs, esModuleInterop, incremental, isolatedModules, jsx, lib, module (+11 more)
 
 ### Community 11 - "Testimonials"
-Cohesion: 0.14
-Nodes (18): Next.js 16 Breaking Changes Warning, Next.js Agent Rules, Next.js Dist Docs in node_modules, CLAUDE.md Agents Reference, ISR Strategy for /properties/[slug] — revalidate=300 + dynamicParams=true, Next.js 16.2.7 App Router (Turbopack), Next.js Brand Identity, Next.js Framework (+10 more)
+Cohesion: 0.22
+Nodes (10): Next.js 16 Breaking Changes Warning, Next.js Agent Rules, Next.js Dist Docs in node_modules, CLAUDE.md Agents Reference, ISR Strategy for /properties/[slug] — revalidate=300 + dynamicParams=true, Next.js 16.2.7 App Router (Turbopack), Next.js Brand Identity, Next.js Framework (+2 more)
 
 ### Community 12 - "Trust Statistics"
 Cohesion: 0.50
@@ -166,20 +175,20 @@ Cohesion: 0.05
 Nodes (42): 2.1 Branding Assets, 2.2 Favicon & App Icons, 2.3 Open Graph / Social Share Image, 2.4 Cookie Consent Banner, 2.5 Custom 404 Page, 2.6 Custom Error Page, 2. DESIGN & UI ASSETS, 3.1 Video (+34 more)
 
 ### Community 29 - "Community 29"
-Cohesion: 0.07
-Nodes (29): 0. How to Work on This Project (READ THIS FIRST), 1. The Goal We're Working Toward, 2. Current State of the Code, 3. Files Edited / Created (all sessions to date), 4. Everything Tried That Failed (don't repeat these), 5. Next Steps (in order), 6. Vercel Environment Variables (7 required), 7. Known Remaining Issues (+21 more)
+Cohesion: 0.06
+Nodes (30): 0. How to Work on This Project (READ THIS FIRST), 1. The Goal We're Working Toward, 2. Current State of the Code, 3. Files Edited / Created (all sessions to date), 4. Everything Tried That Failed (don't repeat these), 5. Next Steps (in order), 6. Vercel Environment Variables (7 required), 7. Known Remaining Issues (+22 more)
 
 ### Community 30 - "Community 30"
 Cohesion: 0.12
 Nodes (16): 1.10 Loan Calculator (`src/components/LoanCalculator.tsx`), 1.11 Promos (`src/components/Promos.tsx`), 1.12 Property Listings, 1.13 Insights / Blog (`src/components/Insights.tsx`), 1.14 Contact Information, 1.15 Footer, 1.1 Team Section (`src/components/Team.tsx`), 1.2 Partners Section (`src/components/Partners.tsx`) (+8 more)
 
 ### Community 31 - "Community 31"
-Cohesion: 0.23
-Nodes (9): EASE, Gallery(), Media, SpotlightCard(), EASE, VideoReel(), EASE, VideoShowcase() (+1 more)
+Cohesion: 0.29
+Nodes (7): EASE, Gallery(), Media, SpotlightCard(), EASE, VideoShowcase(), useVideoAutoplay()
 
 ### Community 32 - "Community 32"
-Cohesion: 0.25
-Nodes (5): metadata, Marquee(), ROW_A, ROW_B, VelocityMarquee()
+Cohesion: 0.20
+Nodes (7): metadata, Marquee(), ROW_A, ROW_B, VelocityMarquee(), EASE, VideoReel()
 
 ### Community 33 - "Community 33"
 Cohesion: 0.40
@@ -189,10 +198,38 @@ Nodes (3): data, EASE, Testimonial
 Cohesion: 0.50
 Nodes (3): Deploy on Vercel, Getting Started, Learn More
 
+### Community 38 - "Community 38"
+Cohesion: 0.18
+Nodes (12): applyFilters Helper — Supabase TypeScript Type Workaround using any, Framer Motion v12, Gallery Preload + Shimmer — useEffect Preloader with unoptimized Images, src/lib/listings.ts — Server-side Listing Reads and Helpers, src/lib/site.ts — STATS, CONTACT, REGIONS, DEVELOPERS Constants, OSRC Website Handoff Document, price_value bigint Column — Numeric Price for Range Filtering, src/components/PropertiesGrid.tsx — Client Grid with Filter Bar + Search + Pagination (+4 more)
+
+### Community 39 - "Community 39"
+Cohesion: 0.22
+Nodes (10): Admin CMS (/admin) — Listings and Promos Management, Admin UID Allowlist — 183105ed-f54a-44e9-9f12-1d6715f58266, src/app/api/delete-listing/route.ts — DB Delete + Storage Cleanup, src/app/api/upload/route.ts — Storage Upload with Service-Role Key, 16:9 Image Upload Pipeline — Canvas Center-crop to 1920x1080 and 640x360 JPEG, Supabase Storage — property-images Bucket (Public) with thumbnails/ Subfolder, src/proxy.ts — Middleware (Admin Auth + UID Allowlist + Security Headers + CSP), Supabase (DB + Auth + Storage) (+2 more)
+
+### Community 40 - "Community 40"
+Cohesion: 0.25
+Nodes (5): FaqJsonLd(), faqPage, localBusiness, webSite, metadata
+
+### Community 41 - "Community 41"
+Cohesion: 0.32
+Nodes (8): app/page.tsx Entry Point, create-next-app Bootstrap Tool, Development Server (npm run dev), Geist Font Family, next/font Optimization, Next.js Framework, Next.js Project (osrc-website), Vercel Platform Deployment
+
+### Community 42 - "Community 42"
+Cohesion: 0.29
+Nodes (5): EASE_DRAWER, EASE_OUT, mobileLinks, navLinks, SPRING
+
+### Community 43 - "Community 43"
+Cohesion: 0.38
+Nodes (7): src/app/api/send-inquiry/route.ts — Rate-limited Inquiry Email via Resend, Resend — Transactional Email Service, Upstash Redis — Rate Limiting, Vercel Deployment Target, Vercel Environment Variables (7 required: Supabase, Resend, Inquiry, Admin UIDs), Vercel Triangle Logo SVG — Hosting Platform Brand, Infrastructure & Deployment Requirements — Domain, Email (Resend), Supabase, Upstash
+
+### Community 44 - "Community 44"
+Cohesion: 0.33
+Nodes (4): CountUp(), counters, EASE, reasons
+
 ## Knowledge Gaps
-- **251 isolated node(s):** `nextConfig`, `name`, `version`, `private`, `dev` (+246 more)
+- **252 isolated node(s):** `nextConfig`, `name`, `version`, `private`, `dev` (+247 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **12 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **14 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
@@ -202,12 +239,12 @@ _Questions this graph is uniquely positioned to answer:_
 - **Why does `createClient()` connect `AI Chatbot` to `Dependencies & Packages`?**
   _High betweenness centrality (0.019) - this node is a cross-community bridge._
 - **What connects `nextConfig`, `name`, `version` to the rest of the system?**
-  _254 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _255 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Awards & Gallery` be split into smaller, more focused modules?**
-  _Cohesion score 0.08205128205128205 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.14619883040935672 - nodes in this community are weakly interconnected._
 - **Should `Main Pages & About` be split into smaller, more focused modules?**
-  _Cohesion score 0.07692307692307693 - nodes in this community are weakly interconnected._
-- **Should `Contact & Inquiry Forms` be split into smaller, more focused modules?**
-  _Cohesion score 0.06736353077816493 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.05285592497868713 - nodes in this community are weakly interconnected._
 - **Should `Dependencies & Packages` be split into smaller, more focused modules?**
   _Cohesion score 0.09 - nodes in this community are weakly interconnected._
+- **Should `App Layout & Fonts` be split into smaller, more focused modules?**
+  _Cohesion score 0.07407407407407407 - nodes in this community are weakly interconnected._
