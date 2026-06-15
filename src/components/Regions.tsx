@@ -7,10 +7,10 @@ import { RevealHeading, Stagger, StaggerItem, TiltCard, ScrollImage } from './mo
 const EASE = [0.23, 1, 0.32, 1] as const
 
 const regions = [
-  { name: 'Cavite', tag: 'Bacoor · Imus · Dasmariñas', count: '5 communities', img: 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&q=80' },
-  { name: 'Laguna', tag: 'Santa Rosa · Calamba · Biñan', count: '3 communities', img: 'https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=800&q=80' },
-  { name: 'Bulacan', tag: 'Marilao · Sta. Maria · Plaridel', count: '4 communities', img: 'https://images.unsplash.com/photo-1572120360610-d971b9d7767c?w=800&q=80' },
-  { name: 'Metro Manila', tag: 'Quezon City · Las Piñas', count: '2 communities', img: 'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=800&q=80' },
+  { name: 'Cavite', tag: 'Bacoor · Imus · Dasmariñas', count: '5 communities', img: 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&q=80', filterRegion: 'CALABARZON' },
+  { name: 'Laguna', tag: 'Santa Rosa · Calamba · Biñan', count: '3 communities', img: 'https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=800&q=80', filterRegion: 'CALABARZON' },
+  { name: 'Bulacan', tag: 'Marilao · Sta. Maria · Plaridel', count: '4 communities', img: 'https://images.unsplash.com/photo-1572120360610-d971b9d7767c?w=800&q=80', filterRegion: 'Central+Luzon' },
+  { name: 'Metro Manila', tag: 'Quezon City · Las Piñas', count: '2 communities', img: 'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=800&q=80', filterRegion: 'Metro+Manila' },
 ]
 
 // staggered reveal directions so cards don't all arrive identically
@@ -37,7 +37,7 @@ export default function Regions() {
             <StaggerItem key={r.name} variant={ENTER[i]}>
               <TiltCard className="group h-full" max={10} glareColor="rgba(255,255,255,0.16)">
                 <a
-                  href="/properties"
+                  href={`/properties?region=${r.filterRegion}`}
                   className="glow-border relative block h-[340px] sm:h-[360px] rounded-3xl overflow-hidden border border-[rgba(28,23,20,0.08)] shadow-[0_10px_40px_-18px_rgba(28,23,20,0.35)]"
                 >
                   <ScrollImage className="absolute inset-0 h-full w-full" scaleFrom={1.22} drift={26}>
