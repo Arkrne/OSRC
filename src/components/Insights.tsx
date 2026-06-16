@@ -9,19 +9,19 @@ const posts = [
     tag: 'Guide',
     title: 'Pag-IBIG Housing Loan Requirements in 2026',
     excerpt: 'Every document you need to qualify, and how OSRC prepares each one for you.',
-    img: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&q=80',
+    img: 'https://pfnfgbbccdexbyjorvam.supabase.co/storage/v1/object/public/site-assets/media/insight-1.jpg',
   },
   {
     tag: 'Tips',
     title: 'How Much Can You Borrow? Computing Your Loanable Amount',
     excerpt: 'Understand how Pag-IBIG calculates your maximum loan based on income and contributions.',
-    img: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&q=80',
+    img: 'https://pfnfgbbccdexbyjorvam.supabase.co/storage/v1/object/public/site-assets/media/insight-2.jpg',
   },
   {
     tag: 'For OFWs',
     title: 'Buying a Home While Working Abroad',
     excerpt: 'How to process your Pag-IBIG loan from abroad, step by step, without flying home.',
-    img: 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&q=80',
+    img: 'https://pfnfgbbccdexbyjorvam.supabase.co/storage/v1/object/public/site-assets/media/insight-3.jpg',
   },
 ]
 

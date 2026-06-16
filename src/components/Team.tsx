@@ -9,10 +9,10 @@ const EASE = [0.23, 1, 0.32, 1] as const
 // Adapted from 21st.dev "Team Section" — themed warm light.
 // `pos` keeps each face framed regardless of the source crop.
 const members = [
-  { name: 'Danny Bautista', role: 'Founder & Loan Specialist', img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=600&auto=format&fit=crop', pos: 'center 22%' },
-  { name: 'Andrea Reyes',  role: 'Property Matching Lead',     img: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=600&auto=format&fit=crop', pos: 'center 18%' },
-  { name: 'Marco Lim',     role: 'Pag-IBIG Documentation',     img: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=600&auto=format&fit=crop', pos: 'center 25%' },
-  { name: 'Jasmine Cruz',  role: 'Client Care & OFW Desk',     img: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=600&auto=format&fit=crop', pos: 'center 22%' },
+  { name: 'Danny Bautista', role: 'Founder & Loan Specialist', img: 'https://pfnfgbbccdexbyjorvam.supabase.co/storage/v1/object/public/site-assets/media/team-danny-bautista.jpg', pos: 'center 22%' },
+  { name: 'Andrea Reyes',  role: 'Property Matching Lead',     img: 'https://pfnfgbbccdexbyjorvam.supabase.co/storage/v1/object/public/site-assets/media/team-andrea-reyes.jpg', pos: 'center 18%' },
+  { name: 'Marco Lim',     role: 'Pag-IBIG Documentation',     img: 'https://pfnfgbbccdexbyjorvam.supabase.co/storage/v1/object/public/site-assets/media/team-marco-lim.jpg', pos: 'center 25%' },
+  { name: 'Jasmine Cruz',  role: 'Client Care & OFW Desk',     img: 'https://pfnfgbbccdexbyjorvam.supabase.co/storage/v1/object/public/site-assets/media/team-jasmine-cruz.jpg', pos: 'center 22%' },
 ]
 
 export default function Team() {

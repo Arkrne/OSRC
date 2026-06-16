@@ -9,21 +9,21 @@ type Testimonial = { image: string; quote: string; name: string; role: string; r
 
 const data: Testimonial[] = [
   {
-    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=600&auto=format&fit=crop',
+    image: 'https://pfnfgbbccdexbyjorvam.supabase.co/storage/v1/object/public/site-assets/media/team-andrea-reyes.jpg',
     quote: 'We thought a Pag-IBIG loan would be impossible for us. OSRC handled every document and got us approved in weeks. We have our own home now.',
     name: 'Maria & Jun Santos',
     role: 'Camella Bacoor · Cavite',
     rating: 5,
   },
   {
-    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=600&auto=format&fit=crop',
+    image: 'https://pfnfgbbccdexbyjorvam.supabase.co/storage/v1/object/public/site-assets/media/team-danny-bautista.jpg',
     quote: 'Honest from day one. They told us our real loanable amount within a day and never pressured us. Found the perfect home for our budget.',
     name: 'Rafael Dela Cruz',
     role: 'Lumina Homes · Bulacan',
     rating: 5,
   },
   {
-    image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=600&auto=format&fit=crop',
+    image: 'https://pfnfgbbccdexbyjorvam.supabase.co/storage/v1/object/public/site-assets/media/testimonial-3.jpg',
     quote: 'As an OFW, I worried about processing while abroad. OSRC kept me updated and did everything remotely. I never had to fly home.',
     name: 'Grace Villanueva',
     role: 'Lancaster New City · Cavite',

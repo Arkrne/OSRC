@@ -14,11 +14,11 @@ export default function VideoReel() {
       {/* Background video */}
       <video
         className="absolute inset-0 w-full h-full object-cover"
-        src="https://videos.pexels.com/video-files/8293760/8293760-uhd_2560_1440_25fps.mp4"
-        autoPlay={shouldAutoplay}
-        preload={shouldAutoplay ? 'auto' : 'none'}
+        // src="..." // Video unavailable at source
+        autoPlay={false}
+        preload="none"
         loop muted playsInline
-        poster="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1400&q=80"
+        poster="https://pfnfgbbccdexbyjorvam.supabase.co/storage/v1/object/public/site-assets/media/video-reel-poster.jpg"
       />
       <div className="absolute inset-0 bg-[#0B0906]/75" />
       <div className="absolute inset-0 bg-gradient-to-r from-[#0B0906] via-[#0B0906]/55 to-transparent" />
@@ -40,7 +40,7 @@ export default function VideoReel() {
           <div className="flex items-center gap-3">
             <div className="w-12 h-12 rounded-full overflow-hidden border border-white/20 shrink-0">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=200&auto=format&fit=crop" alt="Liza Mariano" className="w-full h-full object-cover" loading="lazy" />
+              <img src="https://pfnfgbbccdexbyjorvam.supabase.co/storage/v1/object/public/site-assets/media/avatar-liza-mariano.jpg" alt="Liza Mariano" className="w-full h-full object-cover" loading="lazy" />
             </div>
             <div>
               <p className="text-[#FBF6EC] font-semibold text-[14px]">Liza Mariano</p>

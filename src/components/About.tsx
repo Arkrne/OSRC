@@ -22,7 +22,7 @@ export default function About() {
           className="relative min-h-[400px] lg:min-h-full overflow-hidden"
         >
           <Image
-            src="https://images.unsplash.com/photo-1560185893-a55cbc8c57e8?w=1000&q=90"
+            src="https://pfnfgbbccdexbyjorvam.supabase.co/storage/v1/object/public/site-assets/media/about.jpg"
             alt="Orange Square Realty team"
             fill
             className="object-cover"

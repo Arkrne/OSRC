@@ -49,8 +49,8 @@ export default function Hero() {
           ref={videoRef}
           className="absolute inset-0 w-full object-cover"
           style={{ height: '115%' }}
-          src="https://videos.pexels.com/video-files/7578552/7578552-uhd_2560_1440_30fps.mp4"
-          poster="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1600&q=80"
+          src="https://pfnfgbbccdexbyjorvam.supabase.co/storage/v1/object/public/site-assets/media/hero-bg.mp4"
+          poster="https://pfnfgbbccdexbyjorvam.supabase.co/storage/v1/object/public/site-assets/media/hero-poster.jpg"
           autoPlay={shouldAutoplay}
           preload={shouldAutoplay ? 'auto' : 'none'}
           loop

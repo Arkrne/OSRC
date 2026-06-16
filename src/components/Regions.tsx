@@ -7,10 +7,10 @@ import { RevealHeading, Stagger, StaggerItem, TiltCard, ScrollImage } from './mo
 const EASE = [0.23, 1, 0.32, 1] as const
 
 const regions = [
-  { name: 'Cavite', tag: 'Bacoor · Imus · Dasmariñas', count: '5 communities', img: 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&q=80', filterRegion: 'CALABARZON' },
-  { name: 'Laguna', tag: 'Santa Rosa · Calamba · Biñan', count: '3 communities', img: 'https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=800&q=80', filterRegion: 'CALABARZON' },
-  { name: 'Bulacan', tag: 'Marilao · Sta. Maria · Plaridel', count: '4 communities', img: 'https://images.unsplash.com/photo-1572120360610-d971b9d7767c?w=800&q=80', filterRegion: 'Central+Luzon' },
-  { name: 'Metro Manila', tag: 'Quezon City · Las Piñas', count: '2 communities', img: 'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=800&q=80', filterRegion: 'Metro+Manila' },
+  { name: 'Cavite', tag: 'Bacoor · Imus · Dasmariñas', count: '5 communities', img: 'https://pfnfgbbccdexbyjorvam.supabase.co/storage/v1/object/public/site-assets/media/region-cavite.jpg', filterRegion: 'CALABARZON' },
+  { name: 'Laguna', tag: 'Santa Rosa · Calamba · Biñan', count: '3 communities', img: 'https://pfnfgbbccdexbyjorvam.supabase.co/storage/v1/object/public/site-assets/media/region-laguna.jpg', filterRegion: 'CALABARZON' },
+  { name: 'Bulacan', tag: 'Marilao · Sta. Maria · Plaridel', count: '4 communities', img: 'https://pfnfgbbccdexbyjorvam.supabase.co/storage/v1/object/public/site-assets/media/region-bulacan.jpg', filterRegion: 'Central+Luzon' },
+  { name: 'Metro Manila', tag: 'Quezon City · Las Piñas', count: '2 communities', img: 'https://pfnfgbbccdexbyjorvam.supabase.co/storage/v1/object/public/site-assets/media/region-metro-manila.jpg', filterRegion: 'Metro+Manila' },
 ]
 
 // staggered reveal directions so cards don't all arrive identically

@@ -10,12 +10,12 @@ const EASE = [0.23, 1, 0.32, 1] as const
 type Media = { type: 'image' | 'video'; url: string; title: string; desc: string; span: string }
 
 const media: Media[] = [
-  { type: 'image', url: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=900&q=80', title: 'Model Homes', desc: 'Walkthrough-ready units', span: 'md:col-span-2 md:row-span-2' },
-  { type: 'image', url: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=700&q=80', title: 'Interiors', desc: 'Turnover-quality finishes', span: 'md:col-span-1 md:row-span-1' },
-  { type: 'video', url: 'https://videos.pexels.com/video-files/7578548/7578548-uhd_2560_1440_30fps.mp4', title: 'Community Tour', desc: 'Master-planned living', span: 'md:col-span-1 md:row-span-2' },
-  { type: 'image', url: 'https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=700&q=80', title: 'Bedrooms', desc: 'Space for the family', span: 'md:col-span-1 md:row-span-1' },
-  { type: 'image', url: 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=900&q=80', title: 'Facades', desc: 'Modern Filipino design', span: 'md:col-span-2 md:row-span-1' },
-  { type: 'image', url: 'https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?w=700&q=80', title: 'Amenities', desc: 'Parks, pools & clubhouses', span: 'md:col-span-1 md:row-span-1' },
+  { type: 'image', url: 'https://pfnfgbbccdexbyjorvam.supabase.co/storage/v1/object/public/site-assets/media/hero-poster.jpg', title: 'Model Homes', desc: 'Walkthrough-ready units', span: 'md:col-span-2 md:row-span-2' },
+  { type: 'image', url: 'https://pfnfgbbccdexbyjorvam.supabase.co/storage/v1/object/public/site-assets/media/gallery-interiors.jpg', title: 'Interiors', desc: 'Turnover-quality finishes', span: 'md:col-span-1 md:row-span-1' },
+  { type: 'video', url: 'https://pfnfgbbccdexbyjorvam.supabase.co/storage/v1/object/public/site-assets/media/gallery-community-tour.mp4', title: 'Community Tour', desc: 'Master-planned living', span: 'md:col-span-1 md:row-span-2' },
+  { type: 'image', url: 'https://pfnfgbbccdexbyjorvam.supabase.co/storage/v1/object/public/site-assets/media/gallery-bedrooms.jpg', title: 'Bedrooms', desc: 'Space for the family', span: 'md:col-span-1 md:row-span-1' },
+  { type: 'image', url: 'https://pfnfgbbccdexbyjorvam.supabase.co/storage/v1/object/public/site-assets/media/gallery-facades.jpg', title: 'Facades', desc: 'Modern Filipino design', span: 'md:col-span-2 md:row-span-1' },
+  { type: 'image', url: 'https://pfnfgbbccdexbyjorvam.supabase.co/storage/v1/object/public/site-assets/media/gallery-amenities.jpg', title: 'Amenities', desc: 'Parks, pools & clubhouses', span: 'md:col-span-1 md:row-span-1' },
 ]
 
 export default function Gallery() {
@@ -77,7 +77,7 @@ export default function Gallery() {
                   <video
                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-[800ms] ease-out group-hover:scale-[1.06]"
                     src={item.url}
-                    poster="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=900&q=80"
+                    poster="https://pfnfgbbccdexbyjorvam.supabase.co/storage/v1/object/public/site-assets/media/region-cavite.jpg"
                     autoPlay={shouldAutoplay}
                     preload={shouldAutoplay ? 'auto' : 'none'}
                     loop muted playsInline

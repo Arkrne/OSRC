@@ -59,13 +59,13 @@ export default function VideoShowcase() {
             <video
               ref={videoRef}
               className="w-full h-full object-cover"
-              src="https://videos.pexels.com/video-files/29913691/29913691-uhd_2560_1440_30fps.mp4"
-              autoPlay={shouldAutoplay}
-              preload={shouldAutoplay ? 'auto' : 'none'}
+              // src="..." // Video unavailable at source
+              autoPlay={false}
+              preload="none"
               loop
               muted
               playsInline
-              poster="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1400&q=80"
+              poster="https://pfnfgbbccdexbyjorvam.supabase.co/storage/v1/object/public/site-assets/media/video-showcase-poster.jpg"
             />
             {/* Gradient overlay for legibility */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent pointer-events-none" />

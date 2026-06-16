@@ -88,7 +88,7 @@ export default function ContactSection() {
     >
       {/* ── Full-bleed background ── */}
       <Image
-        src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=1800&q=85"
+        src="https://pfnfgbbccdexbyjorvam.supabase.co/storage/v1/object/public/site-assets/media/contact-bg.jpg"
         alt=""
         fill
         priority
