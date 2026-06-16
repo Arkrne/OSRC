@@ -53,11 +53,10 @@ export default function Services() {
             transition={{ duration: 0.5, ease: EASE }}
             className="flex flex-col gap-3"
           >
-            <span className="eyebrow">What We Do</span>
             <RevealHeading
               className="font-display text-[clamp(32px,4.5vw,64px)] text-[#1C1714]"
               style={{ lineHeight: 0.95, letterSpacing: '-0.025em' }}
-              lines={['Complete', <span key="hs">Homeownership <em className="not-italic text-[#E85D04]">Support</em></span>]}
+              lines={['Three Services.', <span key="hs">One <em className="not-italic text-[#E85D04]">Specialist.</em></span>]}
             />
           </motion.div>
 
@@ -69,9 +68,8 @@ export default function Services() {
             className="flex items-end lg:pb-3"
           >
             <p className="text-[#6E6055] text-[17px] leading-relaxed max-w-md">
-              We handle everything — Pag-IBIG paperwork, property matching,
-              loan processing — so you spend your energy on the decision,
-              not the bureaucracy.
+              We handle the Pag-IBIG paperwork, property matching, and loan
+              processing. You spend your energy on the decision, not the bureaucracy.
             </p>
           </motion.div>
         </div>

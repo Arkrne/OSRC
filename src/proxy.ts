@@ -57,11 +57,16 @@ export async function proxy(request: NextRequest) {
     'Strict-Transport-Security',
     'max-age=63072000; includeSubDomains; preload'
   )
+  // 'unsafe-eval' is only needed by the dev server (HMR); never ship it to production.
+  const scriptSrc =
+    process.env.NODE_ENV === 'development'
+      ? "script-src 'self' 'unsafe-inline' 'unsafe-eval'"
+      : "script-src 'self' 'unsafe-inline'"
   supabaseResponse.headers.set(
     'Content-Security-Policy',
     [
       "default-src 'self'",
-      "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
+      scriptSrc,
       "style-src 'self' 'unsafe-inline'",
       "img-src 'self' data: blob: https://images.unsplash.com https://*.supabase.co https://videos.pexels.com",
       "media-src 'self' https://videos.pexels.com",

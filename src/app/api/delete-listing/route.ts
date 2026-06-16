@@ -7,8 +7,9 @@ export async function DELETE(request: NextRequest) {
   const auth = await createServerSupabase()
   const { data: { user } } = await auth.auth.getUser()
   if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  // Fail closed: if the allowlist is unconfigured, deny everyone (matches proxy.ts).
   const allowedUids = process.env.ADMIN_ALLOWED_UIDS?.split(',').map(s => s.trim()).filter(Boolean) ?? []
-  if (allowedUids.length > 0 && !allowedUids.includes(user.id)) {
+  if (allowedUids.length === 0 || !allowedUids.includes(user.id)) {
     return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
   }
 

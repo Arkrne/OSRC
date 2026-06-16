@@ -10,20 +10,6 @@ const EASE = [0.23, 1, 0.32, 1] as const
 export default function About() {
   return (
     <section id="about" className="py-12 sm:py-18 md:py-24 overflow-hidden">
-      <div className="max-w-[1360px] mx-auto px-5 sm:px-8 lg:px-20">
-
-        {/* Section label */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.45, ease: EASE }}
-          className="mb-6 sm:mb-10"
-        >
-          <span className="eyebrow">Our Story</span>
-        </motion.div>
-      </div>
-
       {/* Full-bleed editorial split */}
       <div className="grid grid-cols-1 lg:grid-cols-[45%_1fr] min-h-[600px]">
 
@@ -71,11 +57,11 @@ export default function About() {
             className="font-display text-[clamp(36px,4vw,60px)] text-[#1C1714] mb-10"
             style={{ lineHeight: 0.95, letterSpacing: '-0.025em' }}
           >
-            Built to Make
+            Pag-IBIG Loans,
             <br />
-            <em className="not-italic text-[#6E6055]">Homeownership</em>
+            <em className="italic text-shine">Done Right,</em>
             <br />
-            Real.
+            Since 2024.
           </motion.h2>
 
           <motion.div
@@ -86,9 +72,9 @@ export default function About() {
             className="flex flex-col gap-5 text-[#6E6055] text-[16px] leading-relaxed mb-12 max-w-lg"
           >
             <p className="text-[#1C1714] text-[18px] font-medium leading-relaxed">
-              Begin your unique home buying journey with our dedicated team. We offer
-              exceptional options and transparent service — managing sales, loan
-              documentation, and consultancy to make your search effortless and enjoyable.
+              Orange Square Realty is a Pag-IBIG housing loan specialist based in Cainta, Rizal.
+              We handle the entire loan process: pre-qualification, property matching, filing,
+              and follow-up. You focus on picking the right home.
             </p>
             <p>
               Orange Square Realty Corporation opened in 2024 to do one thing:
@@ -134,7 +120,7 @@ export default function About() {
             transition={{ delay: 0.3, duration: 0.4 }}
             className="group inline-flex items-center gap-2 pl-6 pr-3 py-3.5 min-h-[48px] rounded-full bg-[rgba(232,93,4,0.07)] hover:bg-[#E85D04] border border-[rgba(232,93,4,0.2)] hover:border-[#E85D04] text-[#E85D04] hover:text-white font-semibold text-[14px] transition-[background-color,border-color,color,transform] duration-[160ms] ease-out active:scale-[0.97] w-full sm:w-fit justify-center"
           >
-            Get Free Loan Assessment
+            Free Pre-Qualification
             <span className="w-7 h-7 rounded-full bg-current/10 flex items-center justify-center transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
               <ArrowUpRight size={15} strokeWidth={2.25} />
             </span>

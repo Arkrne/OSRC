@@ -66,27 +66,16 @@ export default function Hero() {
       {/* ── Content ── */}
       <motion.div
         style={{ opacity: contentOpacity }}
-        className="relative z-20 flex-1 flex flex-col justify-center px-5 sm:px-8 md:px-12 lg:px-16 xl:px-20 pt-32 sm:pt-36 pb-10 sm:pb-12"
+        className="relative z-20 flex-1 flex flex-col justify-center px-5 sm:px-8 md:px-12 lg:px-16 xl:px-20 pt-24 sm:pt-28 pb-10 sm:pb-12"
       >
         <div className="flex flex-col gap-7 sm:gap-9 max-w-2xl">
-          <motion.div
-            initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45, ease: EASE }}
-          >
-            <span className="eyebrow" style={{ background: 'rgba(232,93,4,0.12)', borderColor: 'rgba(232,93,4,0.35)', color: '#F27024' }}>
-              <span className="w-1.5 h-1.5 rounded-full bg-[#E85D04] inline-block" />
-              Pag-IBIG Housing Loan Specialists
-            </span>
-          </motion.div>
-
           {/* Kinetic headline — masked line-by-line reveal */}
           <h1
             className="font-display text-[clamp(42px,8.5vw,100px)] text-[#FBF6EC]"
             style={{ lineHeight: 0.96, letterSpacing: '-0.03em', textShadow: '0 2px 30px rgba(0,0,0,0.35)' }}
           >
             {headlineLines.map((line, i) => (
-              <span key={line.text} className="block overflow-hidden pb-[0.06em] -mb-[0.06em]">
+              <span key={line.text} className="block overflow-hidden pb-[0.2em] -mb-[0.2em]">
                 <motion.span
                   className={`block ${line.accent ? 'not-italic text-[#F27024]' : ''}`}
                   initial={reduced ? { opacity: 0 } : { y: '105%' }}
@@ -130,7 +119,7 @@ export default function Hero() {
               className="flex items-center justify-center gap-2.5 px-6 py-3.5 min-h-[48px] rounded-full border border-[rgba(255,255,255,0.25)] text-[#E7DCC9] hover:text-white hover:border-[rgba(255,255,255,0.45)] text-[14px] font-medium backdrop-blur-sm transition-[border-color,color,transform] duration-[160ms] ease-out active:scale-[0.97]"
             >
               <span className="w-1.5 h-1.5 rounded-full bg-[#E85D04] animate-pulse" />
-              Get Pre-Qualified
+              Free Pre-Qualification
             </a>
           </motion.div>
         </div>
@@ -154,16 +143,6 @@ export default function Hero() {
       </motion.div>
 
       {/* ── Floating badge + video control ── */}
-      <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.8, duration: 0.45, ease: EASE }}
-        className="absolute top-28 right-6 lg:right-12 z-20 hidden sm:flex items-center gap-2.5 px-4 py-3 rounded-2xl bg-[rgba(11,9,6,0.55)] backdrop-blur-xl border border-[rgba(255,255,255,0.14)]"
-      >
-        <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-[pulse-dot_2s_ease-in-out_infinite]" />
-        <span className="text-[12px] font-medium text-[#FBF6EC] tracking-tight">All properties Pag-IBIG eligible</span>
-      </motion.div>
-
       <button
         onClick={toggle}
         aria-label={playing ? 'Pause background video' : 'Play background video'}

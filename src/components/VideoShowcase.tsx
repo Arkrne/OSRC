@@ -24,7 +24,7 @@ export default function VideoShowcase() {
   }
 
   return (
-    <section className="py-12 sm:py-18 md:py-24 px-5 sm:px-8 lg:px-20 bg-[#F5EEE8]">
+    <section className="py-12 sm:py-18 md:py-24 px-5 sm:px-8 lg:px-20 bg-[#F5EEE8] border-b border-[rgba(28,23,20,0.06)]">
       <div className="max-w-[1360px] mx-auto">
         <div className="flex flex-col items-center text-center gap-2 sm:gap-3 mb-7 sm:mb-10">
           <motion.div

@@ -64,7 +64,7 @@ export default async function PropertiesPage({ searchParams }: Props) {
             Browse Our Listings
           </h1>
           <p className="text-[#6E6055] text-[14px] max-w-xl leading-relaxed">
-            Every listing is Pag-IBIG eligible. Browse, then get a free 24-hour pre-qualification — no obligation.
+            Every listing is Pag-IBIG eligible. Browse, then get a free 24-hour pre-qualification. No obligation.
           </p>
         </div>
 

@@ -1,6 +1,6 @@
 # HANDOFF — OSRC Website
 
-> Last updated: 2026-06-15 (Session 6 — design audit implementation). This document is the single source of truth for picking up
+> Last updated: 2026-06-16 (Session 7 — audit fixes batch 2, partial). This document is the single source of truth for picking up
 > work on this project. Read the top 5 sections first.
 
 ---

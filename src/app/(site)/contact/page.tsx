@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <div className="bg-[#0B0906] pt-20 sm:pt-24">
+    <div>
       <FaqJsonLd />
       <ContactForm />
       <FAQ />

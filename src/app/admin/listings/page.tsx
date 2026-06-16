@@ -342,6 +342,7 @@ export default function AdminListings() {
 
   async function handleSave(e: React.FormEvent) {
     e.preventDefault()
+    if (saving) return // re-entry guard — prevents duplicate listings on rapid submit
     const title       = sanitizeText(form.title)
     const location    = sanitizeText(form.location)
     const price       = sanitizeText(form.price)
@@ -436,7 +437,7 @@ export default function AdminListings() {
 
   return (
     <div
-      className="min-h-screen bg-[#0B0906]"
+      className="min-h-[100dvh] bg-[#0B0906]"
       style={{ backgroundImage: 'radial-gradient(ellipse 80% 50% at 72% -8%, rgba(232,93,4,0.09) 0%, transparent 55%), radial-gradient(ellipse 45% 35% at 5% 105%, rgba(200,148,58,0.05) 0%, transparent 50%)' }}
     >
       <div className="max-w-5xl mx-auto px-5 sm:px-8 pt-8 pb-24">
@@ -734,7 +735,7 @@ export default function AdminListings() {
                 </div>
 
                 {/* ── 2. Classification ── */}
-                <SectionHeader label="Classification" hint="Enables filters &amp; detail page" />
+                <SectionHeader label="Classification" hint="Enables filters & detail page" />
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
                   <SelectField label="Property Type" value={form.property_type} onChange={v => setForm(f => ({ ...f, property_type: v }))} optgroups={PROPERTY_TYPES} />
                   <SelectField label="Region" value={form.region} onChange={v => setForm(f => ({ ...f, region: v }))} optgroups={REGIONS} />
@@ -840,7 +841,7 @@ export default function AdminListings() {
                 </div>
 
                 {/* ── 5. Content ── */}
-                <SectionHeader label="Description &amp; Features" />
+                <SectionHeader label="Description & Features" />
                 <div className="flex flex-col gap-4 mb-8">
                   <div className="flex flex-col gap-1.5">
                     <div className="flex items-center justify-between">
@@ -901,11 +902,10 @@ export default function AdminListings() {
 function SectionHeader({ label, hint }: { label: string; hint?: string }) {
   return (
     <div className="flex items-baseline gap-3 mb-4">
-      <h3
-        className="text-[10px] font-semibold text-[#C8943A] uppercase tracking-[0.14em]"
-        dangerouslySetInnerHTML={{ __html: label }}
-      />
-      {hint && <span className="text-[10px] text-[#3A3028]" dangerouslySetInnerHTML={{ __html: hint }} />}
+      <h3 className="text-[10px] font-semibold text-[#C8943A] uppercase tracking-[0.14em]">
+        {label}
+      </h3>
+      {hint && <span className="text-[10px] text-[#3A3028]">{hint}</span>}
     </div>
   )
 }
@@ -925,7 +925,10 @@ function Field({ label, value, onChange, placeholder, className = '', required, 
         onChange={e => onChange(e.target.value)}
         placeholder={placeholder}
         inputMode={inputMode}
-        className="w-full px-4 py-3 rounded-xl bg-[#1A1410] border border-[rgba(255,255,255,0.07)] text-[#FBF6EC] placeholder-[#3A3028] text-sm focus:outline-none focus:border-[rgba(232,93,4,0.5)] transition-colors"
+        required={required}
+        aria-required={required || undefined}
+        autoComplete="off"
+        className="w-full px-4 py-3 rounded-xl bg-[#1A1410] border border-[rgba(255,255,255,0.07)] text-[#FBF6EC] placeholder-[#3A3028] text-base sm:text-sm focus:outline-none focus:border-[rgba(232,93,4,0.5)] transition-colors"
       />
     </div>
   )
@@ -944,7 +947,7 @@ function SelectField({ label, value, onChange, options, optgroups, className = '
       <select
         value={value}
         onChange={e => onChange(e.target.value)}
-        className="w-full px-4 py-3 rounded-xl bg-[#1A1410] border border-[rgba(255,255,255,0.07)] text-[#FBF6EC] text-sm focus:outline-none focus:border-[rgba(232,93,4,0.5)] transition-colors"
+        className="w-full px-4 py-3 rounded-xl bg-[#1A1410] border border-[rgba(255,255,255,0.07)] text-[#FBF6EC] text-base sm:text-sm focus:outline-none focus:border-[rgba(232,93,4,0.5)] transition-colors"
       >
         <option value="">— unset —</option>
         {optgroups

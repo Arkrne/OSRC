@@ -54,12 +54,12 @@ export default function HowItWorks() {
             viewport={{ once: true }}
             transition={{ duration: 0.45, ease: EASE }}
           >
-            <span className="eyebrow">How It Works</span>
+            <span className="eyebrow">Four Steps</span>
           </motion.div>
           <RevealHeading
             className="font-display text-[clamp(40px,5vw,72px)] text-[#1C1714]"
             style={{ lineHeight: 0.93, letterSpacing: '-0.03em' }}
-            lines={['From Inquiry', <span key="2">to <em className="not-italic text-shine">Keys</em> — in Four Steps</span>]}
+            lines={['From Inquiry', <span key="2">to <em className="not-italic text-shine">Keys,</em> Four Steps</span>]}
           />
           <motion.p
             initial={{ opacity: 0, y: 14 }}
@@ -68,7 +68,7 @@ export default function HowItWorks() {
             transition={{ duration: 0.5, delay: 0.18, ease: EASE }}
             className="text-[#6E6055] text-[17px] leading-relaxed max-w-xl"
           >
-            We guide you through every stage — from finding out how much Pag-IBIG will lend you, all the way to the day you get your keys.
+            From finding out how much Pag-IBIG will lend you, all the way to the day you get your keys.
           </motion.p>
         </div>
 

@@ -42,7 +42,7 @@ export default function WhyChooseUs() {
       <div className="relative z-10 max-w-[1360px] mx-auto">
 
         {/* Section header */}
-        <div className="flex flex-col gap-2 sm:gap-3 mb-8 sm:mb-12">
+        <div className="flex flex-col gap-2 sm:gap-3 mb-10 sm:mb-14">
           <RevealHeading
             className="font-display text-[clamp(36px,4vw,60px)] text-[#1C1714] max-w-xl"
             style={{ lineHeight: 0.95, letterSpacing: '-0.025em' }}

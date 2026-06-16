@@ -22,14 +22,11 @@ export default function FinalCTA() {
           <div className="pointer-events-none absolute -top-1/3 right-0 w-[500px] h-[500px] max-w-full opacity-30" style={{ background: 'radial-gradient(ellipse, rgba(232,93,4,0.5) 0%, transparent 65%)', filter: 'blur(90px)' }} />
 
           <div className="relative z-10 flex flex-col items-center text-center max-w-2xl mx-auto">
-            <span className="eyebrow on-dark mb-5 sm:mb-6">
-              Ready to Find Your Home?
-            </span>
-            <h2 className="font-display text-[clamp(30px,5vw,68px)] text-[#FBF6EC] mb-5" style={{ lineHeight: 0.95, letterSpacing: '-0.03em' }}>
+<h2 className="font-display text-[clamp(30px,5vw,68px)] text-[#FBF6EC] mb-5" style={{ lineHeight: 0.95, letterSpacing: '-0.03em' }}>
               Browse Pag-IBIG Homes,<br /><em className="not-italic text-[#F27024]">Find the Right Fit</em>
             </h2>
             <p className="text-[#C6B9A4] text-[15px] sm:text-[16px] leading-relaxed mb-8 sm:mb-10 max-w-lg">
-              Explore available properties across Cavite, Laguna, Bulacan, and Metro Manila — all Pag-IBIG eligible, all with transparent developer pricing.
+              Explore available properties across Cavite, Laguna, Bulacan, and Metro Manila. All Pag-IBIG eligible, all at developer pricing.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center gap-4">
@@ -46,7 +43,7 @@ export default function FinalCTA() {
                 href="/contact"
                 className="flex items-center gap-2.5 px-7 py-4 rounded-full border border-[rgba(255,255,255,0.2)] text-[#C6B9A4] hover:text-white hover:border-[rgba(255,255,255,0.4)] text-[15px] font-medium transition-[border-color,color] duration-[160ms] ease-out"
               >
-                Get Free Pre-Qualification
+                Free Pre-Qualification
               </Link>
             </div>
           </div>

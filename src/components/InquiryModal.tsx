@@ -31,6 +31,7 @@ export default function InquiryModal({ propertyName, onClose }: Props) {
   })
   const [formState, setFormState] = useState<FormState>('idle')
   const [error, setError]         = useState('')
+  const [invalidField, setInvalidField] = useState('')
   const dialogRef  = useRef<HTMLDivElement>(null)
   const triggerRef = useRef<HTMLElement | null>(null)
 
@@ -82,15 +83,28 @@ export default function InquiryModal({ propertyName, onClose }: Props) {
     triggerRef.current?.focus()
   }, [onClose])
 
-  const set = (k: keyof typeof form, v: string) => setForm(f => ({ ...f, [k]: v }))
+  const set = (k: keyof typeof form, v: string) => {
+    setForm(f => ({ ...f, [k]: v }))
+    if (error || invalidField) { setError(''); setInvalidField('') }
+  }
+
+  const fail = (field: string, msg: string) => {
+    setInvalidField(field)
+    setError(msg)
+    document.getElementById(`modal-${field}`)?.focus()
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!form.name || !form.email || !form.phone) {
-      setError('Please fill in all required fields.')
-      return
-    }
+    if (formState === 'loading') return // re-entry guard (blocks Enter double-submit)
+
+    // Client-side validation mirrors the API for precise, immediate feedback.
+    if (!form.name || form.name.trim().length < 2) return fail('name', 'Please enter your full name.')
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(form.email)) return fail('email', 'Please enter a valid email address.')
+    if (!/^[+\d\s\-().]{7,20}$/.test(form.phone)) return fail('phone', 'Please enter a valid phone number.')
+
     setError('')
+    setInvalidField('')
     setFormState('loading')
     try {
       const res = await fetch('/api/send-inquiry', {
@@ -98,7 +112,12 @@ export default function InquiryModal({ propertyName, onClose }: Props) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
       })
-      if (!res.ok) throw new Error()
+      const data: { error?: string } = await res.json().catch(() => ({}))
+      if (!res.ok) {
+        setFormState('error')
+        setError(data.error ?? 'Unable to send your inquiry right now. Please call us at +63 956 884 3373.')
+        return
+      }
       setFormState('success')
     } catch {
       setFormState('error')
@@ -171,11 +190,11 @@ export default function InquiryModal({ propertyName, onClose }: Props) {
                 </p>
               )}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <Field id="modal-name"  label="Full Name *"  value={form.name}  onChange={v => set('name',  v)} placeholder="Juan dela Cruz"  />
-                <Field id="modal-email" label="Email *" type="email" value={form.email} onChange={v => set('email', v)} placeholder="juan@email.com" />
+                <Field id="modal-name"  label="Full Name"  required autoComplete="name"  maxLength={120} invalid={invalidField === 'name'}  value={form.name}  onChange={v => set('name',  v)} placeholder="Juan dela Cruz"  />
+                <Field id="modal-email" label="Email" required type="email" autoComplete="email" maxLength={120} invalid={invalidField === 'email'} value={form.email} onChange={v => set('email', v)} placeholder="juan@email.com" />
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <Field id="modal-phone" label="Phone *" type="tel" value={form.phone} onChange={v => set('phone', v)} placeholder="09XX XXX XXXX" />
+                <Field id="modal-phone" label="Phone" required type="tel" autoComplete="tel" inputMode="tel" maxLength={20} invalid={invalidField === 'phone'} value={form.phone} onChange={v => set('phone', v)} placeholder="09XX XXX XXXX" />
                 <div className="flex flex-col gap-1.5">
                   <label htmlFor="modal-property" className="text-[10px] font-medium text-[#A89070] uppercase tracking-wide">
                     Property of Interest{!propertyName && <span className="normal-case tracking-normal font-normal text-[#C4B8A8] ml-1">(optional)</span>}
@@ -185,7 +204,9 @@ export default function InquiryModal({ propertyName, onClose }: Props) {
                     value={form.property}
                     onChange={e => set('property', e.target.value)}
                     placeholder={propertyName ? '' : 'e.g. Catanduanes in Virac, or leave blank'}
-                    className="h-11 px-4 rounded-xl bg-[rgba(28,23,20,0.03)] border border-[rgba(28,23,20,0.1)] text-[#1C1714] text-[13px] placeholder:text-[#C4B8A8] focus:outline-none focus:border-[rgba(232,93,4,0.45)] transition-[border-color] duration-200"
+                    autoComplete="off"
+                    maxLength={120}
+                    className="h-11 px-4 rounded-xl bg-[rgba(28,23,20,0.03)] border border-[rgba(28,23,20,0.1)] text-[#1C1714] text-[16px] sm:text-[13px] placeholder:text-[#C4B8A8] focus:outline-none focus:border-[rgba(232,93,4,0.45)] transition-[border-color] duration-200"
                   />
                 </div>
               </div>
@@ -238,9 +259,10 @@ export default function InquiryModal({ propertyName, onClose }: Props) {
                   id="modal-message"
                   value={form.message}
                   onChange={e => set('message', e.target.value)}
-                  placeholder="Any specific questions or requirements…"
+                  placeholder="Budget, location, or anything else on your mind"
                   rows={3}
-                  className="px-4 py-3 rounded-xl bg-[rgba(28,23,20,0.03)] border border-[rgba(28,23,20,0.1)] text-[#1C1714] text-[13px] placeholder:text-[#C4B8A8] focus:outline-none focus:border-[rgba(232,93,4,0.45)] transition-[border-color] duration-200 resize-none"
+                  maxLength={2000}
+                  className="px-4 py-3 rounded-xl bg-[rgba(28,23,20,0.03)] border border-[rgba(28,23,20,0.1)] text-[#1C1714] text-[16px] sm:text-[13px] placeholder:text-[#C4B8A8] focus:outline-none focus:border-[rgba(232,93,4,0.45)] transition-[border-color] duration-200 resize-none"
                 />
               </div>
 
@@ -271,19 +293,37 @@ export default function InquiryModal({ propertyName, onClose }: Props) {
   )
 }
 
-function Field({ id, label, value, onChange, placeholder, type = 'text' }: {
-  id: string; label: string; value: string; onChange: (v: string) => void; placeholder?: string; type?: string
+function Field({
+  id, label, value, onChange, placeholder, type = 'text',
+  required, autoComplete, inputMode, maxLength, invalid,
+}: {
+  id: string; label: string; value: string; onChange: (v: string) => void;
+  placeholder?: string; type?: string; required?: boolean;
+  autoComplete?: string;
+  inputMode?: 'text' | 'tel' | 'email' | 'numeric';
+  maxLength?: number; invalid?: boolean;
 }) {
   return (
     <div className="flex flex-col gap-1.5">
-      <label htmlFor={id} className="text-[10px] font-medium text-[#A89070] uppercase tracking-wide">{label}</label>
+      <label htmlFor={id} className="text-[10px] font-medium text-[#A89070] uppercase tracking-wide">
+        {label}{required && <span className="text-[#E85D04] ml-0.5" aria-hidden>*</span>}
+      </label>
       <input
         id={id}
         type={type}
         value={value}
         onChange={e => onChange(e.target.value)}
         placeholder={placeholder}
-        className="h-11 px-4 rounded-xl bg-[rgba(28,23,20,0.03)] border border-[rgba(28,23,20,0.1)] text-[#1C1714] text-[13px] placeholder:text-[#C4B8A8] focus:outline-none focus:border-[rgba(232,93,4,0.45)] transition-[border-color] duration-200"
+        required={required}
+        aria-required={required || undefined}
+        aria-invalid={invalid || undefined}
+        autoComplete={autoComplete}
+        inputMode={inputMode}
+        maxLength={maxLength}
+        /* 16px on mobile prevents iOS Safari focus-zoom; tightens to 13px at sm+ */
+        className={`h-11 px-4 rounded-xl bg-[rgba(28,23,20,0.03)] border text-[#1C1714] text-[16px] sm:text-[13px] placeholder:text-[#C4B8A8] focus:outline-none transition-[border-color] duration-200 ${
+          invalid ? 'border-[rgba(220,38,38,0.55)]' : 'border-[rgba(28,23,20,0.1)] focus:border-[rgba(232,93,4,0.45)]'
+        }`}
       />
     </div>
   )

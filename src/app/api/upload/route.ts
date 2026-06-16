@@ -10,8 +10,9 @@ export async function POST(request: NextRequest) {
   if (!user) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
+  // Fail closed: if the allowlist is unconfigured, deny everyone (matches proxy.ts).
   const allowedUids = process.env.ADMIN_ALLOWED_UIDS?.split(',').map(s => s.trim()).filter(Boolean) ?? []
-  if (allowedUids.length > 0 && !allowedUids.includes(user.id)) {
+  if (allowedUids.length === 0 || !allowedUids.includes(user.id)) {
     return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
   }
 
@@ -38,6 +39,22 @@ export async function POST(request: NextRequest) {
 
   if (!fullBlob || !thumbBlob || !fullName || !thumbName) {
     return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
+  }
+
+  // Reject path-traversal / unexpected storage keys (client-supplied → untrusted).
+  const isSafeKey = (k: string) =>
+    /^[A-Za-z0-9._\-/]+$/.test(k) && !k.includes('..') && !k.startsWith('/') && k.length <= 200
+  if (!isSafeKey(fullName) || !isSafeKey(thumbName)) {
+    return NextResponse.json({ error: 'Invalid file name' }, { status: 400 })
+  }
+
+  // Only accept images, and cap size to prevent storage/memory exhaustion.
+  const MAX_BYTES = 10 * 1024 * 1024 // 10 MB
+  if (!fullBlob.type.startsWith('image/') || !thumbBlob.type.startsWith('image/')) {
+    return NextResponse.json({ error: 'Only image uploads are allowed' }, { status: 415 })
+  }
+  if (fullBlob.size > MAX_BYTES || thumbBlob.size > MAX_BYTES) {
+    return NextResponse.json({ error: 'File too large (10 MB max)' }, { status: 413 })
   }
 
   const fullBytes  = Buffer.from(await fullBlob.arrayBuffer())

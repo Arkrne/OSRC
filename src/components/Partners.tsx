@@ -17,7 +17,7 @@ const partners = [
 
 export default function Partners() {
   return (
-    <section className="py-14 sm:py-16 md:py-24 border-y border-[rgba(28,23,20,0.08)] overflow-hidden">
+    <section className="py-12 sm:py-18 md:py-24 border-y border-[rgba(28,23,20,0.08)] overflow-hidden">
       <div className="max-w-[1360px] mx-auto px-5 sm:px-8 lg:px-20">
         <motion.div
           initial={{ opacity: 0, y: 16 }}

@@ -21,19 +21,10 @@ export default function Team() {
       <div className="blob blob-1 left-1/2 -translate-x-1/2 -top-10 h-72 w-[28rem] opacity-70" aria-hidden />
       <div className="relative z-10 max-w-[1360px] mx-auto">
         <div className="flex flex-col items-center text-center gap-2 sm:gap-3 mb-8 sm:mb-11">
-          <motion.span
-            initial={{ opacity: 0, y: 14 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.45, ease: EASE }}
-            className="eyebrow"
-          >
-            The Specialists
-          </motion.span>
           <RevealHeading
             className="font-display text-[clamp(34px,4vw,58px)] text-[#1C1714] max-w-2xl"
             style={{ lineHeight: 0.95, letterSpacing: '-0.025em' }}
-            lines={['Real People Who', <span key="2">Walk <em className="italic text-shine">With You</em></span>]}
+            lines={['The Same Team,', <span key="2">Start to <em className="italic text-shine">Finish</em></span>]}
           />
           <motion.p
             initial={{ opacity: 0, y: 14 }}

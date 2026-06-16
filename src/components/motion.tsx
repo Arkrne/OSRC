@@ -41,23 +41,25 @@ export function RevealHeading({
   delay?: number
 }) {
   const reduced = useReducedMotion()
+  const ref = useRef<HTMLSpanElement>(null)
+  const inView = useInView(ref, { once: true, amount: 0 })
   const Tag = as
 
   return (
     <Tag className={className} style={style}>
-      {lines.map((line, i) => (
-        <span key={i} className="block overflow-hidden pb-[0.08em] -mb-[0.08em]">
-          <motion.span
-            className="block"
-            initial={reduced ? { opacity: 0 } : { y: '110%' }}
-            whileInView={reduced ? { opacity: 1 } : { y: '0%' }}
-            viewport={{ once: true, margin: '-8% 0px' }}
-            transition={{ duration: 0.8, delay: delay + i * 0.09, ease: EASE }}
-          >
-            {line}
-          </motion.span>
-        </span>
-      ))}
+      <span ref={ref}>
+        {lines.map((line, i) => (
+          <span key={i} className="block overflow-hidden pb-[0.2em] -mb-[0.2em] pr-[0.2em]">
+            <motion.span
+              className="block"
+              animate={reduced ? { opacity: inView ? 1 : 0 } : { y: inView ? '0%' : '110%' }}
+              transition={{ duration: 0.8, delay: delay + i * 0.09, ease: EASE }}
+            >
+              {line}
+            </motion.span>
+          </span>
+        ))}
+      </span>
     </Tag>
   )
 }

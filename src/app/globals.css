@@ -383,6 +383,8 @@ a, button, [role="button"], input[type="submit"], label {
   background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: text-shine 5s linear infinite;
+  padding-right: 0.2em;
+  margin-right: -0.2em;
 }
 
 /* ─── Marquee strip styling ─── */

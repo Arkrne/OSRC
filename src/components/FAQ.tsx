@@ -20,7 +20,7 @@ export default function FAQ() {
   const [open, setOpen] = useState<number | null>(0)
 
   return (
-    <section id="faq" className="py-12 sm:py-18 md:py-24 px-5 sm:px-8 lg:px-20">
+    <section id="faq" className="py-12 sm:py-18 md:py-24 px-5 sm:px-8 lg:px-20 bg-[#FAFAF7]">
       <div className="max-w-5xl mx-auto grid md:grid-cols-5 gap-10 md:gap-12">
         <div className="md:col-span-2">
           <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.45, ease: EASE }} className="mb-5">

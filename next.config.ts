@@ -1,11 +1,21 @@
 import type { NextConfig } from "next";
+import path from "node:path";
 
 const nextConfig: NextConfig = {
+  devIndicators: false,
+  // Pin the workspace root — a stray lockfile in the home dir made Next infer
+  // C:\Users\TUF as the root, which breaks output file tracing on deploy.
+  turbopack: { root: path.resolve(".") },
   images: {
     remotePatterns: [
       {
         protocol: 'https',
         hostname: 'images.unsplash.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.pexels.com',
         pathname: '/**',
       },
       {

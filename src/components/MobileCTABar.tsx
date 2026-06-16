@@ -39,7 +39,7 @@ export default function MobileCTABar() {
               href="/contact"
               className="flex-1 flex items-center justify-center gap-1.5 min-h-[48px] rounded-xl bg-[#E85D04] text-white font-semibold text-[14px] tracking-tight shadow-[0_4px_20px_rgba(232,93,4,0.45)] active:scale-[0.97] transition-transform duration-150"
             >
-              Get Pre-Qualified Free
+              Free Pre-Qualification
               <ArrowUpRight size={15} strokeWidth={2.25} />
             </Link>
           </div>

@@ -57,7 +57,6 @@ export default function Testimonials() {
     <section id="testimonials" className="py-12 sm:py-18 md:py-24 px-5 sm:px-8 lg:px-20">
       <div className="max-w-[1360px] mx-auto">
         <div className="flex flex-col items-center text-center gap-2 sm:gap-3 mb-8 sm:mb-11">
-          <span className="eyebrow">Client Stories</span>
           <h2 className="font-display text-[clamp(34px,4vw,58px)] text-[#1C1714] max-w-2xl" style={{ lineHeight: 0.95, letterSpacing: '-0.025em' }}>
             Families We've Helped Come Home
           </h2>
