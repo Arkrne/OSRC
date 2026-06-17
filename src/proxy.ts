@@ -48,34 +48,8 @@ export async function proxy(request: NextRequest) {
     return NextResponse.redirect(new URL('/admin/dashboard', request.url))
   }
 
-  // ── Security headers on every response ────────────────────────────────────
-  supabaseResponse.headers.set('X-Frame-Options', 'DENY')
-  supabaseResponse.headers.set('X-Content-Type-Options', 'nosniff')
-  supabaseResponse.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin')
-  supabaseResponse.headers.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=()')
-  supabaseResponse.headers.set(
-    'Strict-Transport-Security',
-    'max-age=63072000; includeSubDomains; preload'
-  )
-  // 'unsafe-eval' is only needed by the dev server (HMR); never ship it to production.
-  const scriptSrc =
-    process.env.NODE_ENV === 'development'
-      ? "script-src 'self' 'unsafe-inline' 'unsafe-eval'"
-      : "script-src 'self' 'unsafe-inline'"
-  supabaseResponse.headers.set(
-    'Content-Security-Policy',
-    [
-      "default-src 'self'",
-      scriptSrc,
-      "style-src 'self' 'unsafe-inline'",
-      "img-src 'self' data: blob: https://*.supabase.co",
-      "media-src 'self' https://*.supabase.co",
-      "connect-src 'self' https://*.supabase.co https://api.resend.com https://va.vercel-scripts.com https://vitals.vercel-insights.com",
-      "font-src 'self'",
-      "frame-ancestors 'none'",
-    ].join('; ')
-  )
-
+  // Security headers (CSP, HSTS, X-Frame-Options, …) are set globally in
+  // next.config.ts so they also cover static assets the matcher below excludes.
   return supabaseResponse
 }
 

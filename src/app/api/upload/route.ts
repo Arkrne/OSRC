@@ -1,6 +1,8 @@
 import { createClient as createServerSupabase } from '@/lib/supabase/server'
 import { createClient as createAdminSupabase } from '@supabase/supabase-js'
 import { NextRequest, NextResponse } from 'next/server'
+import { isSafeKey } from '@/lib/validation'
+import { reportError } from '@/lib/report-error'
 
 export async function POST(request: NextRequest) {
   // ── Auth guard: only logged-in admins may upload ──────────────────────────
@@ -42,8 +44,6 @@ export async function POST(request: NextRequest) {
   }
 
   // Reject path-traversal / unexpected storage keys (client-supplied → untrusted).
-  const isSafeKey = (k: string) =>
-    /^[A-Za-z0-9._\-/]+$/.test(k) && !k.includes('..') && !k.startsWith('/') && k.length <= 200
   if (!isSafeKey(fullName) || !isSafeKey(thumbName)) {
     return NextResponse.json({ error: 'Invalid file name' }, { status: 400 })
   }
@@ -67,6 +67,7 @@ export async function POST(request: NextRequest) {
 
   if (r1.error || r2.error) {
     const msg = r1.error?.message ?? r2.error?.message ?? 'Upload error'
+    reportError('upload_failed', r1.error ?? r2.error ?? msg, { userId: user.id, fullName })
     return NextResponse.json({ error: msg }, { status: 500 })
   }
 

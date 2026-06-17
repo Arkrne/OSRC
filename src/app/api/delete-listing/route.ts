@@ -1,6 +1,7 @@
 import { createClient as createServerSupabase } from '@/lib/supabase/server'
 import { createClient as createAdminSupabase } from '@supabase/supabase-js'
 import { NextRequest, NextResponse } from 'next/server'
+import { reportError } from '@/lib/report-error'
 
 export async function DELETE(request: NextRequest) {
   // Auth guard
@@ -34,7 +35,10 @@ export async function DELETE(request: NextRequest) {
 
   // Delete the DB row
   const { error: dbErr } = await admin.from('listings').delete().eq('id', id)
-  if (dbErr) return NextResponse.json({ error: dbErr.message }, { status: 500 })
+  if (dbErr) {
+    reportError('delete_listing_failed', dbErr, { userId: user.id, listingId: id })
+    return NextResponse.json({ error: dbErr.message }, { status: 500 })
+  }
 
   // Clean up storage images (best-effort — don't fail the request if this errors)
   if (row) {

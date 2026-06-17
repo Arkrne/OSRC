@@ -2,6 +2,8 @@ import { Resend } from 'resend'
 import { NextRequest, NextResponse } from 'next/server'
 import { Ratelimit } from '@upstash/ratelimit'
 import { Redis } from '@upstash/redis'
+import { isEmail, isPhone, strip, esc } from '@/lib/validation'
+import { reportError } from '@/lib/report-error'
 
 const RECIPIENT = process.env.INQUIRY_EMAIL ?? 'jolavts@gmail.com'
 // Switch to noreply@orangesquarerealty.com.ph once domain is verified in Resend
@@ -41,16 +43,8 @@ async function checkRate(ip: string): Promise<boolean> {
   return false
 }
 
-// ─── Validation helpers ───────────────────────────────────────────────────────
-function isEmail(s: string)  { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(s) && s.length <= 254 }
-function isPhone(s: string)  { return /^[+\d\s\-()\\.]{7,20}$/.test(s) }
-function strip(s: unknown)   {
-  if (typeof s !== 'string') return ''
-  return s.trim().replace(/[\x00-\x1F\x7F]/g, '').slice(0, 1000)
-}
-function esc(s: string) {
-  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;')
-}
+// Validation + sanitization helpers (isEmail, isPhone, strip, esc) now live in
+// @/lib/validation so they can be unit-tested in isolation.
 
 // ─── CORS helpers ─────────────────────────────────────────────────────────────
 const ALLOWED_ORIGINS = new Set([
@@ -187,7 +181,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ success: true }, { headers: cors })
 
   } catch (err) {
-    log('error', 'email_failed', { ip, err: String(err) })
+    reportError('email_failed', err, { ip, property: property || 'general' })
     return NextResponse.json(
       { error: 'Unable to send your inquiry right now. Please call us directly at +63 956 884 3373.' },
       { status: 500, headers: cors }
