@@ -110,6 +110,21 @@ export async function getAllSlugs(): Promise<{ slug: string; created_at: string 
   return (data ?? []) as { slug: string; created_at: string }[]
 }
 
+// Paginated slug fetch for sitemap chunks. Unlike getAllSlugs (capped at 1000
+// for generateStaticParams), this fetches an arbitrary window so the sitemap
+// can cover an unbounded number of listings via generateSitemaps().
+export async function getSlugPage(offset: number, limit: number): Promise<{ slug: string; created_at: string }[]> {
+  const supabase = publicClient()
+  const { data, error } = await supabase
+    .from('listings')
+    .select('slug,created_at')
+    .not('slug', 'is', null)
+    .order('created_at', { ascending: false })
+    .range(offset, offset + limit - 1)
+  if (error) { console.error('getSlugPage error:', error.message); return [] }
+  return (data ?? []) as { slug: string; created_at: string }[]
+}
+
 // ─── Image helpers (shared across card, grid, detail) ────────────────────────
 export function getCardImage(l: Listing): string {
   if (l.thumbnail_urls?.length) return l.thumbnail_urls[l.main_image_index ?? 0] ?? l.thumbnail_urls[0]
