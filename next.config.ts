@@ -39,6 +39,8 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   devIndicators: false,
+  // Don't advertise the framework (removes the X-Powered-By: Next.js header).
+  poweredByHeader: false,
   // Build-time Subresource Integrity: adds integrity="sha256-…" to emitted
   // scripts so a strict script-src 'self' (no 'unsafe-inline') is safe while
   // preserving static/ISR rendering. Experimental — verify after Next upgrades.

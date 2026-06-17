@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { Ratelimit } from '@upstash/ratelimit'
 import { Redis } from '@upstash/redis'
 import { isEmail, isPhone, strip, esc } from '@/lib/validation'
+import { getClientIp } from '@/lib/client-ip'
 import { reportError } from '@/lib/report-error'
 
 const RECIPIENT = process.env.INQUIRY_EMAIL ?? 'jolavts@gmail.com'
@@ -82,8 +83,8 @@ export async function POST(req: NextRequest) {
   const origin = req.headers.get('origin')
   const cors   = corsHeaders(origin)
 
-  // 1. Rate limit
-  const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'unknown'
+  // 1. Rate limit — key on a trusted client IP (not the spoofable leftmost XFF token)
+  const ip = getClientIp(req.headers)
   if (await checkRate(ip)) {
     log('warn', 'rate_limited', { ip })
     return NextResponse.json(
