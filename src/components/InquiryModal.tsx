@@ -132,7 +132,6 @@ export default function InquiryModal({ propertyName, onClose }: Props) {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.2 }}
       className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm"
-      aria-hidden="true"
       onClick={e => { if (e.target === e.currentTarget) handleClose() }}
     >
       <motion.div
@@ -145,7 +144,6 @@ export default function InquiryModal({ propertyName, onClose }: Props) {
         exit={{ opacity: 0, scale: 0.97, y: 8 }}
         transition={{ duration: 0.3, ease: EASE_OUT }}
         className="bezel-outer w-full max-w-lg max-h-[90vh] overflow-y-auto"
-        aria-hidden="false"
       >
         <div className="bezel-inner px-6 py-6">
           <div className="flex items-start justify-between mb-6">

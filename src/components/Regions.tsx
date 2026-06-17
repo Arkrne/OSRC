@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { MapPin, ArrowUpRight } from 'lucide-react'
 import { RevealHeading, Stagger, StaggerItem, TiltCard, ScrollImage } from './motion'
@@ -41,8 +42,7 @@ export default function Regions() {
                   className="glow-border relative block h-[340px] sm:h-[360px] rounded-3xl overflow-hidden border border-[rgba(28,23,20,0.08)] shadow-[0_10px_40px_-18px_rgba(28,23,20,0.35)]"
                 >
                   <ScrollImage className="absolute inset-0 h-full w-full" scaleFrom={1.22} drift={26}>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={r.img} alt={r.name} loading="lazy" className="h-full w-full object-cover transition-transform duration-[800ms] ease-out group-hover:scale-[1.04]" />
+                    <Image src={r.img} alt={r.name} fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw" className="object-cover transition-transform duration-[800ms] ease-out group-hover:scale-[1.04]" />
                   </ScrollImage>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
                   {/* count chip — floats on a 3D layer */}

@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { Quote } from 'lucide-react'
 import { useVideoAutoplay } from '@/lib/useVideoAutoplay'
@@ -38,9 +39,8 @@ export default function VideoReel() {
             OSRC made the Pag-IBIG process feel simple and human.&rdquo;
           </p>
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-full overflow-hidden border border-white/20 shrink-0">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="https://pfnfgbbccdexbyjorvam.supabase.co/storage/v1/object/public/site-assets/media/avatar-liza-mariano.jpg" alt="Liza Mariano" className="w-full h-full object-cover" loading="lazy" />
+            <div className="relative w-12 h-12 rounded-full overflow-hidden border border-white/20 shrink-0">
+              <Image src="https://pfnfgbbccdexbyjorvam.supabase.co/storage/v1/object/public/site-assets/media/avatar-liza-mariano.jpg" alt="Liza Mariano" fill sizes="48px" className="object-cover" />
             </div>
             <div>
               <p className="text-[#FBF6EC] font-semibold text-[14px]">Liza Mariano</p>

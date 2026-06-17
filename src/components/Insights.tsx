@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 
 const EASE = [0.23, 1, 0.32, 1] as const
@@ -58,8 +59,7 @@ export default function Insights() {
               className="flex flex-col h-full"
             >
               <div className="relative h-56 rounded-3xl overflow-hidden border border-[rgba(28,23,20,0.08)] mb-5">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={p.img} alt="" role="presentation" loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
+                <Image src={p.img} alt="" role="presentation" fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover" />
                 <span className="absolute top-4 left-4 text-[10px] font-medium px-2.5 py-1 rounded-full bg-white/90 text-[#E85D04] border border-[rgba(232,93,4,0.2)]">{p.tag}</span>
               </div>
               <h3 className="text-[#1C1714] font-semibold text-[17px] leading-snug tracking-tight mb-2">

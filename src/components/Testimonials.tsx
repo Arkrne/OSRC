@@ -1,6 +1,7 @@
 'use client'
 
 import { useCallback, useEffect, useState } from 'react'
+import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronLeft, ChevronRight, Star, Quote } from 'lucide-react'
 
@@ -76,8 +77,7 @@ export default function Testimonials() {
               >
                 {/* Photo */}
                 <div className="relative w-44 h-44 md:w-60 md:h-60 shrink-0 rounded-3xl overflow-hidden md:mr-[-3rem] z-10 shadow-[0_10px_40px_rgba(28,23,20,0.12)]">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={t.image} alt={t.name} className="w-full h-full object-cover" loading="lazy" />
+                  <Image src={t.image} alt={t.name} fill sizes="(max-width: 768px) 176px, 240px" className="object-cover" />
                 </div>
                 {/* Card */}
                 <div className="relative w-full bezel-outer">
