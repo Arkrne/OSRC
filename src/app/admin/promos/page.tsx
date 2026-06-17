@@ -50,7 +50,7 @@ export default function AdminPromos() {
 
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase()
-    let list = q
+    const list = q
       ? promos.filter(p =>
           p.title.toLowerCase().includes(q) ||
           p.description.toLowerCase().includes(q) ||

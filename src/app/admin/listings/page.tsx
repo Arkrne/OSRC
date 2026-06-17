@@ -232,7 +232,7 @@ export default function AdminListings() {
 
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase()
-    let list = q
+    const list = q
       ? listings.filter(l =>
           l.title.toLowerCase().includes(q) ||
           l.location.toLowerCase().includes(q) ||

@@ -14,7 +14,6 @@ export function isPhone(s: string): boolean {
 /** Coerce to string, trim, strip control characters, and cap length. */
 export function strip(s: unknown, max = 1000): string {
   if (typeof s !== 'string') return ''
-  // eslint-disable-next-line no-control-regex
   return s.trim().replace(/[\x00-\x1F\x7F]/g, '').slice(0, max)
 }
 
