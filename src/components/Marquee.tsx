@@ -26,7 +26,7 @@ export default function Marquee() {
     >
       <div className="ambient-glow" />
       {/* top row — outline type, drifts right→left */}
-      <VelocityMarquee baseVelocity={8} className="relative z-10 mb-3 sm:mb-4">
+      <VelocityMarquee baseVelocity={8 / 3} className="relative z-10 mb-3 sm:mb-4">
         <div className="flex shrink-0 items-center">
           {ROW_A.map((w) => (
             <span key={w} className="flex shrink-0 items-center">
@@ -38,7 +38,7 @@ export default function Marquee() {
       </VelocityMarquee>
 
       {/* bottom row — solid cream, drifts opposite via negative base */}
-      <VelocityMarquee baseVelocity={-6} className="relative z-10">
+      <VelocityMarquee baseVelocity={-2} className="relative z-10">
         <div className="flex shrink-0 items-center">
           {ROW_B.map((w, i) => (
             <span key={w} className="flex shrink-0 items-center">

@@ -39,3 +39,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Local Claude Code tooling — not part of the website
+/context-mode/
+/skills/
+/.playwright-mcp/
+
+# Generated knowledge-graph output (graphify)
+/graphify-out/
