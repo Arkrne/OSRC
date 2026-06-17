@@ -12,11 +12,9 @@ const isDev = process.env.NODE_ENV !== "production";
 // 'unsafe-inline' is required for script-src: App Router streams hydration via
 // page-specific inline <script>self.__next_f.push(...)</script> tags whose
 // content (RSC flight payload) changes per page/revalidation, so they cannot be
-// hash-allowlisted, and experimental.sri only adds integrity to EXTERNAL chunks
-// (verified: 7/7 external scripts hashed, 14 inline scripts unhashed). Removing
-// 'unsafe-inline' here is only possible with a per-request nonce, which forces
-// dynamic rendering and disables ISR — a tradeoff this site intentionally avoids.
-// 'unsafe-eval' is dev-only (HMR). SRI below still hardens the external chunks.
+// hash-allowlisted. Removing 'unsafe-inline' here is only possible with a
+// per-request nonce, which forces dynamic rendering and disables ISR — a
+// tradeoff this site intentionally avoids. 'unsafe-eval' is dev-only (HMR).
 const csp = [
   "default-src 'self'",
   `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""}`,
@@ -41,10 +39,10 @@ const nextConfig: NextConfig = {
   devIndicators: false,
   // Don't advertise the framework (removes the X-Powered-By: Next.js header).
   poweredByHeader: false,
-  // Build-time Subresource Integrity: adds integrity="sha256-…" to emitted
-  // scripts so a strict script-src 'self' (no 'unsafe-inline') is safe while
-  // preserving static/ISR rendering. Experimental — verify after Next upgrades.
-  experimental: { sri: { algorithm: 'sha256' } },
+  // NOTE: experimental.sri (SRI) was REMOVED — with Turbopack builds the
+  // integrity hashes did not match the chunks Vercel serves, so the browser
+  // blocked all JS in production and the site failed to hydrate. Do not re-add
+  // it unless SRI+Turbopack is confirmed working on this Next version.
   // Pin the workspace root — a stray lockfile in the home dir made Next infer
   // C:\Users\TUF as the root, which breaks output file tracing on deploy.
   turbopack: { root: path.resolve(".") },
