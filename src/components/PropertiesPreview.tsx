@@ -12,12 +12,12 @@ export default async function PropertiesPreview() {
 
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-5 mb-7 sm:mb-10">
           <div className="flex flex-col gap-2 sm:gap-3">
-            <span className="eyebrow">Available Properties</span>
+            <span className="eyebrow self-start">Available Properties</span>
             <h2
               className="font-display text-[clamp(36px,4vw,60px)] text-[#1C1714]"
               style={{ lineHeight: 0.95, letterSpacing: '-0.025em' }}
             >
-              Find the Right Home for You
+              Find the <em className="not-italic text-[#E85D04]">Right Home</em> for You
             </h2>
           </div>
           <Link

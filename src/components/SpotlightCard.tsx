@@ -35,12 +35,13 @@ export default function SpotlightCard({ listing, image }: { listing: Listing; im
           {/* Parallax image */}
           <div ref={ref} className="relative h-[300px] sm:h-[380px] lg:h-[520px] rounded-3xl overflow-hidden border border-[rgba(255,255,255,0.12)]">
             {image ? (
-              <motion.div style={{ y }} className="absolute -inset-y-[10%] inset-x-0">
+              <motion.div style={{ y }} className="absolute inset-x-0 -top-[15%] h-[130%]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={image}
                   alt={listing.title}
-                  className="w-full h-full object-cover"
+                  className="object-cover"
+                  style={{ width: '100%', height: '100%' }}
                   loading="lazy"
                 />
               </motion.div>
