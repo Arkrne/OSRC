@@ -4,6 +4,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { reportError } from '@/lib/report-error'
 import { makeRatelimit } from '@/lib/ratelimit'
 import { getClientIp } from '@/lib/client-ip'
+import { logAdminAction } from '@/lib/audit-log'
 
 const isRateLimited = makeRatelimit('delete-listing', 10, 60)
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
@@ -68,6 +69,8 @@ export async function DELETE(request: NextRequest) {
       await admin.storage.from('property-images').remove(paths)
     }
   }
+
+  logAdminAction('delete_listing', user.id, { listingId: id })
 
   return NextResponse.json({ ok: true })
 }
