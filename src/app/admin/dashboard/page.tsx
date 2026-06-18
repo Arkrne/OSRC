@@ -4,12 +4,15 @@ import {
   ImageOff, CircleDollarSign, FileText, CalendarX,
 } from 'lucide-react'
 import LogoutButton from '../LogoutButton'
-import { getDashboardStats } from '@/lib/admin-stats'
+import { getDashboardStats, getRecentAuditLog, type AuditLogEntry } from '@/lib/admin-stats'
 
 export const dynamic = 'force-dynamic'
 
 export default async function Dashboard() {
-  const { storage, content } = await getDashboardStats()
+  const [{ storage, content }, auditLog] = await Promise.all([
+    getDashboardStats(),
+    getRecentAuditLog(),
+  ])
 
   const pct = storage.quotaBytes > 0
     ? Math.min(100, (storage.usedBytes / storage.quotaBytes) * 100)
@@ -105,6 +108,9 @@ export default async function Dashboard() {
             </Link>
           </div>
         )}
+
+        {/* Recent Activity */}
+        <RecentActivity entries={auditLog} />
 
         {/* Nav cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -240,4 +246,67 @@ function formatPeso(n: number): string {
   if (n >= 1e6) return `₱${(n / 1e6).toFixed(1)}M`
   if (n >= 1e3) return `₱${(n / 1e3).toFixed(0)}K`
   return `₱${n.toLocaleString('en-PH')}`
+}
+
+// ─── Audit log helpers ────────────────────────────────────────────────────────
+
+const ACTION_LABELS: Record<string, string> = {
+  upload_image:   'Uploaded image',
+  delete_listing: 'Deleted listing',
+  create_promo:   'Created promo',
+  update_promo:   'Updated promo',
+  delete_promo:   'Deleted promo',
+}
+
+function metaSummary(action: string, meta: Record<string, unknown> | null): string {
+  if (!meta) return ''
+  if (action === 'upload_image' && meta.fullName)
+    return ` — ${String(meta.fullName).split('/').pop()}`
+  if (action === 'delete_listing' && meta.listingId)
+    return ` — ${String(meta.listingId).slice(0, 8)}…`
+  if ((action === 'create_promo' || action === 'update_promo') && meta.title)
+    return ` — ${String(meta.title).slice(0, 40)}`
+  if (action === 'delete_promo' && meta.promoId)
+    return ` — ${String(meta.promoId).slice(0, 8)}…`
+  return ''
+}
+
+function formatRelativeTime(ts: string): string {
+  const diff = Date.now() - new Date(ts).getTime()
+  const min  = Math.floor(diff / 60_000)
+  if (min < 1)  return 'just now'
+  if (min < 60) return `${min}m ago`
+  const hr = Math.floor(min / 60)
+  if (hr < 24)  return `${hr}h ago`
+  const days = Math.floor(hr / 24)
+  if (days === 1) return 'yesterday'
+  if (days < 7)   return `${days}d ago`
+  return new Date(ts).toLocaleDateString('en-PH', { month: 'short', day: 'numeric' })
+}
+
+function RecentActivity({ entries }: { entries: AuditLogEntry[] }) {
+  return (
+    <div className="mb-8 rounded-2xl bg-[#1A1410] border border-[rgba(255,255,255,0.05)] p-5">
+      <h3 className="text-[10px] font-medium text-[#6E6055] uppercase tracking-[0.12em] mb-3">
+        Recent Activity
+      </h3>
+      {entries.length === 0 ? (
+        <p className="text-[13px] text-[#6E6055]">No activity recorded yet.</p>
+      ) : (
+        <ul className="flex flex-col gap-2.5">
+          {entries.map(e => (
+            <li key={e.id} className="flex items-baseline justify-between gap-3">
+              <span className="text-[13px] text-[#C6B9A4] leading-snug">
+                {ACTION_LABELS[e.action] ?? e.action}
+                <span className="text-[#6E6055]">{metaSummary(e.action, e.meta)}</span>
+              </span>
+              <span className="text-[11px] text-[#6E6055] shrink-0 tabular-nums">
+                {formatRelativeTime(e.ts)}
+              </span>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  )
 }

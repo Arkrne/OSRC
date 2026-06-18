@@ -231,3 +231,27 @@ export async function getDashboardStats(): Promise<DashboardStats> {
   const [storage, content] = await Promise.all([getStorageStats(), getContentStats()])
   return { storage, content }
 }
+
+// ─── Audit log ────────────────────────────────────────────────────────────────
+
+export type AuditLogEntry = {
+  id: string
+  ts: string
+  actor_id: string
+  action: string
+  meta: Record<string, unknown> | null
+}
+
+/** Last 20 admin actions, newest first. Never cached — always fresh. */
+export async function getRecentAuditLog(): Promise<AuditLogEntry[]> {
+  try {
+    const { data } = await adminClient()
+      .from('admin_audit_log')
+      .select('id, ts, actor_id, action, meta')
+      .order('ts', { ascending: false })
+      .limit(20)
+    return (data as AuditLogEntry[]) ?? []
+  } catch {
+    return []
+  }
+}
