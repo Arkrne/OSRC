@@ -373,6 +373,7 @@ export function SpotlightCard({
           position: 'relative',
           '--spot': color,
           '--spot-size': `${size}px`,
+          ...style,
         } as CSSProperties
       }
     >

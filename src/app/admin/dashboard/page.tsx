@@ -4,7 +4,7 @@ import {
   ImageOff, CircleDollarSign, FileText, CalendarX,
 } from 'lucide-react'
 import LogoutButton from '../LogoutButton'
-import { getDashboardStats, type AlertGroup } from '@/lib/admin-stats'
+import { getDashboardStats } from '@/lib/admin-stats'
 
 export const dynamic = 'force-dynamic'
 

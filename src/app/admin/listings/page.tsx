@@ -282,6 +282,7 @@ export default function AdminListings() {
     load(pg)
   }
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => { load(0) }, [])
 
   function openAdd() {

@@ -3,13 +3,11 @@
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { Quote } from 'lucide-react'
-import { useVideoAutoplay } from '@/lib/useVideoAutoplay'
 
 const EASE = [0.23, 1, 0.32, 1] as const
 
 // Second video block — a "client story reel" full-bleed band
 export default function VideoReel() {
-  const shouldAutoplay = useVideoAutoplay()
   return (
     <section className="relative min-h-[78svh] sm:min-h-[70vh] flex items-center overflow-hidden bg-[#0B0906]">
       {/* Background video */}

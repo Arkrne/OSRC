@@ -72,6 +72,7 @@ export default function AdminPromos() {
     setPromos(data ?? [])
     setLoading(false)
   }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => { load() }, [])
 
   function openAdd()  { setEditing(null); setForm(EMPTY); setError(''); setShowForm(true) }
