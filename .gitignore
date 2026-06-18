@@ -47,3 +47,8 @@ next-env.d.ts
 
 # Generated knowledge-graph output (graphify)
 /graphify-out/
+
+# Personal/stray files accidentally committed
+.obsidian/
+_COMMUNITY_Community 39.md
+osrc-recovered.jpeg
