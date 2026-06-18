@@ -6,10 +6,8 @@ import { isEmail, isPhone, strip, esc } from '@/lib/validation'
 import { getClientIp } from '@/lib/client-ip'
 import { reportError } from '@/lib/report-error'
 
-const RECIPIENT = process.env.INQUIRY_EMAIL!
-if (!RECIPIENT) throw new Error('INQUIRY_EMAIL env var is not configured')
 // Switch to noreply@orangesquarerealty.com.ph once domain is verified in Resend
-const FROM      = process.env.RESEND_FROM ?? 'OSRC Inquiries <onboarding@resend.dev>'
+const FROM = process.env.RESEND_FROM ?? 'OSRC Inquiries <onboarding@resend.dev>'
 
 // ─── Rate limiting ────────────────────────────────────────────────────────────
 // Upstash Redis when env vars are present (production); in-memory fallback for local dev.
@@ -81,8 +79,13 @@ export async function OPTIONS(req: NextRequest) {
 
 // ─── Main handler ─────────────────────────────────────────────────────────────
 export async function POST(req: NextRequest) {
-  const origin = req.headers.get('origin')
-  const cors   = corsHeaders(origin)
+  const origin    = req.headers.get('origin')
+  const cors      = corsHeaders(origin)
+  const RECIPIENT = process.env.INQUIRY_EMAIL
+  if (!RECIPIENT) {
+    console.error('INQUIRY_EMAIL env var is not configured')
+    return NextResponse.json({ error: 'Server misconfiguration.' }, { status: 500, headers: cors })
+  }
 
   // 1. Rate limit — key on a trusted client IP (not the spoofable leftmost XFF token)
   const ip = getClientIp(req.headers)
