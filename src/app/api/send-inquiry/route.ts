@@ -6,7 +6,7 @@ import { isEmail, isPhone, strip, esc } from '@/lib/validation'
 import { getClientIp } from '@/lib/client-ip'
 import { reportError } from '@/lib/report-error'
 
-const RECIPIENT = process.env.INQUIRY_EMAIL
+const RECIPIENT = process.env.INQUIRY_EMAIL!
 if (!RECIPIENT) throw new Error('INQUIRY_EMAIL env var is not configured')
 // Switch to noreply@orangesquarerealty.com.ph once domain is verified in Resend
 const FROM      = process.env.RESEND_FROM ?? 'OSRC Inquiries <onboarding@resend.dev>'
