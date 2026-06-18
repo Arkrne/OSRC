@@ -17,15 +17,12 @@ test.describe('Inquiry form', () => {
   })
 
   test('submits inquiry and shows success state', async ({ page }) => {
-    await page.goto('/')
+    // ContactForm lives at /contact, not the homepage
+    await page.goto('/contact')
 
-    // PremiumField renders <input id="cf-*"> — use IDs directly to avoid
-    // label-matching ambiguity with Framer Motion-animated elements.
+    // PremiumField renders <input id="cf-*"> — use IDs directly
     const nameInput = page.locator('#cf-name')
-
-    // Scroll the contact section into view and wait for the form to be interactive
-    await page.evaluate(() => document.getElementById('contact')?.scrollIntoView())
-    await nameInput.waitFor({ state: 'visible', timeout: 15_000 })
+    await nameInput.waitFor({ state: 'visible', timeout: 10_000 })
 
     await nameInput.fill('Juan dela Cruz')
     await page.locator('#cf-email').fill('juan@example.com')
