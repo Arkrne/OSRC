@@ -5,6 +5,7 @@ import { isSafeKey } from '@/lib/validation'
 import { reportError } from '@/lib/report-error'
 import { makeRatelimit } from '@/lib/ratelimit'
 import { getClientIp } from '@/lib/client-ip'
+import { logAdminAction } from '@/lib/audit-log'
 
 const isRateLimited = makeRatelimit('upload', 20, 60)
 
@@ -82,6 +83,8 @@ export async function POST(request: NextRequest) {
 
   const fullUrl  = storage.storage.from('property-images').getPublicUrl(fullName).data.publicUrl
   const thumbUrl = storage.storage.from('property-images').getPublicUrl(thumbName).data.publicUrl
+
+  logAdminAction('upload_image', user.id, { fullName, thumbName })
 
   return NextResponse.json({ fullUrl, thumbUrl })
 }
