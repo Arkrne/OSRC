@@ -13,7 +13,10 @@ test.describe('Admin login', () => {
     await page.getByPlaceholder('Email').fill('wrong@example.com')
     await page.getByPlaceholder('Password').fill('wrongpassword')
     await page.getByRole('button', { name: 'Sign In' }).click()
-    // Any auth failure (including network error with fake Supabase URL) shows the generic message
-    await expect(page.getByRole('alert')).toContainText('Invalid email or password.', { timeout: 10_000 })
+    // Filter to the specific error paragraph — Next.js route announcer also has
+    // role="alert" and causes a strict-mode collision without the filter.
+    await expect(
+      page.getByRole('alert').filter({ hasText: 'Invalid email or password.' })
+    ).toBeVisible({ timeout: 10_000 })
   })
 })

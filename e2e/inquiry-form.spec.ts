@@ -19,20 +19,18 @@ test.describe('Inquiry form', () => {
   test('submits inquiry and shows success state', async ({ page }) => {
     await page.goto('/')
 
-    // Scroll to and fill the contact form fields
-    const nameInput  = page.getByLabel(/name/i).first()
-    const emailInput = page.getByLabel(/email/i).first()
-    const phoneInput = page.getByLabel(/phone/i).first()
+    // Navigate directly to the contact section anchor to avoid scrolling issues
+    await page.goto('/#contact')
 
-    await nameInput.scrollIntoViewIfNeeded()
-    await nameInput.fill('Juan dela Cruz')
-    await emailInput.fill('juan@example.com')
-    await phoneInput.fill('09568843373')
+    // Fields use PremiumField which renders <label htmlFor="cf-*"> + <input id="cf-*">
+    await page.getByLabel('Full Name').fill('Juan dela Cruz')
+    await page.getByLabel('Email').fill('juan@example.com')
+    await page.getByLabel('Phone').fill('09568843373')
 
-    // Submit the form
-    await page.getByRole('button', { name: /send inquiry/i }).click()
+    // Submit button text is "Get My Free Consult"
+    await page.getByRole('button', { name: /get my free consult/i }).click()
 
-    // Success state shows a confirmation message
-    await expect(page.getByText(/inquiry sent/i)).toBeVisible({ timeout: 8_000 })
+    // Success heading is "You're in good hands."
+    await expect(page.getByText("You're in good hands.")).toBeVisible({ timeout: 8_000 })
   })
 })
