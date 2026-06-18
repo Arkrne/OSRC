@@ -53,7 +53,8 @@ export type ListingFilters = {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function applyFilters(q: any, f: ListingFilters): any {
-  const s = f.search?.trim()
+  // Strip PostgREST filter delimiters to prevent .or() injection via the search param.
+  const s = f.search?.trim().replace(/[(),]/g, '').slice(0, 200)
   if (s) q = q.or(`title.ilike.%${s}%,location.ilike.%${s}%,property_type.ilike.%${s}%,region.ilike.%${s}%,description.ilike.%${s}%`)
   if (f.type)     q = q.eq('property_type', f.type)
   if (f.region)   q = q.eq('region', f.region)

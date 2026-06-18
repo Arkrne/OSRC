@@ -68,12 +68,18 @@ export const metadata: Metadata = {
     locale: 'en_PH',
     siteName: 'Orange Square Realty Corporation',
     url: 'https://orangesquarerealty.com.ph',
+    images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: 'Orange Square Realty Corporation — Pag-IBIG Housing Loan Specialists Philippines' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Orange Square Realty Corporation — Pag-IBIG Housing Loan Specialists',
     description: 'Find Your Dream Home. We Handle the Pag-IBIG Loan. Free pre-qualification in 24 hours.',
     site: '@orangesquarerealty',
+    images: ['/opengraph-image'],
+  },
+  icons: {
+    icon: [{ url: '/favicon.ico' }],
+    apple: [{ url: '/logo.jpg', sizes: '180x180', type: 'image/jpeg' }],
   },
 }
 

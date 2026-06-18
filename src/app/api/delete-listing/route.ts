@@ -2,8 +2,19 @@ import { createClient as createServerSupabase } from '@/lib/supabase/server'
 import { createClient as createAdminSupabase } from '@supabase/supabase-js'
 import { NextRequest, NextResponse } from 'next/server'
 import { reportError } from '@/lib/report-error'
+import { makeRatelimit } from '@/lib/ratelimit'
+import { getClientIp } from '@/lib/client-ip'
+
+const isRateLimited = makeRatelimit('delete-listing', 10, 60)
+const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
 
 export async function DELETE(request: NextRequest) {
+  // Rate limit: 10 deletes/min per IP
+  const ip = getClientIp(request.headers)
+  if (await isRateLimited(ip)) {
+    return NextResponse.json({ error: 'Too many requests.' }, { status: 429, headers: { 'Retry-After': '60' } })
+  }
+
   // Auth guard
   const auth = await createServerSupabase()
   const { data: { user } } = await auth.auth.getUser()
@@ -17,6 +28,7 @@ export async function DELETE(request: NextRequest) {
   const body = await request.json().catch(() => null)
   const id = body?.id as string | undefined
   if (!id) return NextResponse.json({ error: 'Missing id' }, { status: 400 })
+  if (!UUID_RE.test(id)) return NextResponse.json({ error: 'Invalid id' }, { status: 400 })
 
   // Use service-role key for all DB and storage operations (bypasses RLS)
   const rawKey = process.env.SUPABASE_SERVICE_ROLE_KEY

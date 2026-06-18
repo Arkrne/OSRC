@@ -12,6 +12,7 @@ export const metadata: Metadata = {
     title: 'Contact | Orange Square Realty',
     description: 'Free 24-hour Pag-IBIG pre-qualification. Call, email, or send an inquiry.',
     url: '/contact',
+    images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: 'Contact Orange Square Realty — Free Pag-IBIG Pre-Qualification' }],
   },
 }
 

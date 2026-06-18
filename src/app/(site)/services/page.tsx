@@ -13,6 +13,7 @@ export const metadata: Metadata = {
     title: 'Services | Orange Square Realty',
     description: 'Pag-IBIG loan processing, pre-qualification, property matching, and OFW housing loan service.',
     url: '/services',
+    images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: 'Orange Square Realty Services — Pag-IBIG Loan Processing' }],
   },
 }
 

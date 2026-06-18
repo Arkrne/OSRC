@@ -18,6 +18,7 @@ export const metadata: Metadata = {
     title: 'About | Orange Square Realty',
     description: 'Meet the team, the areas we serve, and why Filipino families trust Orange Square Realty.',
     url: '/about',
+    images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: 'About Orange Square Realty Corporation' }],
   },
 }
 

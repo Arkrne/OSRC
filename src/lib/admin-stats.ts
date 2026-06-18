@@ -18,8 +18,8 @@ const MAX_PAGES   = 50            // safety cap: never list more than 50k entrie
 function adminClient(): SupabaseClient {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL!
   const raw = process.env.SUPABASE_SERVICE_ROLE_KEY
-  // Treat the placeholder / anything that isn't a real JWT as "not configured".
-  const key = raw?.startsWith('eyJ') ? raw : process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  const key = raw?.startsWith('eyJ') ? raw : undefined
+  if (!key) throw new Error('SUPABASE_SERVICE_ROLE_KEY is not configured — admin-stats requires the service role key')
   return createClient(url, key, { auth: { persistSession: false } })
 }
 

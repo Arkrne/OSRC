@@ -15,6 +15,7 @@ export const metadata: Metadata = {
     title: 'Properties for Sale | Orange Square Realty',
     description: 'Browse Pag-IBIG-eligible house and lot listings across the Philippines.',
     url: '/properties',
+    images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: 'Properties for Sale — Pag-IBIG Eligible Homes Philippines' }],
   },
 }
 

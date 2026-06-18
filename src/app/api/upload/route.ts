@@ -3,10 +3,19 @@ import { createClient as createAdminSupabase } from '@supabase/supabase-js'
 import { NextRequest, NextResponse } from 'next/server'
 import { isSafeKey } from '@/lib/validation'
 import { reportError } from '@/lib/report-error'
+import { makeRatelimit } from '@/lib/ratelimit'
+import { getClientIp } from '@/lib/client-ip'
+
+const isRateLimited = makeRatelimit('upload', 20, 60)
 
 export async function POST(request: NextRequest) {
+  // ── Rate limit: 20 uploads/min per IP ────────────────────────────────────
+  const ip = getClientIp(request.headers)
+  if (await isRateLimited(ip)) {
+    return NextResponse.json({ error: 'Too many requests.' }, { status: 429, headers: { 'Retry-After': '60' } })
+  }
+
   // ── Auth guard: only logged-in admins may upload ──────────────────────────
-  // Uses the cookie-based session (same mechanism that protects /admin/*).
   const auth = await createServerSupabase()
   const { data: { user } } = await auth.auth.getUser()
   if (!user) {

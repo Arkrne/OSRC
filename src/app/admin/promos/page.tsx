@@ -89,16 +89,22 @@ export default function AdminPromos() {
     if (!title || !description) { setError('Title and description are required.'); return }
     setSaving(true); setError('')
     const payload = { title, description, valid_until: form.valid_until || null, badge: badge || null }
-    const { error: dbErr } = editing
-      ? await supabase.from('promos').update(payload).eq('id', editing.id)
-      : await supabase.from('promos').insert(payload)
-    if (dbErr) { setError('Save failed. Please try again.'); setSaving(false); return }
+    const res = await fetch('/api/promos', {
+      method: editing ? 'PATCH' : 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(editing ? { id: editing.id, ...payload } : payload),
+    })
+    if (!res.ok) { setError('Save failed. Please try again.'); setSaving(false); return }
     setSaving(false); setShowForm(false); load()
   }
 
   async function handleDelete(id: string) {
     if (!confirm('Delete this promo?')) return
-    await supabase.from('promos').delete().eq('id', id)
+    await fetch('/api/promos', {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id }),
+    })
     load()
   }
 
