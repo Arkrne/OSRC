@@ -2,6 +2,7 @@ import { createClient as createServerSupabase } from '@/lib/supabase/server'
 import { createClient as createAdminSupabase } from '@supabase/supabase-js'
 import { NextRequest, NextResponse } from 'next/server'
 import { strip } from '@/lib/validation'
+import { logAdminAction } from '@/lib/audit-log'
 
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
 
@@ -44,6 +45,9 @@ export async function POST(request: NextRequest) {
 
   const { data, error } = await adminClient().from('promos').insert({ title, description, badge, valid_until }).select().single()
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })
+
+  logAdminAction('create_promo', auth.userId, { promoId: data.id, title })
+
   return NextResponse.json(data)
 }
 
@@ -69,6 +73,9 @@ export async function PATCH(request: NextRequest) {
 
   const { data, error } = await adminClient().from('promos').update({ title, description, badge, valid_until }).eq('id', id).select().single()
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })
+
+  logAdminAction('update_promo', auth.userId, { promoId: id, title })
+
   return NextResponse.json(data)
 }
 
@@ -83,5 +90,8 @@ export async function DELETE(request: NextRequest) {
 
   const { error } = await adminClient().from('promos').delete().eq('id', id)
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })
+
+  logAdminAction('delete_promo', auth.userId, { promoId: id })
+
   return NextResponse.json({ ok: true })
 }
