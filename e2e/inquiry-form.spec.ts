@@ -19,13 +19,17 @@ test.describe('Inquiry form', () => {
   test('submits inquiry and shows success state', async ({ page }) => {
     await page.goto('/')
 
-    // Navigate directly to the contact section anchor to avoid scrolling issues
-    await page.goto('/#contact')
+    // PremiumField renders <input id="cf-*"> — use IDs directly to avoid
+    // label-matching ambiguity with Framer Motion-animated elements.
+    const nameInput = page.locator('#cf-name')
 
-    // Fields use PremiumField which renders <label htmlFor="cf-*"> + <input id="cf-*">
-    await page.getByLabel('Full Name').fill('Juan dela Cruz')
-    await page.getByLabel('Email').fill('juan@example.com')
-    await page.getByLabel('Phone').fill('09568843373')
+    // Scroll the contact section into view and wait for the form to be interactive
+    await page.evaluate(() => document.getElementById('contact')?.scrollIntoView())
+    await nameInput.waitFor({ state: 'visible', timeout: 15_000 })
+
+    await nameInput.fill('Juan dela Cruz')
+    await page.locator('#cf-email').fill('juan@example.com')
+    await page.locator('#cf-phone').fill('09568843373')
 
     // Submit button text is "Get My Free Consult"
     await page.getByRole('button', { name: /get my free consult/i }).click()

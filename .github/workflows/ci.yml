@@ -18,7 +18,10 @@ jobs:
           cache: npm
 
       - name: Install dependencies
-        run: npm ci
+        # npm install instead of npm ci: Playwright adds Linux-specific optional
+        # packages (@emnapi/*) that are absent from a Windows-generated lockfile,
+        # causing npm ci to fail on the ubuntu-latest runner.
+        run: npm install
 
       - name: Lint
         run: npm run lint
