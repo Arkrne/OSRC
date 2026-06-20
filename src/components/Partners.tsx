@@ -1,8 +1,6 @@
 'use client'
 
-import { motion } from 'framer-motion'
-
-const EASE = [0.23, 1, 0.32, 1] as const
+import { Reveal } from './motion'
 
 const partners = [
   { name: 'Camella',             mark: 'CM' },
@@ -19,19 +17,13 @@ export default function Partners() {
   return (
     <section className="py-12 sm:py-18 md:py-24 border-y border-[rgba(28,23,20,0.08)] overflow-hidden">
       <div className="max-w-[1360px] mx-auto px-5 sm:px-8 lg:px-20">
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, ease: EASE }}
-          className="flex flex-col items-center text-center gap-3 mb-12"
-        >
+        <Reveal variant="fade" className="flex flex-col items-center text-center gap-3 mb-12">
           <span className="eyebrow">Trusted Developer Partners</span>
           <p className="text-[#6E6055] text-[15px] max-w-md">
             We buy direct from the country's biggest housing developers,
             so you skip the middleman's markup.
           </p>
-        </motion.div>
+        </Reveal>
       </div>
 
       {/* Marquee — seamless CSS loop, pauses on hover, edge fade masks */}

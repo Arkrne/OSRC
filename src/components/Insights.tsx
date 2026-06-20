@@ -2,6 +2,7 @@
 
 import Image from 'next/image'
 import { motion } from 'framer-motion'
+import { RevealHeading, Reveal, Stagger, StaggerItem } from './motion'
 
 const EASE = [0.23, 1, 0.32, 1] as const
 
@@ -32,32 +33,22 @@ export default function Insights() {
       <div className="max-w-[1360px] mx-auto">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
           <div className="flex flex-col gap-5 max-w-xl">
-            <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.45, ease: EASE }}>
+            <Reveal variant="fade">
               <span className="eyebrow">Insights & Guides</span>
-            </motion.div>
-            <motion.h2
-              initial={{ opacity: 0, y: 20, filter: 'blur(8px)' }}
-              whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.55, delay: 0.08, ease: EASE }}
+            </Reveal>
+            <RevealHeading
+              lines={['Learn Before You Buy']}
+              delay={0.06}
               className="font-display text-[clamp(34px,4vw,58px)] text-[#1C1714]"
               style={{ lineHeight: 0.95, letterSpacing: '-0.025em' }}
-            >
-              Learn Before You Buy
-            </motion.h2>
+            />
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <Stagger className="grid grid-cols-1 md:grid-cols-3 gap-6" gap={0.1}>
           {posts.map((p, i) => (
-            <motion.article
-              key={p.title}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.08, ease: EASE }}
-              className="flex flex-col h-full"
-            >
+            <StaggerItem key={p.title} variant="rotate">
+              <article className="flex flex-col h-full">
               <div className="relative h-56 rounded-3xl overflow-hidden border border-[rgba(28,23,20,0.08)] mb-5">
                 <Image src={p.img} alt="" role="presentation" fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover" />
                 <span className="absolute top-4 left-4 text-[10px] font-medium px-2.5 py-1 rounded-full bg-white/90 text-[#E85D04] border border-[rgba(232,93,4,0.2)]">{p.tag}</span>
@@ -73,17 +64,12 @@ export default function Insights() {
                 Ask us about this
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg>
               </a>
-            </motion.article>
+            </article>
+            </StaggerItem>
           ))}
-        </div>
+        </Stagger>
 
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.45, delay: 0.25, ease: EASE }}
-          className="mt-12 flex justify-center"
-        >
+        <Reveal variant="fade" delay={0.1} className="mt-12 flex justify-center">
           <a
             href="/contact"
             className="inline-flex items-center gap-2 pl-6 pr-5 py-3 rounded-full bg-[#1C1714] hover:bg-[#2E2420] text-[#FBF6EC] text-[13px] font-semibold tracking-tight transition-colors duration-150"
@@ -91,7 +77,7 @@ export default function Insights() {
             Have questions? Talk to a specialist
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg>
           </a>
-        </motion.div>
+        </Reveal>
       </div>
     </section>
   )

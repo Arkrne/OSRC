@@ -1,22 +1,14 @@
 'use client'
 
-import { motion } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
 import Link from 'next/link'
-
-const EASE = [0.23, 1, 0.32, 1] as const
+import { Reveal } from './motion'
 
 export default function FinalCTA() {
   return (
     <section className="py-20 sm:py-24 md:py-32 px-5 sm:px-8 lg:px-20 bg-[#F5EEE8]">
       <div className="max-w-[1360px] mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: EASE }}
-          className="relative overflow-hidden rounded-[1.75rem] sm:rounded-[2rem] bg-[#0B0906] px-6 py-12 sm:px-10 sm:py-16 md:px-16 md:py-20"
-        >
+        <Reveal variant="scale" duration={0.7} className="relative overflow-hidden rounded-[1.75rem] sm:rounded-[2rem] bg-[#0B0906] px-6 py-12 sm:px-10 sm:py-16 md:px-16 md:py-20">
           {/* Ambient glow */}
           <div className="ambient-glow" aria-hidden />
           <div className="pointer-events-none absolute -top-1/3 right-0 w-[500px] h-[500px] max-w-full opacity-30" style={{ background: 'radial-gradient(ellipse, rgba(232,93,4,0.5) 0%, transparent 65%)', filter: 'blur(90px)' }} />
@@ -47,7 +39,7 @@ export default function FinalCTA() {
               </Link>
             </div>
           </div>
-        </motion.div>
+        </Reveal>
       </div>
     </section>
   )

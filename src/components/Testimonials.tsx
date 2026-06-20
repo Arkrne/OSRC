@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from 'react'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronLeft, ChevronRight, Star, Quote } from 'lucide-react'
+import { Reveal } from './motion'
 
 // Adapted from 21st.dev "Testimonial Slider" — themed warm light, framer-motion
 type Testimonial = { image: string; quote: string; name: string; role: string; rating: number }
@@ -57,11 +58,11 @@ export default function Testimonials() {
   return (
     <section id="testimonials" className="py-12 sm:py-18 md:py-24 px-5 sm:px-8 lg:px-20">
       <div className="max-w-[1360px] mx-auto">
-        <div className="flex flex-col items-center text-center gap-2 sm:gap-3 mb-8 sm:mb-11">
+        <Reveal variant="blur" className="flex flex-col items-center text-center gap-2 sm:gap-3 mb-8 sm:mb-11">
           <h2 className="font-display text-[clamp(34px,4vw,58px)] text-[#1C1714] max-w-2xl" style={{ lineHeight: 0.95, letterSpacing: '-0.025em' }}>
             Families We've Helped Come Home
           </h2>
-        </div>
+        </Reveal>
 
         <div className="relative max-w-4xl mx-auto">
           <div className="relative min-h-[340px] md:min-h-[280px]">

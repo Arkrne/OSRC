@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { ArrowUpRight } from 'lucide-react'
 import { STATS } from '@/lib/site'
+import { RevealHeading, Reveal } from './motion'
 
 const EASE = [0.23, 1, 0.32, 1] as const
 
@@ -49,28 +50,17 @@ export default function About() {
 
         {/* Right — editorial text */}
         <div className="flex flex-col justify-center px-5 sm:px-8 lg:px-16 xl:px-20 py-12 sm:py-16 lg:py-0">
-          <motion.h2
-            initial={{ opacity: 0, y: 28, filter: 'blur(8px)' }}
-            whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: EASE }}
+          <RevealHeading
+            lines={[
+              'Pag-IBIG Loans,',
+              <em key="accent" className="italic text-shine">Done Right,</em>,
+              'Since 2024.',
+            ]}
             className="font-display text-[clamp(36px,4vw,60px)] text-[#1C1714] mb-10"
             style={{ lineHeight: 0.95, letterSpacing: '-0.025em' }}
-          >
-            Pag-IBIG Loans,
-            <br />
-            <em className="italic text-shine">Done Right,</em>
-            <br />
-            Since 2024.
-          </motion.h2>
+          />
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.14, ease: EASE }}
-            className="flex flex-col gap-5 text-[#6E6055] text-[16px] leading-relaxed mb-12 max-w-lg"
-          >
+          <Reveal variant="blur" delay={0.1} className="flex flex-col gap-5 text-[#6E6055] text-[16px] leading-relaxed mb-12 max-w-lg">
             <p className="text-[#1C1714] text-[18px] font-medium leading-relaxed">
               Orange Square Realty is a Pag-IBIG housing loan specialist based in Cainta, Rizal.
               We handle the entire loan process: pre-qualification, property matching, filing,
@@ -89,16 +79,10 @@ export default function About() {
               broker. We sit with you, learn your situation, and stay with you until
               the keys are in your hand.
             </p>
-          </motion.div>
+          </Reveal>
 
           {/* Stats row */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.22, ease: EASE }}
-            className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8 mb-10 sm:mb-12 pt-8 border-t border-[rgba(28,23,20,0.08)]"
-          >
+          <Reveal variant="left" delay={0.18} className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8 mb-10 sm:mb-12 pt-8 border-t border-[rgba(28,23,20,0.08)]">
             {[
               { v: '2024',                   l: 'Founded'       },
               { v: STATS.developerPartners,  l: 'Dev. Partners' },
@@ -110,21 +94,19 @@ export default function About() {
                 <div className="text-[11px] text-[#A89070] mt-1.5 uppercase tracking-[0.12em] font-medium">{s.l}</div>
               </div>
             ))}
-          </motion.div>
+          </Reveal>
 
-          <motion.a
-            href="/contact"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3, duration: 0.4 }}
-            className="group inline-flex items-center gap-2 pl-6 pr-3 py-3.5 min-h-[48px] rounded-full bg-[rgba(232,93,4,0.07)] hover:bg-[#E85D04] border border-[rgba(232,93,4,0.2)] hover:border-[#E85D04] text-[#E85D04] hover:text-white font-semibold text-[14px] transition-[background-color,border-color,color,transform] duration-[160ms] ease-out active:scale-[0.97] w-full sm:w-fit justify-center"
-          >
-            Free Pre-Qualification
-            <span className="w-7 h-7 rounded-full bg-current/10 flex items-center justify-center transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
-              <ArrowUpRight size={15} strokeWidth={2.25} />
-            </span>
-          </motion.a>
+          <Reveal variant="fade" delay={0.26} className="w-full sm:w-fit">
+            <a
+              href="/contact"
+              className="group inline-flex items-center gap-2 pl-6 pr-3 py-3.5 min-h-[48px] rounded-full bg-[rgba(232,93,4,0.07)] hover:bg-[#E85D04] border border-[rgba(232,93,4,0.2)] hover:border-[#E85D04] text-[#E85D04] hover:text-white font-semibold text-[14px] transition-[background-color,border-color,color,transform] duration-[160ms] ease-out active:scale-[0.97] w-full sm:w-fit justify-center"
+            >
+              Free Pre-Qualification
+              <span className="w-7 h-7 rounded-full bg-current/10 flex items-center justify-center transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+                <ArrowUpRight size={15} strokeWidth={2.25} />
+              </span>
+            </a>
+          </Reveal>
         </div>
       </div>
     </section>

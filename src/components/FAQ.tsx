@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronDown } from 'lucide-react'
+import { RevealHeading, Reveal, Stagger, StaggerItem } from './motion'
 
 const EASE = [0.23, 1, 0.32, 1] as const
 
@@ -23,31 +24,28 @@ export default function FAQ() {
     <section id="faq" className="py-12 sm:py-18 md:py-24 px-5 sm:px-8 lg:px-20 bg-[#FAFAF7]">
       <div className="max-w-5xl mx-auto grid md:grid-cols-5 gap-10 md:gap-12">
         <div className="md:col-span-2">
-          <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.45, ease: EASE }} className="mb-5">
+          <Reveal variant="fade" className="mb-5">
             <span className="eyebrow">FAQ</span>
-          </motion.div>
-          <motion.h2
-            initial={{ opacity: 0, y: 20, filter: 'blur(8px)' }}
-            whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.55, delay: 0.08, ease: EASE }}
+          </Reveal>
+          <RevealHeading
+            lines={['Questions,', 'Answered']}
+            delay={0.06}
             className="font-display text-[clamp(32px,3.6vw,52px)] text-[#1C1714] mb-5"
             style={{ lineHeight: 0.95, letterSpacing: '-0.025em' }}
-          >
-            Questions,
-            <br />Answered
-          </motion.h2>
-          <p className="text-[#6E6055] text-[15px] leading-relaxed">
-            Can't find what you're looking for?{' '}
-            <a href="#contact" className="text-[#E85D04] font-medium hover:underline">Talk to our team</a>.
-          </p>
+          />
+          <Reveal variant="fade" delay={0.18}>
+            <p className="text-[#6E6055] text-[15px] leading-relaxed">
+              Can't find what you're looking for?{' '}
+              <a href="#contact" className="text-[#E85D04] font-medium hover:underline">Talk to our team</a>.
+            </p>
+          </Reveal>
         </div>
 
-        <div className="md:col-span-3 flex flex-col">
+        <Stagger className="md:col-span-3 flex flex-col" gap={0.06} amount={0.1}>
           {faqs.map((item, i) => {
             const isOpen = open === i
             return (
-              <div key={i} className="border-b border-[rgba(28,23,20,0.1)]">
+              <StaggerItem key={i} variant="clip" className="border-b border-[rgba(28,23,20,0.1)]">
                 <button
                   onClick={() => setOpen(isOpen ? null : i)}
                   className="flex items-center justify-between gap-4 w-full text-left py-5 group"
@@ -73,10 +71,10 @@ export default function FAQ() {
                     </motion.div>
                   )}
                 </AnimatePresence>
-              </div>
+              </StaggerItem>
             )
           })}
-        </div>
+        </Stagger>
       </div>
     </section>
   )
